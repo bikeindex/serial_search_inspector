@@ -1,0 +1,2 @@
+class SerialSearch < ApplicationRecord
+end

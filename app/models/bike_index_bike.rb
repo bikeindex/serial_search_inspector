@@ -1,0 +1,2 @@
+class BikeIndexBike < ApplicationRecord
+end
