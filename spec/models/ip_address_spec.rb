@@ -6,6 +6,7 @@ RSpec.describe IpAddress, type: :model do
   end
 
   describe 'associations' do
-    it { should belong_to(:log_line) }
+    it { should have_many(:log_lines) }
   end
 end
+

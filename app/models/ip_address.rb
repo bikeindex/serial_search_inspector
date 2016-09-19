@@ -1,5 +1,5 @@
 class IpAddress < ApplicationRecord
   validates_presence_of :address
 
-  belongs_to :log_line
+  has_many :log_lines
 end
