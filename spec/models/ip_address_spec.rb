@@ -7,6 +7,6 @@ RSpec.describe IpAddress, type: :model do
 
   describe 'associations' do
     it { should have_many(:log_lines) }
+    it { should have_many(:serial_searches) }
   end
 end
-

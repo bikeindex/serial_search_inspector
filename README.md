@@ -3,22 +3,20 @@
 [![Code Climate](https://codeclimate.com/github/bikeindex/serial_search_inspector/badges/gpa.svg)](https://codeclimate.com/github/bikeindex/serial_search_inspector)
 [![Test Coverage](https://codeclimate.com/github/bikeindex/serial_search_inspector/badges/coverage.svg)](https://codeclimate.com/github/bikeindex/serial_search_inspector/coverage)
 
-Things you may want to cover:
+## Dependencies
 
-* Ruby version
+| What            | Install             | Notes |
+| --------------- | -------------------------- | ----- |
+| Rails 5.0.0.1   | [Ruby on Rails](http://rubyonrails.org/)
+| Ruby 2.2.5      | [rvm](https://github.com/wayneeseguin/rvm), [rbenv](https://github.com/sstephenson/rbenv) with [ruby-build](https://github.com/sstephenson/ruby-build) or [from source.](http://www.ruby-lang.org/en/) | |
+| PostgreSQL 9.5.3| [Postgres.app](http://postgresapp.com/), `brew install postgresql` on OSX, [on Linux](http://www.postgresql.org/download/linux/ubuntu/) | |
 
-* System dependencies
+## Setup
+```
+bundle exec rake db:create
+bundle exec rake db:migrate
+bundle exec rake db:test:prepare
+```
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Testing
+Serial Search Inspector uses Guard to test. Run `bundle exec guard`

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160919202926) do
+ActiveRecord::Schema.define(version: 20160919233006) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,9 +41,8 @@ ActiveRecord::Schema.define(version: 20160919202926) do
     t.string   "source"
     t.string   "type"
     t.boolean  "insufficient_length"
-    t.boolean  "inspector"
-    t.float    "latitude"
-    t.float    "longitude"
+    t.boolean  "inspector_request"
+    t.string   "entry_location"
     t.integer  "ip_address_id"
     t.integer  "serial_search_id"
     t.datetime "created_at",          null: false
