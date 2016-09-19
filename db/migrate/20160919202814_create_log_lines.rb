@@ -4,13 +4,13 @@ class CreateLogLines < ActiveRecord::Migration[5.0]
       t.json :entry
       t.datetime :request_at
       t.string :source
-      t.string :source
+      t.string :type
       t.boolean :insufficient_length
       t.boolean :inspector
       t.float :latitude
       t.float :longitude
       t.references :ip_address
-      t.references :serial
+      t.references :serial_search
 
       t.timestamps
     end
