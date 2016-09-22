@@ -1,0 +1,23 @@
+{
+  "method": "GET",
+  "path": "/bikes",
+  "format": "html",
+  "controller": "BikesController",
+  "action": "index",
+  "status": 200,
+  "duration": 1165.46,
+  "view": 21.53,
+  "db": 1133.24,
+  "remote_ip": "11.22.33.44",
+  "params": {
+    "utf8": "✓",
+    "serial": "f00111",
+    "button": "",
+    "location": "",
+    "distance": "100",
+    "stolenness": ""
+  },
+  "@timestamp": "2016-09-21T19:14:49.085Z",
+  "@version": "1",
+  "message": "[200] GET /bikes (BikesController#index)"
+}
