@@ -4,7 +4,7 @@ class CreateBikeIndexBikes < ActiveRecord::Migration[5.0]
       t.integer :bike_index_id
       t.boolean :stolen
       t.datetime :date_stolen
-      t.references :serial_search
+      t.references :serial_search, index: true
 
       t.timestamps
     end

@@ -1,0 +1,15 @@
+{
+  "status": 200,
+  "method": "GET",
+  "path": "/api/v2/bikes_search/stolen",
+  "params": {
+    "per_page": "10",
+    "widget_from": "bikeindex.org",
+    "serial": "3L0"
+  },
+  "remote_ip": "111.222.333.444",
+  "format": "json",
+  "db": 966.68,
+  "view": 300.15,
+  "duration": 1266.83
+}
