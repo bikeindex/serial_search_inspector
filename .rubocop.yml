@@ -23,3 +23,6 @@ ParameterLists:
 
 NumericLiterals:
   Enabled: false
+
+Style/RegexpLiteral:
+  AllowInnerSlashes: true
