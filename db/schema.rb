@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20160919233006) do
     t.json     "entry"
     t.datetime "request_at"
     t.string   "source"
-    t.string   "type"
+    t.string   "search_type"
     t.boolean  "insufficient_length"
     t.boolean  "inspector_request"
     t.string   "entry_location"

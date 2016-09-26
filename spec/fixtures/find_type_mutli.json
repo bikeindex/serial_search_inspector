@@ -1,0 +1,19 @@
+{
+  "method": "GET",
+  "path": "/api/v1/bikes",
+  "format": "json",
+  "controller": "Api::V1::BikesController",
+  "action": "index",
+  "status": 200,
+  "duration": 1785.85,
+  "view": 5.75,
+  "db": 1750.48,
+  "remote_ip": "111.222.333.444",
+  "params": {
+    "serial": "WTU 268 T 0046 J",
+    "multi_serial_search": "true"
+  },
+  "@timestamp": "2016-09-21T23:57:32.160Z",
+  "@version": "1",
+  "message": "[200] GET /api/v1/bikes (Api::V1::BikesController#index)"
+}
