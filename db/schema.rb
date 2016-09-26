@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20160919233006) do
   create_table "log_lines", force: :cascade do |t|
     t.json     "entry"
     t.datetime "request_at"
-    t.string   "source"
+    t.string   "search_source"
     t.string   "search_type"
     t.boolean  "insufficient_length"
     t.boolean  "inspector_request"

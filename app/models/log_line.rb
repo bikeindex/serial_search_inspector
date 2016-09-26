@@ -1,5 +1,5 @@
 class LogLine < ApplicationRecord
-  validates_presence_of :entry, :request_at, :source, :serial
+  validates_presence_of :entry, :request_at, :search_source, :serial
 
   belongs_to :ip_address, optional: true
   belongs_to :serial_search, optional: true
@@ -12,7 +12,7 @@ class LogLine < ApplicationRecord
     entry['params']['location'] if entry['params']['location'].present?
   end
 
-  def find_source
+  def find_search_source
     return 'html' if entry['path'] == '/bikes'
     entry['path'].match(/api\/v[^\/]+/i).to_s if entry['path'].include?('api')
   end
@@ -33,14 +33,18 @@ class LogLine < ApplicationRecord
     entry['params']['serial'].length < 4 if serial
   end
 
+  def entry_ip_address
+    entry['remote_ip']
+  end
+
   def inspector_request?
-    IpAddress.inspector_address?(address: entry['remote_ip'], request_at: find_request_at)
+    IpAddress.inspector_address?(address: entry_ip_address, request_at: find_request_at)
   end
 
   def attributes_from_entry
     {
       request_at: find_request_at,
-      source: find_source,
+      search_source: find_search_source,
       search_type: find_search_type,
       insufficient_length: serial_length_insufficient?,
       inspector_request: inspector_request?,
@@ -50,7 +54,9 @@ class LogLine < ApplicationRecord
 
   def self.create_log_line(entry)
     log_line = new(entry: entry)
-    log_line.attributes = log_line.attributes_from_entry
-    LogLine.first_or_create(log_line.attributes)
+    where(request_at: log_line.find_request_at,
+          search_source: log_line.find_search_source,
+          search_type: log_line.find_search_type).each { |found| return true if log_line.serial == found.serial }
+    log_line.update_attributes(log_line.attributes_from_entry)
   end
 end

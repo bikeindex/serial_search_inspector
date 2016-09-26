@@ -3,7 +3,7 @@ class CreateLogLines < ActiveRecord::Migration[5.0]
     create_table :log_lines do |t|
       t.json :entry
       t.datetime :request_at
-      t.string :source
+      t.string :search_source
       t.string :search_type
       t.boolean :insufficient_length
       t.boolean :inspector
