@@ -1,11 +1,11 @@
 class LogLine < ApplicationRecord
-  validates_presence_of :entry, :request_at, :source
+  validates_presence_of :entry, :request_at, :source, :serial
 
   belongs_to :ip_address, optional: true
   belongs_to :serial_search, optional: true
 
-  def serial?
-    entry['params']['serial'].present? && !entry['params']['serial'].blank?
+  def serial
+    entry && entry['params'] && !entry['params']['serial'].blank? && entry['params']['serial']
   end
 
   def find_location
@@ -15,8 +15,7 @@ class LogLine < ApplicationRecord
   def find_source
     return 'html' if entry['path'] == '/bikes'
     if entry['path'].include?('api')
-      m = entry['path'].match(/api\/v[^\/]+/i)
-      m.to_s
+      entry['path'].match(/api\/v[^\/]+/i).to_s
     end
   end
 
@@ -29,12 +28,11 @@ class LogLine < ApplicationRecord
   end
 
   def find_request_at
-    request_at || Time.parse(entry['@timestamp'])
+    request_at || entry['@timestamp'] && Time.parse(entry['@timestamp'])
   end
 
-  def check_length
-    return true if entry['params']['serial'].length <= 3
-    return false if entry['params']['serial'].length > 3
+  def serial_length_insufficient?
+    entry['params']['serial'] && entry['params']['serial'].length < 4
   end
 
   def inspector_request?
@@ -46,7 +44,7 @@ class LogLine < ApplicationRecord
       request_at: find_request_at,
       source: find_source,
       type: find_type,
-      insufficient_length: check_length,
+      insufficient_length: serial_length_insufficient?,
       inspector_request: inspector_request?,
       entry_location: find_location
     }
@@ -54,9 +52,7 @@ class LogLine < ApplicationRecord
 
   def self.create_log_line(entry)
     log_line = new(entry: entry)
-    if log_line.serial?
-      log_line.update_attributes(log_line.attributes_from_entry)
-      log_line.save
-    end
+    log_line.attributes = log_line.attributes_from_entry
+    LogLine.first_or_create(log_line.attributes)
   end
 end

@@ -15,23 +15,23 @@ RSpec.describe LogLine, type: :model do
     it { should belong_to(:serial_search) }
   end
 
-  describe 'serial?' do
+  describe 'serial' do
     context 'valid serial number' do
       let(:log_fixture) { File.read('./spec/fixtures/parse_log_single_serial.json') }
       it 'returns true' do
-        expect(log.serial?).to be_truthy
+        expect(log.serial).to be_truthy
       end
     end
     context 'empty serial number' do
       let(:log_fixture) { File.read('./spec/fixtures/parse_log_empty_serial.json') }
       it 'returns true' do
-        expect(log.serial?).to be_falsey
+        expect(log.serial).to be_falsey
       end
     end
     context 'no serial number' do
       let(:log_fixture) { File.read('./spec/fixtures/parse_log_no_serial.json') }
       it 'returns true' do
-        expect(log.serial?).to be_falsey
+        expect(log.serial).to be_falsey
       end
     end
   end
@@ -84,17 +84,17 @@ RSpec.describe LogLine, type: :model do
     end
   end
 
-  describe 'check_length' do
+  describe 'serial_length_insufficient?' do
     context 'serial number is 3 or shorter' do
       let(:log_fixture) { File.read('./spec/fixtures/check_length_shorter.json') }
       it 'returns true' do
-        expect(log.check_length).to be_truthy
+        expect(log.serial_length_insufficient?).to be_truthy
       end
     end
     context 'serial number is greater than 3' do
       let(:log_fixture) { File.read('./spec/fixtures/check_length_ok.json') }
       it 'returns false' do
-        expect(log.check_length).to eq false
+        expect(log.serial_length_insufficient?).to eq false
       end
     end
   end
@@ -149,7 +149,7 @@ RSpec.describe LogLine, type: :model do
       let(:log_fixture) { File.read('./spec/fixtures/attributes_from_entry.json') }
       it 'returns hash for creation' do
         attributes = log.attributes_from_entry
-        expect(attributes[:request_at]).to eq '2016-09-21T19:14:49.085Z'
+        expect(attributes[:request_at]).to eq Time.parse('2016-09-21T19:14:49.085Z')
         expect(attributes[:source]).to eq 'html'
         expect(attributes[:type]).to eq nil
         expect(attributes[:insufficient_length]).to be_falsey
@@ -162,10 +162,22 @@ RSpec.describe LogLine, type: :model do
   describe 'create_log_line' do
     context 'with valid serial' do
       let(:log_fixture) { File.read('./spec/fixtures/create_log_line_valid_serial.json') }
-      it 'creates a new logline' do
-        expect do
+      context 'first create' do
+        it 'creates a new logline' do
+          expect do
+            LogLine.create_log_line(parsed_log_fixture)
+          end.to change(LogLine, :count).by 1
+        end
+      end
+      context 'same log_line does not create two' do
+        before do
           LogLine.create_log_line(parsed_log_fixture)
-        end.to change(LogLine, :count).by 1
+        end
+        it 'does not create a new logline' do
+          expect do
+            LogLine.create_log_line(parsed_log_fixture)
+          end.to change(LogLine, :count).by 0
+        end
       end
     end
     context 'no serial does not create' do
@@ -176,7 +188,7 @@ RSpec.describe LogLine, type: :model do
         end.to change(LogLine, :count).by 0
       end
     end
-    context 'empty serial > does not create' do
+    context 'empty serial does not create' do
       let(:log_fixture) { File.read('./spec/fixtures/create_log_line_empty_serial.json') }
       it 'does not creates a new logline' do
         expect do
