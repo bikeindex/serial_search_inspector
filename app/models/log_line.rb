@@ -5,7 +5,7 @@ class LogLine < ApplicationRecord
   belongs_to :serial_search, optional: true
 
   def serial
-    entry && entry['params'] && !entry['params']['serial'].blank? && entry['params']['serial']
+    entry && entry['params'] && entry['params']['serial'] && entry['params']['serial'].strip
   end
 
   def find_location
@@ -14,12 +14,10 @@ class LogLine < ApplicationRecord
 
   def find_source
     return 'html' if entry['path'] == '/bikes'
-    if entry['path'].include?('api')
-      entry['path'].match(/api\/v[^\/]+/i).to_s
-    end
+    entry['path'].match(/api\/v[^\/]+/i).to_s if entry['path'].include?('api')
   end
 
-  def find_type
+  def find_search_type
     if entry['params']['widget_from'].present?
       'widget'
     elsif entry['params']['multi_serial_search'].present?
@@ -32,7 +30,7 @@ class LogLine < ApplicationRecord
   end
 
   def serial_length_insufficient?
-    entry['params']['serial'] && entry['params']['serial'].length < 4
+    entry['params']['serial'].length < 4 if serial
   end
 
   def inspector_request?
@@ -43,7 +41,7 @@ class LogLine < ApplicationRecord
     {
       request_at: find_request_at,
       source: find_source,
-      type: find_type,
+      search_type: find_search_type,
       insufficient_length: serial_length_insufficient?,
       inspector_request: inspector_request?,
       entry_location: find_location

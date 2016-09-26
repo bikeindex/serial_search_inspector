@@ -19,19 +19,19 @@ RSpec.describe LogLine, type: :model do
     context 'valid serial number' do
       let(:log_fixture) { File.read('./spec/fixtures/parse_log_single_serial.json') }
       it 'returns true' do
-        expect(log.serial).to be_truthy
+        expect(log.serial.present?).to be_truthy
       end
     end
     context 'empty serial number' do
       let(:log_fixture) { File.read('./spec/fixtures/parse_log_empty_serial.json') }
       it 'returns true' do
-        expect(log.serial).to be_falsey
+        expect(log.serial.present?).to be_falsey
       end
     end
     context 'no serial number' do
       let(:log_fixture) { File.read('./spec/fixtures/parse_log_no_serial.json') }
       it 'returns true' do
-        expect(log.serial).to be_falsey
+        expect(log.serial.present?).to be_falsey
       end
     end
   end
@@ -63,23 +63,23 @@ RSpec.describe LogLine, type: :model do
     end
   end
 
-  describe 'find_type' do
+  describe 'find_search_type' do
     context 'widget' do
       let(:log_fixture) { File.read('./spec/fixtures/find_type_widget.json') }
       it 'returns widget type' do
-        expect(log.find_type).to eq 'widget'
+        expect(log.find_search_type).to eq 'widget'
       end
     end
     context 'multi' do
       let(:log_fixture) { File.read('./spec/fixtures/find_type_mutli.json') }
       it 'returns mutli type' do
-        expect(log.find_type).to eq 'multi'
+        expect(log.find_search_type).to eq 'multi'
       end
     end
     context 'nil' do
       let(:log_fixture) { File.read('./spec/fixtures/find_type_nil.json') }
       it 'returns nil' do
-        expect(log.find_type).to eq nil
+        expect(log.find_search_type).to eq nil
       end
     end
   end
@@ -151,7 +151,7 @@ RSpec.describe LogLine, type: :model do
         attributes = log.attributes_from_entry
         expect(attributes[:request_at]).to eq Time.parse('2016-09-21T19:14:49.085Z')
         expect(attributes[:source]).to eq 'html'
-        expect(attributes[:type]).to eq nil
+        expect(attributes[:search_type]).to eq nil
         expect(attributes[:insufficient_length]).to be_falsey
         expect(attributes[:inspector_request]).to be_falsey
         expect(attributes[:entry_location]).to be nil
