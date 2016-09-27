@@ -52,6 +52,15 @@ class LogLine < ApplicationRecord
     }
   end
 
+  def find_or_create_ip_address
+    self.ip_address_id = IpAddress.first_or_create(address: entry_ip_address).id
+  end
+
+  def create_serial_search
+    return false if serial_length_insufficient?
+    self.serial_search_id = SerialSearch.first_or_create(serial: serial).id
+  end
+
   def self.create_log_line(entry)
     log_line = new(entry: entry)
     where(request_at: log_line.find_request_at,

@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe SerialSearch, type: :model do
   describe 'validations' do
     it { should validate_presence_of(:serial) }
-    it { should validate_presence_of(:searched_bike_index_at) }
     it { should validate_uniqueness_of(:serial) }
   end
 
@@ -11,5 +10,22 @@ RSpec.describe SerialSearch, type: :model do
     it { should have_many(:log_lines) }
     it { should have_many(:ip_addresses) }
     it { should have_many(:bike_index_bikes) }
+  end
+
+  describe 'sanitize_serial' do
+    context 'w235 53214' do
+      let(:dirty_serial) { FactoryGirl.create(:serial_search, serial: 'w235 53214') }
+      it 'cleans serial' do
+        dirty_serial.sanitize_serial
+        expect(dirty_serial.serial).to eq 'W235 53214'
+      end
+    end
+    context ' b532 4324   ' do
+      let(:dirty_serial) { FactoryGirl.create(:serial_search, serial: ' b532 4324   ') }
+      it 'cleans serial' do
+        dirty_serial.sanitize_serial
+        expect(dirty_serial.serial).to eq 'B532 4324'
+      end
+    end
   end
 end

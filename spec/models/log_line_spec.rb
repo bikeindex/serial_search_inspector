@@ -209,4 +209,51 @@ RSpec.describe LogLine, type: :model do
       end
     end
   end
+
+  describe 'find_or_create_ip_address' do
+    let(:log_fixture) { File.read('./spec/fixtures/create_log_line_valid_serial.json') }
+    context 'a new ip address' do
+      it 'creates in database' do
+        expect do
+          log.find_or_create_ip_address
+        end.to change(IpAddress, :count).by 1
+      end
+      it 'associates with logline' do
+        log.find_or_create_ip_address
+        expect(log.ip_address.address).to eq log.entry_ip_address
+      end
+    end
+    context 'ip address already exists' do
+      let(:ip_address) { FactoryGirl.create(:ip_address, address: '111.222.333.444') }
+      let(:created_log) { FactoryGirl.create(:log_line, entry: parsed_log_fixture) }
+      it 'associates with that ip' do
+        expect(ip_address).to be_present
+        log.find_or_create_ip_address
+        expect(log.ip_address).to eq ip_address
+      end
+    end
+  end
+
+  describe 'create_serial_search' do
+    context 'valid serial' do
+      let(:log_fixture) { File.read('./spec/fixtures/create_log_line_valid_serial.json') }
+      it 'creates a new serial in the database' do
+        expect do
+          log.create_serial_search
+        end.to change(SerialSearch, :count).by 1
+      end
+      it 'associates with logline' do
+        log.create_serial_search
+        expect(log.serial_search.serial).to eq log.serial
+      end
+    end
+    context 'invalid serial (length)' do
+      let(:log_fixture) { File.read('./spec/fixtures/check_length_shorter.json') }
+      it 'does not create a SerialSearch' do
+        expect do
+          log.create_serial_search
+        end.to change(SerialSearch, :count).by 0
+      end
+    end
+  end
 end
