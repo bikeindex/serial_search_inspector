@@ -182,11 +182,11 @@ RSpec.describe LogLine, type: :model do
           end
         end
         context 'different serial search' do
-          let(:log_fixture_2) { File.read('./spec/fixtures/create_log_line_different_serial.json') }
           it 'creates a second logline' do
-            LogLine.create_log_line(parsed_log_fixture)
+            log_fixture_2 = parsed_log_fixture
+            log_fixture_2['params']['serial'] = 'abc'
             expect do
-              LogLine.create_log_line(JSON.parse(log_fixture_2))
+              LogLine.create_log_line(log_fixture_2)
             end.to change(LogLine, :count).by 1
           end
         end

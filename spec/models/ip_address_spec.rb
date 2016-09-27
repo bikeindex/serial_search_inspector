@@ -20,7 +20,7 @@ RSpec.describe IpAddress, type: :model do
         expect(IpAddress.inspector_address?(address: 'sample_address', request_at: Time.now)).to be_truthy
       end
     end
-    context 'ip_address has both start and stop' do
+    context 'ip_address has both start and stop,' do
       let(:ip_address) { FactoryGirl.create(:ip_address, address: 'sample_address', started_being_inspector_at: Date.parse('01-07-2016').to_time, stopped_being_inspector_at: Date.parse('01-08-2016').to_time) }
       before do
         expect(ip_address).to be_present
