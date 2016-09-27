@@ -6,8 +6,9 @@ class SerialSearch < ApplicationRecord
   has_many :ip_addresses, through: :log_lines
   has_many :bike_index_bikes
 
+  before_save :sanitize_serial
+
   def sanitize_serial
-    serial.strip!
-    serial.capitalize!
+    self.serial = serial.strip.upcase
   end
 end

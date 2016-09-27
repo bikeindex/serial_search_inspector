@@ -34,6 +34,20 @@ RSpec.describe LogLine, type: :model do
         expect(log.serial.present?).to be_falsey
       end
     end
+    context 'w235 53214' do
+      let(:dirty_serial) { FactoryGirl.create(:serial_search, serial: 'w235 53214') }
+      it 'cleans serial' do
+        dirty_serial.sanitize_serial
+        expect(dirty_serial.serial).to eq 'W235 53214'
+      end
+    end
+    context ' b532 4324   ' do
+      let(:dirty_serial) { FactoryGirl.create(:serial_search, serial: ' b532 4324   ') }
+      it 'cleans serial' do
+        dirty_serial.sanitize_serial
+        expect(dirty_serial.serial).to eq 'B532 4324'
+      end
+    end
   end
 
   describe 'find_search_source' do
@@ -234,16 +248,16 @@ RSpec.describe LogLine, type: :model do
     end
   end
 
-  describe 'create_serial_search' do
+  describe 'find_or_create_serial_search' do
     context 'valid serial' do
       let(:log_fixture) { File.read('./spec/fixtures/create_log_line_valid_serial.json') }
       it 'creates a new serial in the database' do
         expect do
-          log.create_serial_search
+          log.find_or_create_serial_search
         end.to change(SerialSearch, :count).by 1
       end
       it 'associates with logline' do
-        log.create_serial_search
+        log.find_or_create_serial_search
         expect(log.serial_search.serial).to eq log.serial
       end
     end
@@ -251,8 +265,23 @@ RSpec.describe LogLine, type: :model do
       let(:log_fixture) { File.read('./spec/fixtures/check_length_shorter.json') }
       it 'does not create a SerialSearch' do
         expect do
-          log.create_serial_search
+          log.find_or_create_serial_search
         end.to change(SerialSearch, :count).by 0
+      end
+    end
+    context 'SerialSearch already exists' do
+      let(:log_fixture) { File.read('./spec/fixtures/create_log_line_valid_serial.json') }
+      let(:serial) { FactoryGirl.create(:serial_search, serial: 'Wsbc602203254k') }
+      it 'does not create a new serial' do
+        expect(serial).to be_present
+        expect do
+          log.find_or_create_serial_search
+        end.to change(SerialSearch, :count).by 0
+      end
+      it 'associates with that serial' do
+        expect(serial).to be_present
+        log.find_or_create_serial_search
+        expect(log.serial_search).to eq serial
       end
     end
   end
