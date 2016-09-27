@@ -7,7 +7,7 @@ RSpec.describe LogLine, type: :model do
   describe 'validations' do
     it { should validate_presence_of(:entry) }
     it { should validate_presence_of(:request_at) }
-    it { should validate_presence_of(:source) }
+    it { should validate_presence_of(:search_source) }
   end
 
   describe 'associations' do
@@ -36,29 +36,29 @@ RSpec.describe LogLine, type: :model do
     end
   end
 
-  describe 'find_source' do
+  describe 'find_search_source' do
     context 'html' do
       let(:log_fixture) { File.read('./spec/fixtures/find_source_html.json') }
       it 'returns html' do
-        expect(log.find_source).to eq 'html'
+        expect(log.find_search_source).to eq 'html'
       end
     end
     context 'api v1' do
       let(:log_fixture) { File.read('./spec/fixtures/find_source_apiv1.json') }
       it 'returns api v1' do
-        expect(log.find_source).to eq 'api/v1'
+        expect(log.find_search_source).to eq 'api/v1'
       end
     end
     context 'api v2' do
       let(:log_fixture) { File.read('./spec/fixtures/find_source_apiv2.json') }
       it 'returns api v2' do
-        expect(log.find_source).to eq 'api/v2'
+        expect(log.find_search_source).to eq 'api/v2'
       end
     end
     context 'api v3' do
       let(:log_fixture) { File.read('./spec/fixtures/find_source_apiv3.json') }
       it 'returns api v3' do
-        expect(log.find_source).to eq 'api/v3'
+        expect(log.find_search_source).to eq 'api/v3'
       end
     end
   end
@@ -148,9 +148,10 @@ RSpec.describe LogLine, type: :model do
     context 'valid serial number' do
       let(:log_fixture) { File.read('./spec/fixtures/attributes_from_entry.json') }
       it 'returns hash for creation' do
+        allow(IpAddress).to receive(:inspector_address?) { false }
         attributes = log.attributes_from_entry
         expect(attributes[:request_at]).to eq Time.parse('2016-09-21T19:14:49.085Z')
-        expect(attributes[:source]).to eq 'html'
+        expect(attributes[:search_source]).to eq 'html'
         expect(attributes[:search_type]).to eq nil
         expect(attributes[:insufficient_length]).to be_falsey
         expect(attributes[:inspector_request]).to be_falsey
@@ -169,14 +170,25 @@ RSpec.describe LogLine, type: :model do
           end.to change(LogLine, :count).by 1
         end
       end
-      context 'same log_line does not create two' do
+      context 'same timestamp log_line' do
         before do
           LogLine.create_log_line(parsed_log_fixture)
         end
-        it 'does not create a new logline' do
-          expect do
-            LogLine.create_log_line(parsed_log_fixture)
-          end.to change(LogLine, :count).by 0
+        context 'same serial' do
+          it 'does not create a new logline' do
+            expect do
+              LogLine.create_log_line(parsed_log_fixture)
+            end.to change(LogLine, :count).by 0
+          end
+        end
+        context 'different serial search' do
+          it 'creates a second logline' do
+            log_fixture_2 = parsed_log_fixture
+            log_fixture_2['params']['serial'] = 'abc'
+            expect do
+              LogLine.create_log_line(log_fixture_2)
+            end.to change(LogLine, :count).by 1
+          end
         end
       end
     end
