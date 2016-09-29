@@ -15,6 +15,13 @@ RSpec.describe LogLine, type: :model do
     it { should belong_to(:serial_search) }
   end
 
+  describe 'factory' do
+    let!(:log_line) { FactoryGirl.create(:log_line) }
+    it 'works correctly' do
+      expect(log_line.request_at).to be_within(1.second).of Time.now
+    end
+  end
+
   describe 'serial' do
     context 'valid serial number' do
       let(:log_fixture) { File.read('./spec/fixtures/parse_log_single_serial.json') }
@@ -224,16 +231,16 @@ RSpec.describe LogLine, type: :model do
     end
   end
 
-  describe 'find_or_create_ip_address' do
+  describe 'find_or_create_ip_address_association' do
     let(:log_fixture) { File.read('./spec/fixtures/create_log_line_valid_serial.json') }
     context 'a new ip address' do
       it 'creates in database' do
         expect do
-          log.find_or_create_ip_address
+          log.find_or_create_ip_address_association
         end.to change(IpAddress, :count).by 1
       end
       it 'associates with logline' do
-        log.find_or_create_ip_address
+        log.find_or_create_ip_address_association
         expect(log.ip_address.address).to eq log.entry_ip_address
       end
     end
@@ -242,22 +249,22 @@ RSpec.describe LogLine, type: :model do
       let(:created_log) { FactoryGirl.create(:log_line, entry: parsed_log_fixture) }
       it 'associates with that ip' do
         expect(ip_address).to be_present
-        log.find_or_create_ip_address
+        log.find_or_create_ip_address_association
         expect(log.ip_address).to eq ip_address
       end
     end
   end
 
-  describe 'find_or_create_serial_search' do
+  describe 'find_or_create_serial_search_association' do
     context 'valid serial' do
       let(:log_fixture) { File.read('./spec/fixtures/create_log_line_valid_serial.json') }
       it 'creates a new serial in the database' do
         expect do
-          log.find_or_create_serial_search
+          log.find_or_create_serial_search_association
         end.to change(SerialSearch, :count).by 1
       end
       it 'associates with logline' do
-        log.find_or_create_serial_search
+        log.find_or_create_serial_search_association
         expect(log.serial_search.serial).to eq log.serial
       end
     end
@@ -265,23 +272,23 @@ RSpec.describe LogLine, type: :model do
       let(:log_fixture) { File.read('./spec/fixtures/check_length_shorter.json') }
       it 'does not create a SerialSearch' do
         expect do
-          log.find_or_create_serial_search
+          log.find_or_create_serial_search_association
         end.to change(SerialSearch, :count).by 0
       end
     end
     context 'SerialSearch already exists' do
       let(:log_fixture) { File.read('./spec/fixtures/create_log_line_valid_serial.json') }
-      let(:serial) { FactoryGirl.create(:serial_search, serial: 'Wsbc602203254k') }
+      let(:serial_search) { FactoryGirl.create(:serial_search, serial: "#{parsed_log_fixture['params']['serial'].upcase}  ") }
       it 'does not create a new serial' do
-        expect(serial).to be_present
+        expect(serial_search).to be_present
         expect do
-          log.find_or_create_serial_search
+          log.find_or_create_serial_search_association
         end.to change(SerialSearch, :count).by 0
       end
       it 'associates with that serial' do
-        expect(serial).to be_present
-        log.find_or_create_serial_search
-        expect(log.serial_search).to eq serial
+        expect(serial_search).to be_present
+        log.find_or_create_serial_search_association
+        expect(log.serial_search).to eq serial_search
       end
     end
   end

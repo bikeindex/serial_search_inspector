@@ -52,11 +52,11 @@ class LogLine < ApplicationRecord
     }
   end
 
-  def find_or_create_ip_address
+  def find_or_create_ip_address_association
     self.ip_address_id = IpAddress.first_or_create(address: entry_ip_address).id
   end
 
-  def find_or_create_serial_search
+  def find_or_create_serial_search_association
     return false if serial_length_insufficient?
     self.serial_search_id = SerialSearch.first_or_create(serial: serial).id
   end
