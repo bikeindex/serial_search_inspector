@@ -5,7 +5,7 @@ class LogLine < ApplicationRecord
   belongs_to :serial_search, optional: true
 
   def serial
-    entry && entry['params'] && entry['params']['serial'] && entry['params']['serial'].strip
+    entry && entry['params'] && entry['params']['serial'] && entry['params']['serial'].strip.upcase
   end
 
   def find_location
@@ -30,7 +30,7 @@ class LogLine < ApplicationRecord
   end
 
   def serial_length_insufficient?
-    entry['params']['serial'].length < 4 if serial
+    serial.length < 4 if serial
   end
 
   def entry_ip_address
@@ -50,6 +50,15 @@ class LogLine < ApplicationRecord
       inspector_request: inspector_request?,
       entry_location: find_location
     }
+  end
+
+  def find_or_create_ip_address_association
+    self.ip_address_id = IpAddress.first_or_create(address: entry_ip_address).id
+  end
+
+  def find_or_create_serial_search_association
+    return false if serial_length_insufficient?
+    self.serial_search_id = SerialSearch.first_or_create(serial: serial).id
   end
 
   def self.create_log_line(entry)
