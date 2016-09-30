@@ -1,0 +1,17 @@
+.container
+  .row
+    .col-md-12
+      %table.table.table-striped.table-bordered
+        %tr
+          %th Request at
+          %th IP Address
+          %th Entry Data
+        - @serial_search.log_lines.each do |log|
+          %tr
+            %td
+              = I18n.localize log.request_at, format: :long
+            %td
+              = log.ip_address.address
+            %td
+              %pre
+                = log.entry.to_json
