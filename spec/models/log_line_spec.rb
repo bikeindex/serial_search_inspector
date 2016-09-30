@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe LogLine, type: :model do
-  let(:parsed_log_fixture) { JSON.parse(log_fixture) }
+  include_context :log_line_fixtures
+  let(:parsed_log_fixture) { JSON.parse(File.read(log_fixture)) }
   let(:log) { LogLine.new(entry: parsed_log_fixture) }
 
   describe 'validations' do
@@ -24,25 +25,25 @@ RSpec.describe LogLine, type: :model do
 
   describe 'serial' do
     context 'valid serial number' do
-      let(:log_fixture) { File.read('./spec/fixtures/parse_log_single_serial.json') }
+      let(:log_fixture) { log_line_fixture }
       it 'returns true' do
         expect(log.serial.present?).to be_truthy
       end
     end
     context 'empty serial number' do
-      let(:log_fixture) { File.read('./spec/fixtures/parse_log_empty_serial.json') }
+      let(:log_fixture) { log_line_fixture_empty_serial }
       it 'returns true' do
         expect(log.serial.present?).to be_falsey
       end
     end
     context 'no serial number' do
-      let(:log_fixture) { File.read('./spec/fixtures/parse_log_no_serial.json') }
+      let(:log_fixture) { log_line_fixture_no_serial }
       it 'returns true' do
         expect(log.serial.present?).to be_falsey
       end
     end
     context 'returns sanitized serial' do
-      let(:log_fixture) { File.read('./spec/fixtures/log_line_dirty_serial.json') }
+      let(:log_fixture) { log_line_fixture_dirty_serial }
       it 'cleans serial' do
         expect(log.serial).to eq 'WSBC60 2203254K'
       end
@@ -51,25 +52,25 @@ RSpec.describe LogLine, type: :model do
 
   describe 'find_search_source' do
     context 'html' do
-      let(:log_fixture) { File.read('./spec/fixtures/find_source_html.json') }
+      let(:log_fixture) { log_line_fixture }
       it 'returns html' do
         expect(log.find_search_source).to eq 'html'
       end
     end
     context 'api v1' do
-      let(:log_fixture) { File.read('./spec/fixtures/find_source_apiv1.json') }
+      let(:log_fixture) { log_line_fixture_find_search_source_apiv1 }
       it 'returns api v1' do
         expect(log.find_search_source).to eq 'api/v1'
       end
     end
     context 'api v2' do
-      let(:log_fixture) { File.read('./spec/fixtures/find_source_apiv2.json') }
+      let(:log_fixture) { log_line_fixture_find_search_source_apiv2 }
       it 'returns api v2' do
         expect(log.find_search_source).to eq 'api/v2'
       end
     end
     context 'api v3' do
-      let(:log_fixture) { File.read('./spec/fixtures/find_source_apiv3.json') }
+      let(:log_fixture) { log_line_fixture_find_search_source_apiv3 }
       it 'returns api v3' do
         expect(log.find_search_source).to eq 'api/v3'
       end
@@ -78,19 +79,19 @@ RSpec.describe LogLine, type: :model do
 
   describe 'find_search_type' do
     context 'widget' do
-      let(:log_fixture) { File.read('./spec/fixtures/find_type_widget.json') }
+      let(:log_fixture) { log_line_fixture_find_search_type_widget }
       it 'returns widget type' do
         expect(log.find_search_type).to eq 'widget'
       end
     end
     context 'multi' do
-      let(:log_fixture) { File.read('./spec/fixtures/find_type_mutli.json') }
+      let(:log_fixture) { log_line_fixture_find_search_type_multi }
       it 'returns mutli type' do
         expect(log.find_search_type).to eq 'multi'
       end
     end
     context 'nil' do
-      let(:log_fixture) { File.read('./spec/fixtures/find_type_nil.json') }
+      let(:log_fixture) { log_line_fixture }
       it 'returns nil' do
         expect(log.find_search_type).to eq nil
       end
@@ -99,13 +100,13 @@ RSpec.describe LogLine, type: :model do
 
   describe 'serial_length_insufficient?' do
     context 'serial number is 3 or shorter' do
-      let(:log_fixture) { File.read('./spec/fixtures/check_length_shorter.json') }
+      let(:log_fixture) { log_line_fixture_serial_length_shorter }
       it 'returns true' do
         expect(log.serial_length_insufficient?).to be_truthy
       end
     end
     context 'serial number is greater than 3' do
-      let(:log_fixture) { File.read('./spec/fixtures/check_length_ok.json') }
+      let(:log_fixture) { log_line_fixture }
       it 'returns false' do
         expect(log.serial_length_insufficient?).to eq false
       end
@@ -113,7 +114,7 @@ RSpec.describe LogLine, type: :model do
   end
 
   describe 'inspector_request?' do
-    let(:log_fixture) { File.read('./spec/fixtures/attributes_from_entry.json') }
+    let(:log_fixture) { log_line_fixture }
     let(:args) { { address: log.entry['remote_ip'], request_at: log.find_request_at } }
     context 'is currently inspector' do
       it 'return true' do
@@ -131,19 +132,19 @@ RSpec.describe LogLine, type: :model do
 
   describe 'find_location' do
     context 'location present' do
-      let(:log_fixture) { File.read('./spec/fixtures/find_location_present.json') }
+      let(:log_fixture) { log_line_fixture_find_location_present }
       it 'returns a location string' do
         expect(log.find_location).to eq 'Davis, CA'
       end
     end
     context 'no location present' do
-      let(:log_fixture) { File.read('./spec/fixtures/find_location_not_present.json') }
+      let(:log_fixture) { log_line_fixture }
       it 'returns nil' do
         expect(log.find_location).to eq nil
       end
     end
     context 'empty string' do
-      let(:log_fixture) { File.read('./spec/fixtures/find_location_empty_string.json') }
+      let(:log_fixture) { log_line_fixture_find_location_empty_string }
       it 'returns nil' do
         expect(log.find_location).to eq nil
       end
@@ -151,19 +152,19 @@ RSpec.describe LogLine, type: :model do
   end
 
   describe 'find_request_at' do
-    let(:log_fixture) { File.read('./spec/fixtures/find_request_at.json') }
+    let(:log_fixture) { log_line_fixture }
     it 'returns correct time object' do
-      expect(log.find_request_at).to eq Time.parse('2016-09-22T16:08:15.896Z')
+      expect(log.find_request_at).to eq Time.parse('2016-09-22T05:24:38.139Z')
     end
   end
 
   describe 'attributes_from_entry' do
     context 'valid serial number' do
-      let(:log_fixture) { File.read('./spec/fixtures/attributes_from_entry.json') }
+      let(:log_fixture) { log_line_fixture }
       it 'returns hash for creation' do
         allow(IpAddress).to receive(:inspector_address?) { false }
         attributes = log.attributes_from_entry
-        expect(attributes[:request_at]).to eq Time.parse('2016-09-21T19:14:49.085Z')
+        expect(attributes[:request_at]).to eq Time.parse('2016-09-22T05:24:38.139Z')
         expect(attributes[:search_source]).to eq 'html'
         expect(attributes[:search_type]).to eq nil
         expect(attributes[:insufficient_length]).to be_falsey
@@ -175,7 +176,7 @@ RSpec.describe LogLine, type: :model do
 
   describe 'create_log_line' do
     context 'with valid serial' do
-      let(:log_fixture) { File.read('./spec/fixtures/create_log_line_valid_serial.json') }
+      let(:log_fixture) { log_line_fixture }
       context 'first create' do
         it 'creates a new logline' do
           expect do
@@ -206,25 +207,26 @@ RSpec.describe LogLine, type: :model do
       end
     end
     context 'no serial does not create' do
-      let(:log_fixture) { File.read('./spec/fixtures/create_log_line_no_serial.json') }
+      let(:log_fixture) { log_line_fixture_no_serial }
       it 'does not creates a new logline' do
         expect do
-          LogLine.create_log_line(log_fixture)
+          LogLine.create_log_line(parsed_log_fixture)
         end.to change(LogLine, :count).by 0
       end
     end
     context 'empty serial does not create' do
-      let(:log_fixture) { File.read('./spec/fixtures/create_log_line_empty_serial.json') }
+      let(:log_fixture) { log_line_fixture_empty_serial }
       it 'does not creates a new logline' do
+        pp log_fixture
         expect do
-          LogLine.create_log_line(log_fixture)
+          LogLine.create_log_line(parsed_log_fixture)
         end.to change(LogLine, :count).by 0
       end
     end
   end
 
   describe 'find_or_create_ip_address_association' do
-    let(:log_fixture) { File.read('./spec/fixtures/create_log_line_valid_serial.json') }
+    let(:log_fixture) { log_line_fixture }
     context 'a new ip address' do
       it 'creates in database' do
         expect do
@@ -249,7 +251,7 @@ RSpec.describe LogLine, type: :model do
 
   describe 'find_or_create_serial_search_association' do
     context 'valid serial' do
-      let(:log_fixture) { File.read('./spec/fixtures/create_log_line_valid_serial.json') }
+      let(:log_fixture) { log_line_fixture }
       it 'creates a new serial in the database' do
         expect do
           log.find_or_create_serial_search_association
@@ -261,7 +263,7 @@ RSpec.describe LogLine, type: :model do
       end
     end
     context 'invalid serial (length)' do
-      let(:log_fixture) { File.read('./spec/fixtures/check_length_shorter.json') }
+      let(:log_fixture) { log_line_fixture_serial_length_shorter }
       it 'does not create a SerialSearch' do
         expect do
           log.find_or_create_serial_search_association
@@ -269,7 +271,7 @@ RSpec.describe LogLine, type: :model do
       end
     end
     context 'SerialSearch already exists' do
-      let(:log_fixture) { File.read('./spec/fixtures/create_log_line_valid_serial.json') }
+      let(:log_fixture) { log_line_fixture }
       let(:serial_search) { FactoryGirl.create(:serial_search, serial: "#{parsed_log_fixture['params']['serial'].upcase}  ") }
       it 'does not create a new serial' do
         expect(serial_search).to be_present

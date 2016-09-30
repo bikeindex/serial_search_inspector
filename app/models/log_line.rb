@@ -67,5 +67,6 @@ class LogLine < ApplicationRecord
           search_source: log_line.find_search_source,
           search_type: log_line.find_search_type).each { |found| return true if log_line.serial == found.serial }
     log_line.update_attributes(log_line.attributes_from_entry)
+    log_line
   end
 end
