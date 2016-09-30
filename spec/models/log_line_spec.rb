@@ -25,7 +25,7 @@ RSpec.describe LogLine, type: :model do
 
   describe 'serial' do
     context 'valid serial number' do
-      let(:log_fixture) { log_line_fixture_single_serial }
+      let(:log_fixture) { log_line_fixture }
       it 'returns true' do
         expect(log.serial.present?).to be_truthy
       end
@@ -52,7 +52,7 @@ RSpec.describe LogLine, type: :model do
 
   describe 'find_search_source' do
     context 'html' do
-      let(:log_fixture) { log_line_fixture_find_search_source_html }
+      let(:log_fixture) { log_line_fixture }
       it 'returns html' do
         expect(log.find_search_source).to eq 'html'
       end
@@ -91,7 +91,7 @@ RSpec.describe LogLine, type: :model do
       end
     end
     context 'nil' do
-      let(:log_fixture) { log_line_fixture_find_search_type_nil }
+      let(:log_fixture) { log_line_fixture }
       it 'returns nil' do
         expect(log.find_search_type).to eq nil
       end
@@ -106,7 +106,7 @@ RSpec.describe LogLine, type: :model do
       end
     end
     context 'serial number is greater than 3' do
-      let(:log_fixture) { log_line_fixture_serial_length_ok }
+      let(:log_fixture) { log_line_fixture }
       it 'returns false' do
         expect(log.serial_length_insufficient?).to eq false
       end
@@ -114,7 +114,7 @@ RSpec.describe LogLine, type: :model do
   end
 
   describe 'inspector_request?' do
-    let(:log_fixture) { log_line_fixture_attributes_from_entry }
+    let(:log_fixture) { log_line_fixture }
     let(:args) { { address: log.entry['remote_ip'], request_at: log.find_request_at } }
     context 'is currently inspector' do
       it 'return true' do
@@ -138,7 +138,7 @@ RSpec.describe LogLine, type: :model do
       end
     end
     context 'no location present' do
-      let(:log_fixture) { log_line_fixture_find_location_not_present }
+      let(:log_fixture) { log_line_fixture }
       it 'returns nil' do
         expect(log.find_location).to eq nil
       end
@@ -152,19 +152,19 @@ RSpec.describe LogLine, type: :model do
   end
 
   describe 'find_request_at' do
-    let(:log_fixture) { log_line_fixture_find_request_at }
+    let(:log_fixture) { log_line_fixture }
     it 'returns correct time object' do
-      expect(log.find_request_at).to eq Time.parse('2016-09-22T16:08:15.896Z')
+      expect(log.find_request_at).to eq Time.parse('2016-09-22T05:24:38.139Z')
     end
   end
 
   describe 'attributes_from_entry' do
     context 'valid serial number' do
-      let(:log_fixture) { log_line_fixture_attributes_from_entry }
+      let(:log_fixture) { log_line_fixture }
       it 'returns hash for creation' do
         allow(IpAddress).to receive(:inspector_address?) { false }
         attributes = log.attributes_from_entry
-        expect(attributes[:request_at]).to eq Time.parse('2016-09-21T19:14:49.085Z')
+        expect(attributes[:request_at]).to eq Time.parse('2016-09-22T05:24:38.139Z')
         expect(attributes[:search_source]).to eq 'html'
         expect(attributes[:search_type]).to eq nil
         expect(attributes[:insufficient_length]).to be_falsey
