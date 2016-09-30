@@ -1,9 +1,8 @@
 require 'rails_helper'
 
 describe PapertrailOutputProcessor do
+  include_context :log_file_fixtures
   let(:instance) { PapertrailOutputProcessor.new }
-  let(:papertrail_log_fixture_path) { './spec/fixtures/papertrail_output.log' }
-
   describe 'filter_lines' do
     it 'returns an array of json hash log entries' do
       result = instance.process_lines(papertrail_log_fixture_path)
