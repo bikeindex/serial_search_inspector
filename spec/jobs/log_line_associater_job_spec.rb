@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe LogLineAssociaterJob, type: :job do
-  pending "add some examples to (or delete) #{__FILE__}"
   describe 'perform' do
     it 'should create an activejob to associate the logline to the IP address and Serial Search' do
       ActiveJob::Base.queue_adapter = :inline

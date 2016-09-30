@@ -41,18 +41,10 @@ RSpec.describe LogLine, type: :model do
         expect(log.serial.present?).to be_falsey
       end
     end
-    context 'w235 53214' do
-      let(:dirty_serial) { FactoryGirl.create(:serial_search, serial: 'w235 53214') }
+    context 'returns sanitized serial' do
+      let(:log_fixture) { File.read('./spec/fixtures/log_line_dirty_serial.json') }
       it 'cleans serial' do
-        dirty_serial.sanitize_serial
-        expect(dirty_serial.serial).to eq 'W235 53214'
-      end
-    end
-    context ' b532 4324   ' do
-      let(:dirty_serial) { FactoryGirl.create(:serial_search, serial: ' b532 4324   ') }
-      it 'cleans serial' do
-        dirty_serial.sanitize_serial
-        expect(dirty_serial.serial).to eq 'B532 4324'
+        expect(log.serial).to eq 'WSBC60 2203254K'
       end
     end
   end

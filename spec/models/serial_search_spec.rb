@@ -14,17 +14,24 @@ RSpec.describe SerialSearch, type: :model do
 
   describe 'sanitize_serial' do
     context 'w235 53214' do
-      let(:dirty_serial) { FactoryGirl.create(:serial_search, serial: 'w235 53214') }
+      let(:dirty_serial) { SerialSearch.new(serial: 'w235 53214') }
       it 'cleans serial' do
         dirty_serial.sanitize_serial
         expect(dirty_serial.serial).to eq 'W235 53214'
       end
     end
     context ' b532 4324   ' do
-      let(:dirty_serial) { FactoryGirl.create(:serial_search, serial: ' b532 4324   ') }
+      let(:dirty_serial) { SerialSearch.new(serial: ' b532 4324   ') }
       it 'cleans serial' do
         dirty_serial.sanitize_serial
         expect(dirty_serial.serial).to eq 'B532 4324'
+      end
+    end
+    context 'before save cleans the serial' do
+      let(:dirty_serial) { SerialSearch.new(serial: ' fGt233 45 12g  ') }
+      it 'saves and cleans serial' do
+        dirty_serial.save
+        expect(dirty_serial.serial).to eq 'FGT233 45 12G'
       end
     end
   end
