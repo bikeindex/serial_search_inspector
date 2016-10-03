@@ -1,0 +1,18 @@
+.container-fluid
+  %h2
+    Bike Index Serial Searches
+  %table.table.table-striped.table-bordered
+    %tr
+      %th Serial
+      %th Number of Searches
+      %th Last searched on
+    - @serial_searches.each do |serial_search|
+      %tr
+        %td
+          = link_to serial_search.serial, serial_search_path(serial_search)
+        %td
+          = serial_search.log_lines.count
+        %td
+          = serial_search.searched_bike_index_at
+
+  = paginate @serial_searches

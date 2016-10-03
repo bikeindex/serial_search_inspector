@@ -1,0 +1,3 @@
+web: bundle exec rails s
+log: tail -f log/development.log
+hard_worker: bundle exec rerun --background --dir app,db,lib --pattern '{**/*.rb}' -- bundle exec sidekiq
