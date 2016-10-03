@@ -1,6 +1,8 @@
 class SerialSearchesController < ApplicationController
   def index
-    @serial_searches = SerialSearch.page(params[:page]).per(10)
+    per_page = params[:per_page] || 50
+    page = params[:page] || 1
+    @serial_searches = SerialSearch.page(page).per(per_page)
   end
 
   def show

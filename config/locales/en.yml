@@ -21,3 +21,6 @@
 
 en:
   hello: "Hello world"
+  time:
+    formats:
+      log_request_time: "%a %-m.%d.%y - %l:%M%P"

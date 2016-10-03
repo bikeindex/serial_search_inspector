@@ -1,17 +1,30 @@
-.container
-  .row
-    .col-md-12
-      %table.table.table-striped.table-bordered
-        %tr
-          %th Request at
-          %th IP Address
-          %th Entry Data
-        - @serial_search.log_lines.each do |log|
-          %tr
-            %td
-              = I18n.localize log.request_at, format: :long
-            %td
-              = log.ip_address.address
-            %td
-              %pre
-                = log.entry.to_json
+.container-fluid
+  %h2
+    Log Lines for
+    %em
+      = @serial_search.serial
+    %small
+      = link_to 'back to all serial searches', serial_searches_path
+  %table.table.table-striped.table-bordered.log_line_table
+    %tr
+      %th Request at
+      %th IP Address
+      %th Entry Data
+    - @serial_search.log_lines.each do |log|
+      %tr
+        %td
+          = l log.request_at, format: :log_request_time
+        %td
+          = log.ip_address.address
+        %td
+          %pre
+            = JSON.pretty_generate(log.entry['params'])
+          %small
+            %a{ href: "#expanded_log_params_#{log.id}",  data: { toggle: 'collapse' }, 'aria-expanded' => 'false', 'aria-controls' => 'collapseExample' }
+              All Parameters
+          .collapse{ id: "expanded_log_params_#{log.id}" }
+            %pre
+              = JSON.pretty_generate(log.entry)
+
+
+

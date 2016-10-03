@@ -33,8 +33,9 @@ gem 'geocoder'
 gem 'sidekiq'
 # gem 'sinatra'
 gem 'hamlit'
-gem 'kaminari'
 gem 'bootstrap'
+gem 'kaminari'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
