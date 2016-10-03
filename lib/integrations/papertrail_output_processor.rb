@@ -19,4 +19,14 @@ class PapertrailOutputProcessor
       LogLine.create_log_line(entry)
     end
   end
+
+  def create_log_lines_from_events(events_array)
+    events_array.each do |entry|
+      parsed_log = JSON.parse(entry[:message])
+      unless parsed_log.include?('@timestamp')
+        parsed_log['@timestamp'] = "#{entry[:received_at]}Z"
+      end
+      LogLine.create_log_line(parsed_log)
+    end
+  end
 end

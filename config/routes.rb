@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   resources :serial_searches, only: [:index, :show]
-
+  resources :log_lines, only: [:create]
 end

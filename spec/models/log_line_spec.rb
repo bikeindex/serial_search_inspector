@@ -217,7 +217,6 @@ RSpec.describe LogLine, type: :model do
     context 'empty serial does not create' do
       let(:log_fixture) { log_line_fixture_empty_serial }
       it 'does not creates a new logline' do
-        pp log_fixture
         expect do
           LogLine.create_log_line(parsed_log_fixture)
         end.to change(LogLine, :count).by 0
@@ -251,14 +250,12 @@ RSpec.describe LogLine, type: :model do
 
   describe 'find_or_create_serial_search_association' do
     context 'valid serial' do
+      let!(:serial_search) { FactoryGirl.create(:serial_search) }
       let(:log_fixture) { log_line_fixture }
       it 'creates a new serial in the database' do
         expect do
           log.find_or_create_serial_search_association
         end.to change(SerialSearch, :count).by 1
-      end
-      it 'associates with logline' do
-        log.find_or_create_serial_search_association
         expect(log.serial_search.serial).to eq log.serial
       end
     end
@@ -272,16 +269,12 @@ RSpec.describe LogLine, type: :model do
     end
     context 'SerialSearch already exists' do
       let(:log_fixture) { log_line_fixture }
-      let(:serial_search) { FactoryGirl.create(:serial_search, serial: "#{parsed_log_fixture['params']['serial'].upcase}  ") }
-      it 'does not create a new serial' do
+      let(:serial_search) { FactoryGirl.create(:serial_search, serial: "#{parsed_log_fixture['params']['serial'].strip.upcase}  ") }
+      it 'does not create a new serial and associates' do
         expect(serial_search).to be_present
         expect do
           log.find_or_create_serial_search_association
         end.to change(SerialSearch, :count).by 0
-      end
-      it 'associates with that serial' do
-        expect(serial_search).to be_present
-        log.find_or_create_serial_search_association
         expect(log.serial_search).to eq serial_search
       end
     end
