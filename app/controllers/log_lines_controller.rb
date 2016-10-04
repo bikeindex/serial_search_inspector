@@ -5,7 +5,8 @@ class LogLinesController < ApplicationController
     require 'papertrail_output_processor'
     pp JSON.parse(params[:payload])
     pp '****************'
-    pp JSON.parse(params[:payload][:events])
+    parsed_payload = JSON.parse(params[:payload])
+    pp parsed_payload[:events]
     # if params[:payload].present?
     PapertrailOutputProcessor.new.create_log_lines_from_events(params[:payload][:events])
     # else
