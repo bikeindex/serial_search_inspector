@@ -1,11 +1,9 @@
 .container-fluid
-  %h2
-    Bike Index Serial Searches
   %table.table.table-striped.table-bordered
     %tr
       %th Serial
       %th Number of Searches
-      %th Last searched on
+      %th Most Recent
     - @serial_searches.each do |serial_search|
       %tr
         %td

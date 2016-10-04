@@ -1,10 +1,8 @@
 .container-fluid
-  %h2
+  %h4
     Log Lines for
     %em
       = @serial_search.serial
-    %small
-      = link_to 'back to all serial searches', serial_searches_path
   %table.table.table-striped.table-bordered.log_line_table
     %tr
       %th Request at

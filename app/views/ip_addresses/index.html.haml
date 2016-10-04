@@ -1,0 +1,17 @@
+.container-fuild
+  %table.table.table-striped.table-bordered
+    %tr
+      %th Address
+      %th Location
+      %th Number of Searches
+      %th Most Recent
+    - @ip_addresses.each do |ip_address|
+      %tr
+        %td
+          = ip_address.address
+        %td
+          / = ip_address.location
+        %td
+          = ip_address.serial_searches.count
+        %td
+          / = ip_address.serial_searches.searched_bike_index_at

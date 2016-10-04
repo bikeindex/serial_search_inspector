@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   root to: 'serial_searches#index'
 
-  resources :serial_searches, only: [:index, :show]
   resources :log_lines, only: [:create]
+  resources :ip_addresses, only: [:index, :show]
+  resources :serial_searches, only: [:index, :show]
 end
