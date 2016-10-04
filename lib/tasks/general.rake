@@ -1,3 +1,4 @@
 task :associate_log_lines => :environment do
-  LogLine.find_each { |l| LogLineAssociaterJob.perform_later(l) }
+  # Sidekiq processes new logs too quickly and causes database failures
+  LogLine.find_each { |l| LogLineAssociaterJob.new.perform(l) }
 end
