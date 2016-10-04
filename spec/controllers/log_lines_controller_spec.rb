@@ -36,7 +36,7 @@ RSpec.describe LogLinesController, type: :controller do
       end
       it 'receives payload of logs' do
         expect do
-          post :create, payload: payload.as_json, headers: { 'Content-Type' => 'application/json' }
+          post :create, payload: payload.to_json, headers: { 'Content-Type' => 'application/json' }
         end.to change(LogLine, :count).by 2
         log_line = LogLine.first # with @timestamp
         log_line_2 = LogLine.last # without @timestamp
@@ -49,7 +49,7 @@ RSpec.describe LogLinesController, type: :controller do
     context 'invalid payload' do
       let(:payload) { { hampsters: [franky: 5, abigail: 'apples'], snakes: 'ibis' } }
       xit 'returns correct error code' do
-        post :create, payload: payload.as_json, headers: { 'Content-Type' => 'application/json' }
+        post :create, payload: payload.to_json, headers: { 'Content-Type' => 'application/json' }
         expect(response.status).to eq 400
       end
     end
