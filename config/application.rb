@@ -23,6 +23,6 @@ module SerialSearchInspector
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     # Load the integrations
-    config.autoload_paths << Rails.root.join('lib', 'integrations')
+    config.autoload_paths << "#{Rails.root}/lib/integrations"
   end
 end
