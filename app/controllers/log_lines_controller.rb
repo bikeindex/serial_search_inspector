@@ -3,9 +3,9 @@ class LogLinesController < ApplicationController
 
   def create
     require 'papertrail_output_processor'
-    pp params[:payload].is_a?(Hash)
-    pp '***************'
-    pp params[:payload].is_a?(String)
+    pp JSON.parse(params[:payload])
+    pp '****************'
+    pp JSON.parse(params[:payload][:events])
     # if params[:payload].present?
     PapertrailOutputProcessor.new.create_log_lines_from_events(params[:payload][:events])
     # else
