@@ -35,7 +35,7 @@ gem 'sidekiq'
 gem 'hamlit'
 gem 'bootstrap'
 gem 'kaminari'
-# gem 'secure_headers'
+gem 'secure_headers'
 
 group :production do
   gem 'honeybadger'
