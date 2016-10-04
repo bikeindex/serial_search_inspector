@@ -4,6 +4,9 @@ class LogLine < ApplicationRecord
   belongs_to :ip_address, optional: true
   belongs_to :serial_search, optional: true
 
+  scope :processed, -> { where.not(ip_address_id: nil) }
+  scope :unprocessed, -> { where(ip_address_id: nil) }
+
   def serial
     entry && entry['params'] && entry['params']['serial'] && entry['params']['serial'].strip.upcase
   end

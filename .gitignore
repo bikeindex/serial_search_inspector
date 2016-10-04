@@ -18,3 +18,4 @@
 
 serial_search*.log
 dump.rdb
+.env
