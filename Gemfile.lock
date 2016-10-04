@@ -62,6 +62,10 @@ GEM
     debug_inspector (0.0.2)
     diff-lcs (1.2.5)
     docile (1.1.5)
+    dotenv (2.1.1)
+    dotenv-rails (2.1.1)
+      dotenv (= 2.1.1)
+      railties (>= 4.0, < 5.1)
     erubis (2.7.0)
     execjs (2.7.0)
     factory_girl (4.7.0)
@@ -97,6 +101,7 @@ GEM
       temple (~> 0.7.6)
       thor
       tilt
+    honeybadger (2.6.0)
     i18n (0.7.0)
     jbuilder (2.6.0)
       activesupport (>= 3.0.0, < 5.1)
@@ -166,6 +171,11 @@ GEM
       nokogiri (~> 1.6.0)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
+    rails_12factor (0.0.3)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.5)
+    rails_stdout_logging (0.0.5)
     railties (5.0.0.1)
       actionpack (= 5.0.0.1)
       activesupport (= 5.0.0.1)
@@ -264,12 +274,14 @@ DEPENDENCIES
   byebug
   codeclimate-test-reporter
   coffee-rails (~> 4.2)
+  dotenv-rails
   factory_girl_rails
   foreman
   geocoder
   guard-rspec
   guard-rubocop
   hamlit
+  honeybadger
   jbuilder (~> 2.5)
   jquery-rails
   kaminari
@@ -278,6 +290,7 @@ DEPENDENCIES
   puma (~> 3.0)
   rails (~> 5.0.0, >= 5.0.0.1)
   rails-controller-testing
+  rails_12factor
   rerun
   rspec-rails
   sass-rails (~> 5.0)

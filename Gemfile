@@ -35,7 +35,12 @@ gem 'sidekiq'
 gem 'hamlit'
 gem 'bootstrap'
 gem 'kaminari'
+# gem 'secure_headers'
 
+group :production do
+  gem 'honeybadger'
+  gem 'rails_12factor'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -46,13 +51,13 @@ group :development, :test do
   gem 'guard-rubocop'
   gem 'factory_girl_rails'
   gem 'rails-controller-testing'
+  gem 'dotenv-rails'
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console'
   gem 'listen', '~> 3.0.5'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'foreman'
   gem 'rerun'
 end
