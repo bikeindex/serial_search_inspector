@@ -6,7 +6,7 @@ SecureHeaders::Configuration.default do |config|
       lax: true # mark all cookies as SameSite=lax
     }
   }
-  config.hsts = "max-age=#{20.years.to_i}; includeSubdomains; preload"
+  config.hsts = "max-age=#{20.years.to_i};"
   config.x_frame_options = "DENY"
   config.x_content_type_options = "nosniff"
   config.x_xss_protection = "1; mode=block"
@@ -35,20 +35,5 @@ SecureHeaders::Configuration.default do |config|
     style_src: %w('unsafe-inline'),
     upgrade_insecure_requests: true, # see https://www.w3.org/TR/upgrade-insecure-requests/
     report_uri: %w(https://report-uri.io/example-csp)
-  }
-  # This is available only from 3.5.0; use the `report_only: true` setting for 3.4.1 and below.
-  config.csp_report_only = config.csp.merge({
-    img_src: %w(somewhereelse.com),
-    report_uri: %w(https://report-uri.io/example-csp-report-only)
-  })
-  config.hpkp = {
-    report_only: false,
-    max_age: 60.days.to_i,
-    include_subdomains: true,
-    report_uri: "https://report-uri.io/example-hpkp",
-    pins: [
-      {sha256: "abc"},
-      {sha256: "123"}
-    ]
   }
 end
