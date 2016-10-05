@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.2.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
@@ -30,8 +31,10 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'geocoder'
+gem 'redis'
 gem 'sidekiq'
-# gem 'sinatra'
+gem 'sidekiq-failures'
+gem 'sinatra', github: 'sinatra'
 gem 'hamlit'
 gem 'bootstrap'
 gem 'kaminari'
@@ -40,6 +43,8 @@ gem 'secure_headers'
 group :production do
   gem 'honeybadger'
   gem 'rails_12factor'
+  gem 'lograge' # Structure log data, put it in single lines to improve the functionality
+  gem 'logstash-event' # Use logstash format for logging data
 end
 
 group :development, :test do
