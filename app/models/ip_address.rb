@@ -10,10 +10,7 @@ class IpAddress < ApplicationRecord
 
   def self.inspector_address?(address:, request_at:)
     where(address: address).each do |ip|
-      pp ip.started_being_inspector_at
-      pp '******************'
-      pp request_at
-
+      return false if ip.started_being_inspector_at.nil?
       if ip.started_being_inspector_at < request_at
         return true if ip.stopped_being_inspector_at.nil? || ip.stopped_being_inspector_at > request_at
       end
