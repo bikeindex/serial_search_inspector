@@ -3,7 +3,7 @@
     Log Lines for
     %em
       = @serial_search.serial
-  %table.table.table-striped.table-bordered.log_line_table
+  %table.table.table-striped.table-bordered
     %tr
       %th Request at
       %th IP Address
@@ -13,7 +13,7 @@
         %td
           = l log.request_at, format: :log_request_time
         %td
-          = log.ip_address.address
+          = link_to log.ip_address.address, ip_address_path(log.ip_address.id)
         %td
           %pre
             = JSON.pretty_generate(log.entry['params'])

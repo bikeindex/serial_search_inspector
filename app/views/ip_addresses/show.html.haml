@@ -1,0 +1,15 @@
+.container-fluid
+  %h4
+    Serial Searches for
+    %em
+      = @ip_address.address
+  %table.table.table-striped.table-bordered
+    %tr
+      %th Serial
+      %th Last searched on
+    - @ip_address.serial_searches.each do |serial_search|
+      %tr
+        %td
+          = link_to serial_search.serial, serial_search_path(serial_search.id)
+        %td
+          = serial_search.searched_bike_index_at

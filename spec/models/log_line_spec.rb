@@ -288,11 +288,11 @@ RSpec.describe LogLine, type: :model do
         end
       end
       context 'serial searched before' do
-        let(:serial_search) { FactoryGirl.create(:serial_search) }
         it 'updates to more recent time' do
-          serial_search.update_attribute(:searched_bike_index_at, Time.now - 1.hour)
-          log.entry['@timestamp'] = Time.now.to_s
           log.find_or_create_serial_search_association
+          log.update_attribute(:request_at, Time.now)
+          log.find_or_create_serial_search_association
+          serial_search = SerialSearch.first
           expect(serial_search.searched_bike_index_at).to be_within(1.second).of Time.now
         end
       end

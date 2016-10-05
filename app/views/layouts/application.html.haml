@@ -11,12 +11,13 @@
       %h2
         = @title
     %nav.navbar.navbar-dark.bg-inverse
+      Bike Index Serial Search Inspector
       %ul.nav.navbar-nav
         %li.nav-item
           .nav-link
-            = link_to 'Serial Searches', serial_searches_path
+            = link_to 'Serial Searches', serial_searches_path, class: 'link-text'
         %li.nav-item
           .nav-link
-            = link_to 'IP Addresses', ip_addresses_path
+            = link_to 'IP Addresses', ip_addresses_path, class: 'link-text'
 
     = yield

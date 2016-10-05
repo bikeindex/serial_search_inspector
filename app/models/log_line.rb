@@ -64,7 +64,6 @@ class LogLine < ApplicationRecord
     serial_search = SerialSearch.find_or_create_by(serial: serial)
     serial_search.update_attribute(:searched_bike_index_at, find_request_at)
     self.serial_search_id = serial_search.id
-
   end
 
   def self.create_log_line(entry)

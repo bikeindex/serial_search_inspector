@@ -5,4 +5,9 @@ class IpAddressesController < ApplicationController
     page = params[:page] || 1
     @ip_addresses = IpAddress.page(page).per(per_page)
   end
+
+  def show
+    @title = ''
+    @ip_address = IpAddress.find(params[:id])
+  end
 end
