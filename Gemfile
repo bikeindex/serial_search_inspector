@@ -30,6 +30,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'geocoder'
+gem 'redis'
 gem 'sidekiq'
 gem 'sidekiq-failures'
 gem 'sinatra', github: 'sinatra'
