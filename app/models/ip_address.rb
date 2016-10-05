@@ -10,7 +10,7 @@ class IpAddress < ApplicationRecord
 
   def self.inspector_address?(address:, request_at:)
     where(address: address).each do |ip|
-      pp started_being_inspector_at
+      pp ip.started_being_inspector_at
       pp '******************'
       pp request_at
 
