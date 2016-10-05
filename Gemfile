@@ -38,13 +38,13 @@ gem 'sinatra', github: 'sinatra'
 gem 'hamlit'
 gem 'bootstrap'
 gem 'kaminari'
-gem 'secure_headers'
 
 group :production do
   gem 'honeybadger'
   gem 'rails_12factor'
   gem 'lograge' # Structure log data, put it in single lines to improve the functionality
   gem 'logstash-event' # Use logstash format for logging data
+  gem 'secure_headers'
 end
 
 group :development, :test do
