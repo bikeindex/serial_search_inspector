@@ -278,24 +278,5 @@ RSpec.describe LogLine, type: :model do
         expect(log.serial_search).to eq serial_search
       end
     end
-    context 'sets searched_bike_index_at' do
-      let(:log_fixture) { log_line_fixture }
-      context 'new serial_search' do
-        it 'sets time correctly' do
-          log.find_or_create_serial_search_association
-          serial_search = SerialSearch.first
-          expect(serial_search.searched_bike_index_at).to eq Time.parse(parsed_log_fixture['@timestamp'])
-        end
-      end
-      context 'serial searched before' do
-        it 'updates to more recent time' do
-          log.find_or_create_serial_search_association
-          log.update_attribute(:request_at, Time.now)
-          log.find_or_create_serial_search_association
-          serial_search = SerialSearch.first
-          expect(serial_search.searched_bike_index_at).to be_within(1.second).of Time.now
-        end
-      end
-    end
   end
 end

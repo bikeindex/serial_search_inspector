@@ -62,7 +62,6 @@ class LogLine < ApplicationRecord
   def find_or_create_serial_search_association
     return false if serial_length_insufficient?
     serial_search = SerialSearch.find_or_create_by(serial: serial)
-    serial_search.update_attribute(:searched_bike_index_at, find_request_at)
     self.serial_search_id = serial_search.id
   end
 
