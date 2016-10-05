@@ -2,15 +2,15 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Use lograge for logging to production
-  config.lograge.enabled = true
-  config.log_level = :info
-  config.lograge.formatter = Lograge::Formatters::Logstash.new # Use logstash format
-  config.lograge.custom_options = lambda do |event|
-    {
-      remote_ip: event.payload[:ip],
-      params: event.payload[:params].except('controller', 'action', 'format', 'id')
-    }
-  end
+  # config.lograge.enabled = true
+  # config.log_level = :info
+  # config.lograge.formatter = Lograge::Formatters::Logstash.new # Use logstash format
+  # config.lograge.custom_options = lambda do |event|
+  #   {
+  #     remote_ip: event.payload[:ip],
+  #     params: event.payload[:params].except('controller', 'action', 'format', 'id')
+  #   }
+  # end
 
   # Code is not reloaded between requests.
   config.cache_classes = true
