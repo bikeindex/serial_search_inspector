@@ -46,5 +46,11 @@ RSpec.describe IpAddress, type: :model do
         expect(IpAddress.inspector_address?(address: 'sample_address', request_at: Time.now)).to be_falsey
       end
     end
+    context 'started_being_inspector_at is nil' do
+      let(:ip) { FactoryGirl.create(:ip_address) }
+      it 'does not error' do
+        expect(IpAddress.inspector_address?(address: ip.address, request_at: Time.now)).to be_falsey
+      end
+    end
   end
 end
