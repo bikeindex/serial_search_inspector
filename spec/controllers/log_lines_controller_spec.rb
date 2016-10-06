@@ -36,7 +36,7 @@ RSpec.describe LogLinesController, type: :controller do
       end
       it 'receives payload of logs' do
         expect do
-          post :create, payload: payload.to_json, source: ENV['LOG_ORIGIN'], headers: { 'Content-Type' => 'application/json' }
+          post :create, payload: payload.to_json, source: ENV['API_AUTH_KEY'], headers: { 'Content-Type' => 'application/json' }
         end.to change(LogLine, :count).by 2
         log_line = LogLine.first # with @timestamp
         log_line_2 = LogLine.last # without @timestamp
