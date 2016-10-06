@@ -11,7 +11,7 @@ class LogLinesController < ApplicationController
       #   render json: 'Error: Invalid Payload', status: :bad_request and return
       # end
     else
-      render json: 'Error: Invalid Log Source', status: :unauthorized and return
+      render json: { 'Message': 'Error: Invalid Log Source' }, status: :unauthorized and return
     end
   end
 end
