@@ -7,7 +7,7 @@ class IpAddressesController < ApplicationController
   end
 
   def show
-    @title = ''
     @ip_address = IpAddress.find(params[:id])
+    @title = "Searches from #{@ip_address.address}"
   end
 end

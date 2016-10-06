@@ -7,7 +7,7 @@ class SerialSearchesController < ApplicationController
   end
 
   def show
-    @title = "Serial Search #{params[:id]}"
     @serial_search = SerialSearch.find(params[:id])
+    @title = "Serial Searches for #{@serial_search.serial}"
   end
 end

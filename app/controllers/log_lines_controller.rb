@@ -5,13 +5,9 @@ class LogLinesController < ApplicationController
     require 'papertrail_output_processor'
     if params[:api_authorization_key] == ENV['API_AUTH_KEY']
       parsed_events = JSON.parse(params[:payload]).with_indifferent_access[:events]
-      # if params[:payload].present?
       PapertrailOutputProcessor.new.create_log_lines_from_events(parsed_events)
-      # else
-      #   render json: 'Error: Invalid Payload', status: :bad_request and return
-      # end
     else
-      render json: { 'Message': 'Error: Invalid Log Source' }, status: :unauthorized and return
+      render json: { 'Message': 'Error: Invalid API Authorization Key' }, status: :unauthorized and return
     end
   end
 end
