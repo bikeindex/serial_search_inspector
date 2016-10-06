@@ -3,7 +3,7 @@
     %tr
       %th Serial
       %th Number of Searches
-      %th Most Recent
+      %th Most Recent Serial Search
     - @serial_searches.each do |serial_search|
       %tr
         %td
@@ -11,6 +11,6 @@
         %td
           = serial_search.log_lines.count
         %td
-          = serial_search.searched_bike_index_at
+          = l serial_search.last_request_at, format: :log_request_time
 
   = paginate @serial_searches
