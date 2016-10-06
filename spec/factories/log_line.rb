@@ -4,6 +4,6 @@ FactoryGirl.define do
     before(:create) do |log|
       log.attributes = log.attributes_from_entry
     end
-    request_at Time.now # need to change the time of each log_line for creation
+    request_at { Time.now } # need to change the time of each log_line for creation
   end
 end
