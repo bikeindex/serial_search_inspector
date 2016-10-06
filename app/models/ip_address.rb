@@ -9,9 +9,9 @@ class IpAddress < ApplicationRecord
   after_validation :geocode, if: ->(obj) { obj.address.present? and obj.address_changed? }
 
   def self.inspector_address?(address:, request_at:)
-    where(address: address).each do |ip|
-      if ip.started_being_inspector_at < request_at
-        return true if ip.stopped_being_inspector_at.nil? || ip.stopped_being_inspector_at > request_at
+    where(address: address).each do |ip_address|
+      if ip_address.started_being_inspector_at.present? && ip_address.started_being_inspector_at < request_at
+        return true if ip_address.stopped_being_inspector_at.nil? || ip_address.stopped_being_inspector_at > request_at
       end
     end
     false

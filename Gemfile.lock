@@ -1,3 +1,13 @@
+GIT
+  remote: git://github.com/sinatra/sinatra.git
+  revision: af6dad2a6c31e31617712b15f455b2a3d3eb1c06
+  specs:
+    sinatra (2.0.0.beta2)
+      mustermann (= 1.0.0.beta2)
+      rack (~> 2.0)
+      rack-protection (= 2.0.0.beta2)
+      tilt (~> 2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -117,6 +127,11 @@ GEM
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
+    lograge (0.4.1)
+      actionpack (>= 4, < 5.1)
+      activesupport (>= 4, < 5.1)
+      railties (>= 4, < 5.1)
+    logstash-event (1.2.02)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     lumberjack (1.0.10)
@@ -129,6 +144,7 @@ GEM
     mini_portile2 (2.1.0)
     minitest (5.9.0)
     multi_json (1.12.1)
+    mustermann (1.0.0.beta2)
     nenv (0.3.0)
     nio4r (1.2.1)
     nokogiri (1.6.8)
@@ -148,6 +164,8 @@ GEM
       slop (~> 3.4)
     puma (3.6.0)
     rack (2.0.1)
+    rack-protection (2.0.0.beta2)
+      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.0.0.1)
@@ -234,6 +252,8 @@ GEM
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
       redis (~> 3.2, >= 3.2.1)
+    sidekiq-failures (0.4.5)
+      sidekiq (>= 2.16.0)
     simplecov (0.11.2)
       docile (~> 1.1.0)
       json (~> 1.8)
@@ -289,21 +309,29 @@ DEPENDENCIES
   jquery-rails
   kaminari
   listen (~> 3.0.5)
+  lograge
+  logstash-event
   pg (~> 0.18)
   puma (~> 3.0)
   rails (~> 5.0.0, >= 5.0.0.1)
   rails-controller-testing
   rails_12factor
+  redis
   rerun
   rspec-rails
   sass-rails (~> 5.0)
   secure_headers
   shoulda-matchers
   sidekiq
+  sidekiq-failures
+  sinatra!
   turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console
 
+RUBY VERSION
+   ruby 2.2.5p319
+
 BUNDLED WITH
-   1.12.5
+   1.13.2
