@@ -3,10 +3,12 @@
     Serial Searches for
     %em
       = @ip_address.address
-  %table.table.table-striped.table-bordered
-    %tr
-      %th Serial
-      %th Last searched on
+  %table.table.table-striped.table-bordered.sortable-theme-bootstrap{'data-sortable' => ''}
+    %thead
+      %tr
+        %th Serial
+        %th Last searched on
+    %tbody
     - @ip_address.serial_searches.each do |serial_search|
       %tr
         %td

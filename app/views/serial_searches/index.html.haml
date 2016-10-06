@@ -1,16 +1,22 @@
 .container-fluid
-  %table.table.table-striped.table-bordered
-    %tr
-      %th Serial
-      %th Number of Searches
-      %th Most Recent Serial Search
-    - @serial_searches.each do |serial_search|
+  = @serial_searches_count
+  Serial Searches from
+  = @ip_addresses_count
+  individual IP Addresses
+  %table.table.table-striped.table-bordered.sortable-theme-bootstrap{'data-sortable' => ''}
+    %thead
       %tr
-        %td
-          = link_to serial_search.serial, serial_search_path(serial_search)
-        %td
-          = serial_search.log_lines.count
-        %td
-          = l serial_search.last_request_at, format: :log_request_time
+        %th Serial
+        %th Number of Searches
+        %th Most Recent Serial Search
+    %tbody
+      - @serial_searches.each do |serial_search|
+        %tr
+          %td
+            = link_to serial_search.serial, serial_search_path(serial_search)
+          %td
+            = serial_search.log_lines.count
+          %td
+            = l serial_search.last_request_at, format: :log_request_time
 
   = paginate @serial_searches
