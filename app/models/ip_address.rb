@@ -6,10 +6,20 @@ class IpAddress < ApplicationRecord
   has_many :serial_searches, through: :log_lines
 
   geocoded_by :address
-  reverse_geocoded_by :latitude, :longitude, address: :location
+  reverse_geocoded_by :latitude, :longitude do |obj, results|
+    if geo = results.first
+      obj.city = geo.city
+      obj.state = geo.state
+      obj.country = geo.country_code
+    end
+  end
 
   after_validation :geocode, if: ->(obj) { obj.address.present? and obj.address_changed? }
   after_validation :reverse_geocode
+
+  def location
+    [city, state, country].join(', ')
+  end
 
   def self.inspector_address?(address:, request_at:)
     where(address: address).each do |ip_address|
