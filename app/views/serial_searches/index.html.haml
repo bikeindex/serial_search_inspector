@@ -1,14 +1,19 @@
 .container-fluid
-  = @serial_searches_count
-  Serial Searches from
-  = @ip_addresses_count
-  individual IP Addresses
-  %table.table.table-striped.table-bordered
+  %header.info-header
+    %h4
+      = @serial_searches_count
+      Serial Searches from
+      = @ip_addresses_count
+      unique IP Addresses
+  %table.table.table-striped.table-bordered.header-sortable
     %thead
       %tr
-        %th Serial
-        %th Number of Searches
-        %th Most Recent Serial Search
+        %th
+          = sortable 'serial'
+        %th
+          = sortable 'Number of Searches', sort: '??'
+        %th
+          = sortable 'last_request_at'
     %tbody
       - @serial_searches.each do |serial_search|
         %tr

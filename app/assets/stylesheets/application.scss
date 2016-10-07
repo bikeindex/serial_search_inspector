@@ -1,2 +1,40 @@
 $enable-flex: true;
 @import "bootstrap";
+
+.info-header {
+  padding:  20px 0px 20px 0px;
+}
+
+.header-sortable {
+  .arrows {
+    display: inline-block;
+  }
+
+  th a {
+    &:after {
+      display: inline-block;
+      content: '';
+      // height: 1em;
+      // width: .5em;
+      float: right;
+      // margin-left: 3em;
+    }
+    &.asc:after {
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 5px solid black;
+    }
+    &.desc:after {
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid black;
+    }
+    &.current:after {
+
+    }
+  }
+}

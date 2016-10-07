@@ -1,8 +1,11 @@
 .container-fluid
-  %h4
-    Serial Searches for
-    %em
-      = @ip_address.address
+  %header.info-header
+    %h4
+      Serial Searches for
+      %em
+        = @ip_address.address
+        from
+        = @ip_address.location
   %table.table.table-striped.table-bordered
     %thead
       %tr

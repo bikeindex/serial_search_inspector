@@ -1,15 +1,21 @@
-.container-fuild
-  = @serial_searches_count
-  Serial Searches from
-  = @ip_addresses_count
-  individual IP Addresses
+.container-fluid
+  %header.info-header
+    %h4
+      = @serial_searches_count
+      Serial Searches from
+      = @ip_addresses_count
+      unique IP Addresses
   %table.table.table-striped.table-bordered
     %thead
       %tr
-        %th Address
-        %th Location
-        %th Number of Searches
-        %th Most Recent
+        %th
+          = sortable 'address'
+        %th
+          = sortable 'location'
+        %th
+          = sortable 'Number of Searches'
+        %th
+          = sortable 'Most Recent'
     %tbody
       - @ip_addresses.each do |ip_address|
         %tr
@@ -21,3 +27,5 @@
             = ip_address.serial_searches.count
           %td
             / = ip_address.serial_searches.last.searched_bike_index_at
+
+  = paginate @ip_addresses
