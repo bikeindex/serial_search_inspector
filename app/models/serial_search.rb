@@ -8,6 +8,8 @@ class SerialSearch < ApplicationRecord
 
   before_save :sanitize_serial
 
+  scope :times_searched, -> { log_lines.count }
+
   def sanitize_serial
     self.serial = serial.strip.upcase
   end

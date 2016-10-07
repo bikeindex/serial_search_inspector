@@ -6,32 +6,38 @@ $enable-flex: true;
 }
 
 .header-sortable {
-  .arrows {
-    display: inline-block;
-  }
-
   th a {
+    &:before {
+      display: inline-block;
+      content: '';
+      float: right;
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      //
+      border-bottom: 10px solid black;
+      // border-top: 10px solid black;
+    }
     &:after {
       display: inline-block;
       content: '';
-      // height: 1em;
-      // width: .5em;
       float: right;
-      // margin-left: 3em;
-    }
-    &.asc:after {
       width: 0;
       height: 0;
-      border-left: 5px solid transparent;
-      border-right: 5px solid transparent;
-      border-bottom: 5px solid black;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      //
+      // border-bottom: 10px solid black;
+      border-top: 10px solid black;
+    }
+    &.asc:before {
+      // border-bottom: 10px solid black;
+      border-bottom: 10px solid blue;
     }
     &.desc:after {
-      width: 0;
-      height: 0;
-      border-left: 5px solid transparent;
-      border-right: 5px solid transparent;
-      border-top: 5px solid black;
+      // border-top: 10px solid black;
+      border-top: 10px solid blue;
     }
     &.current:after {
 
