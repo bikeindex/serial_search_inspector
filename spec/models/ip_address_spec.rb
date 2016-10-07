@@ -11,11 +11,8 @@ RSpec.describe IpAddress, type: :model do
   end
 
   describe 'location' do
-    let(:ip_address) { FactoryGirl.create(:ip_address) }
+    let(:ip_address) { IpAddress.new(city: 'New York', state: 'New York', country: 'US') }
     it 'returns a string of the city, state, and country' do
-      ip_address.city = 'New York'
-      ip_address.state = 'New York'
-      ip_address.country = 'US'
       expect(ip_address.location).to eq 'New York, New York, US'
     end
   end
