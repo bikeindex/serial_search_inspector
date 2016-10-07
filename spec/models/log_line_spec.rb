@@ -17,9 +17,20 @@ RSpec.describe LogLine, type: :model do
   end
 
   describe 'factory' do
-    let!(:log_line) { FactoryGirl.create(:log_line) }
-    it 'works correctly' do
-      expect(log_line.request_at).to be_within(1.second).of Time.now
+    context 'default factory' do
+      let(:log_line) { FactoryGirl.create(:log_line) }
+      it 'works correctly' do
+        log_line.reload
+        expect(log_line.request_at).to be_within(1.second).of Time.now
+      end
+    end
+    context 'factory passing in request_at' do
+      let(:target_time) { Time.now + 1.minute }
+      let(:log_line) { FactoryGirl.create(:log_line, request_at: target_time) }
+      it 'works correctly' do
+        log_line.reload
+        expect(log_line.request_at).to be_within(1.second).of target_time
+      end
     end
   end
 

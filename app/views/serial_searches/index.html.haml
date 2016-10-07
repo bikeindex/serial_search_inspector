@@ -1,18 +1,22 @@
 .container-fluid
-  %h2
-    Bike Index Serial Searches
+  = @serial_searches_count
+  Serial Searches from
+  = @ip_addresses_count
+  individual IP Addresses
   %table.table.table-striped.table-bordered
-    %tr
-      %th Serial
-      %th Number of Searches
-      %th Last searched on
-    - @serial_searches.each do |serial_search|
+    %thead
       %tr
-        %td
-          = link_to serial_search.serial, serial_search_path(serial_search)
-        %td
-          = serial_search.log_lines.count
-        %td
-          = serial_search.searched_bike_index_at
+        %th Serial
+        %th Number of Searches
+        %th Most Recent Serial Search
+    %tbody
+      - @serial_searches.each do |serial_search|
+        %tr
+          %td
+            = link_to serial_search.serial, serial_search_path(serial_search)
+          %td
+            = serial_search.log_lines.count
+          %td
+            = l serial_search.last_request_at, format: :log_request_time
 
   = paginate @serial_searches

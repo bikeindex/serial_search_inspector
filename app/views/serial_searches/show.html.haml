@@ -1,30 +1,30 @@
 .container-fluid
-  %h2
+  %h4
     Log Lines for
     %em
       = @serial_search.serial
-    %small
-      = link_to 'back to all serial searches', serial_searches_path
-  %table.table.table-striped.table-bordered.log_line_table
-    %tr
-      %th Request at
-      %th IP Address
-      %th Entry Data
-    - @serial_search.log_lines.each do |log|
+  %table.table.table-striped.table-bordered
+    %thead
       %tr
-        %td
-          = l log.request_at, format: :log_request_time
-        %td
-          = log.ip_address.address
-        %td
-          %pre
-            = JSON.pretty_generate(log.entry['params'])
-          %small
-            %a{ href: "#expanded_log_params_#{log.id}",  data: { toggle: 'collapse' }, 'aria-expanded' => 'false', 'aria-controls' => 'collapseExample' }
-              All Parameters
-          .collapse{ id: "expanded_log_params_#{log.id}" }
+        %th Request at
+        %th IP Address
+        %th Entry Data
+    %tbody
+      - @serial_search.log_lines.each do |log|
+        %tr
+          %td
+            = l log.request_at, format: :log_request_time
+          %td
+            = link_to log.ip_address.address, ip_address_path(log.ip_address.id)
+          %td
             %pre
-              = JSON.pretty_generate(log.entry)
+              = JSON.pretty_generate(log.entry['params'])
+            %small
+              %a{ href: "#expanded_log_params_#{log.id}",  data: { toggle: 'collapse' }, 'aria-expanded' => 'false', 'aria-controls' => 'collapseExample' }
+                All Parameters
+            .collapse{ id: "expanded_log_params_#{log.id}" }
+              %pre
+                = JSON.pretty_generate(log.entry)
 
 
 

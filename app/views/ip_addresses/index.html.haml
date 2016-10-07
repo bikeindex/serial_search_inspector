@@ -1,0 +1,23 @@
+.container-fuild
+  = @serial_searches_count
+  Serial Searches from
+  = @ip_addresses_count
+  individual IP Addresses
+  %table.table.table-striped.table-bordered
+    %thead
+      %tr
+        %th Address
+        %th Location
+        %th Number of Searches
+        %th Most Recent
+    %tbody
+      - @ip_addresses.each do |ip_address|
+        %tr
+          %td
+            = link_to ip_address.address, ip_address_path(ip_address)
+          %td
+            = ip_address.location
+          %td
+            = ip_address.serial_searches.count
+          %td
+            / = ip_address.serial_searches.last.searched_bike_index_at

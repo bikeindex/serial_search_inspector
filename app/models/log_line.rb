@@ -61,7 +61,8 @@ class LogLine < ApplicationRecord
 
   def find_or_create_serial_search_association
     return false if serial_length_insufficient?
-    self.serial_search_id = SerialSearch.find_or_create_by(serial: serial).id
+    serial_search = SerialSearch.find_or_create_by(serial: serial)
+    self.serial_search_id = serial_search.id
   end
 
   def self.create_log_line(entry)

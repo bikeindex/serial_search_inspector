@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe SerialSearch, type: :model do
+  include_context :log_line_fixtures
   describe 'validations' do
     it { should validate_presence_of(:serial) }
     it { should validate_uniqueness_of(:serial) }

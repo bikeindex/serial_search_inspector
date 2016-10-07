@@ -1,9 +1,18 @@
 !!!
 %html
   %head
-    %title SerialSearchInspector
+    %title
+      = @title
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
+    %nav.navbar.navbar-full.navbar-dark.bg-inverse
+      .navbar-brand Bike Index Serial Search Inspector
+      %ul.nav.navbar-nav
+        %li.nav-item
+          = link_to 'Serial Searches', serial_searches_path, class: 'nav-link'
+        %li.nav-item
+          = link_to 'IP Addresses', ip_addresses_path, class: 'nav-link'
+
     = yield
