@@ -10,7 +10,6 @@ $enable-flex: true;
     display: block;
     position: absolute;
     content: '';
-    float: right;
     width: 0;
     height: 0;
     right: 0;
@@ -20,21 +19,25 @@ $enable-flex: true;
   th a {
     display: block;
     position: relative;
+    padding-right: 10px;
     &:before {
       @extend .sorting-arrow-base;
       bottom: 0;
-      border-top: 10px solid black;
+      border-top: 10px solid $gray-lighter;
     }
     &:after {
       @extend .sorting-arrow-base;
       top: 0;
-      border-bottom: 10px solid black;
+      border-bottom: 10px solid $gray-lighter;
     }
     &.asc:before {
-      border-top: 10px solid blue;
+      border-top: 10px solid $link-color;
     }
     &.desc:after {
-      border-bottom: 10px solid blue;
+      border-bottom: 10px solid $link-color;
+    }
+    &.current {
+      text-decoration: underline;
     }
   }
 }
