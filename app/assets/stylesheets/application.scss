@@ -6,41 +6,35 @@ $enable-flex: true;
 }
 
 .header-sortable {
+  .sorting-arrow-base {
+    display: block;
+    position: absolute;
+    content: '';
+    float: right;
+    width: 0;
+    height: 0;
+    right: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+  }
   th a {
+    display: block;
+    position: relative;
     &:before {
-      display: inline-block;
-      content: '';
-      float: right;
-      width: 0;
-      height: 0;
-      border-left: 10px solid transparent;
-      border-right: 10px solid transparent;
-      //
-      border-bottom: 10px solid black;
-      // border-top: 10px solid black;
-    }
-    &:after {
-      display: inline-block;
-      content: '';
-      float: right;
-      width: 0;
-      height: 0;
-      border-left: 10px solid transparent;
-      border-right: 10px solid transparent;
-      //
-      // border-bottom: 10px solid black;
+      @extend .sorting-arrow-base;
+      bottom: 0;
       border-top: 10px solid black;
     }
-    &.asc:before {
-      // border-bottom: 10px solid black;
-      border-bottom: 10px solid blue;
+    &:after {
+      @extend .sorting-arrow-base;
+      top: 0;
+      border-bottom: 10px solid black;
     }
-    &.desc:after {
-      // border-top: 10px solid black;
+    &.asc:before {
       border-top: 10px solid blue;
     }
-    &.current:after {
-
+    &.desc:after {
+      border-bottom: 10px solid blue;
     }
   }
 }
