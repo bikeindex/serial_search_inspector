@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161007154444) do
+ActiveRecord::Schema.define(version: 20161010184559) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,11 +31,12 @@ ActiveRecord::Schema.define(version: 20161007154444) do
     t.float    "longitude"
     t.datetime "started_being_inspector_at"
     t.datetime "stopped_being_inspector_at"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.string   "city"
     t.string   "state"
     t.string   "country"
+    t.integer  "log_lines_count",            default: 0
   end
 
   create_table "log_lines", force: :cascade do |t|
@@ -58,9 +59,10 @@ ActiveRecord::Schema.define(version: 20161007154444) do
     t.text     "serial"
     t.datetime "searched_bike_index_at"
     t.boolean  "too_many_results"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.datetime "last_request_at"
+    t.integer  "log_lines_count",        default: 0
   end
 
 end
