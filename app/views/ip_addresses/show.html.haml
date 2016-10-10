@@ -10,16 +10,14 @@
     %thead
       %tr
         %th Serial
-        %th Request At
         %th Entry Data
+        %th Request At
 
     %tbody
       - @ip_address.log_lines.each do |log|
         %tr
           %td
             = link_to log.entry['params']['serial'], serial_search_path(log.serial_search.id)
-          %td
-            = l log.request_at, format: :log_request_time
           %td
             %pre
               = JSON.pretty_generate(log.entry['params'])
@@ -29,6 +27,8 @@
             .collapse{ id: "expanded_log_params_#{log.id}" }
               %pre
                 = JSON.pretty_generate(log.entry)
+          %td
+            = l log.request_at, format: :log_request_time
 
     / %tbody
     / - @ip_address.serial_searches.each do |serial_search|
