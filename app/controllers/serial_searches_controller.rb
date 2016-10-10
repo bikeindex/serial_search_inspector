@@ -7,11 +7,7 @@ class SerialSearchesController < ApplicationController
     page = params[:page] || 1
     @serial_searches_count = SerialSearch.count
     @ip_addresses_count = IpAddress.count
-    if params[:sort] == 'times_searched'
-      @serial_searches = SerialSearch.select('*').order('log_lines_count').page(page).per(per_page)
-    else
-      @serial_searches = SerialSearch.order(sort_column + ' ' + sort_direction).page(page).per(per_page)
-    end
+    @serial_searches = SerialSearch.order(sort_column + ' ' + sort_direction).page(page).per(per_page)
   end
 
   def show

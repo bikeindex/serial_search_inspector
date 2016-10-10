@@ -18,7 +18,7 @@ RSpec.describe SerialSearchesController, type: :controller do
         FactoryGirl.create(:log_line, serial_search: serial_search_3)
       end
       it 'sorts by times_searched' do
-        get :index, sort: 'times_searched', direction: 'desc', per_page: '1'
+        get :index, sort: 'log_lines_count', direction: 'desc', per_page: '1'
         expect(response.status).to eq 200
         expect(assigns(:serial_searches)). to eq([serial_search_3])
       end

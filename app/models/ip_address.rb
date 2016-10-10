@@ -14,8 +14,8 @@ class IpAddress < ApplicationRecord
     end
   end
 
-  after_validation :geocode #, if: ->(obj) { obj.address.present? and obj.address_changed? }
-  after_validation :reverse_geocode #, if: ->(obj) { obj.address.present? and obj.address_changed? }
+  after_validation :geocode, if: ->(obj) { obj.address.present? and obj.address_changed? }
+  after_validation :reverse_geocode, if: ->(obj) { obj.address.present? and obj.address_changed? }
 
   def location
     [city, state, country].join(', ')

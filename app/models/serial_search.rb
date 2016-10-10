@@ -11,4 +11,8 @@ class SerialSearch < ApplicationRecord
   def sanitize_serial
     self.serial = serial.strip.upcase
   end
+
+  def self.times_searched
+    select('*').order('log_lines_count DESC')
+  end
 end

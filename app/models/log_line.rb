@@ -1,7 +1,7 @@
 class LogLine < ApplicationRecord
   validates_presence_of :entry, :request_at, :search_source, :serial
 
-  belongs_to :ip_address, optional: true
+  belongs_to :ip_address, optional: true, counter_cache: true
   belongs_to :serial_search, optional: true, counter_cache: true
 
   scope :processed, -> { where.not(ip_address_id: nil) }
