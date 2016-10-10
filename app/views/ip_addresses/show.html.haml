@@ -1,7 +1,8 @@
 .container-fluid
   %header.info-header
     %h4
-      Log Lines for
+      = pluralize(@ip_address.log_lines.count, 'Log Line')
+      for
       %em
         = @ip_address.address
         from

@@ -1,9 +1,9 @@
 $enable-flex: true;
 @import "bootstrap";
 
-.info-header {
-  padding:  20px 0px 20px 0px;
-}
+.info-header { padding:  20px 0px 20px 0px; }
+
+.ip-address-location { display: block; }
 
 .header-sortable {
   .sorting-arrow-base {

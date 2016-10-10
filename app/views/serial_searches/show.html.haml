@@ -1,9 +1,11 @@
 .container-fluid
   %header.info-header
     %h4
-      Log Lines for
+      = pluralize(@serial_search.log_lines.count, 'Log Line')
+      for
       %em
         = @serial_search.serial
+
   %table.table.table-striped.table-bordered.header-sortable
     %thead
       %tr
@@ -15,6 +17,8 @@
         %tr
           %td
             = link_to log.ip_address.address, ip_address_path(log.ip_address.id)
+            %small.ip-address-location
+              = log.ip_address.location
           %td
             %pre
               = JSON.pretty_generate(log.entry['params'])
