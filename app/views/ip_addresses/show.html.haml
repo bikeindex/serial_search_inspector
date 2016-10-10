@@ -1,7 +1,7 @@
 .container-fluid
   %header.info-header
     %h4
-      Serial Searches for
+      Log Lines for
       %em
         = @ip_address.address
         from
@@ -11,10 +11,39 @@
       %tr
         %th Serial
         %th Most Recent Search
+        %th Entry Data
+
     %tbody
-    - @ip_address.serial_searches.each do |serial_search|
-      %tr
-        %td
-          = link_to serial_search.serial, serial_search_path(serial_search.id)
-        %td
-          = l serial_search.last_request_at, format: :log_request_time
+      - @ip_address.log_lines.each do |log|
+        %tr
+          %td
+            = link_to log.entry['params']['serial'], serial_search_path(log.serial_search.id)
+          %td
+            = l log.request_at, format: :log_request_time
+          %td
+            %pre
+              = JSON.pretty_generate(log.entry['params'])
+            %small
+              %a{ href: "#expanded_log_params_#{log.id}",  data: { toggle: 'collapse' }, 'aria-expanded' => 'false', 'aria-controls' => 'collapseExample' }
+                All Parameters
+            .collapse{ id: "expanded_log_params_#{log.id}" }
+              %pre
+                = JSON.pretty_generate(log.entry)
+
+    / %tbody
+    / - @ip_address.serial_searches.each do |serial_search|
+    /   %tr
+    /     %td
+    /       = link_to serial_search.serial, serial_search_path(serial_search.id)
+    /     %td
+    /       = l serial_search.last_request_at, format: :log_request_time
+    /     %td
+    /       - serial_search.log_lines.each do |log|
+    /         %pre
+    /           = JSON.pretty_generate(log.entry['params'])
+    /         %small
+    /           %a{ href: "#expanded_log_params_#{log.id}",  data: { toggle: 'collapse' }, 'aria-expanded' => 'false', 'aria-controls' => 'collapseExample' }
+    /             All Parameters
+    /         .collapse{ id: "expanded_log_params_#{log.id}" }
+    /           %pre
+    /             = JSON.pretty_generate(log.entry)

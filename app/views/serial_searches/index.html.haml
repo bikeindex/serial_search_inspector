@@ -5,15 +5,15 @@
       Serial Searches from
       = @ip_addresses_count
       unique IP Addresses
-  %table.table.table-striped.table-bordered
+  %table.table.table-striped.table-bordered.header-sortable
     %thead
       %tr
-        %th.header-sortable
+        %th
           = sortable 'serial'
-        %th.header-sortable
+        %th
           = sortable 'log_lines_count', 'Number of Searches'
-        %th.header-sortable
-          = sortable 'Most Recent Search'
+        %th
+          = sortable 'last_request_at', 'Most Recent Search'
     %tbody
       - @serial_searches.each do |serial_search|
         %tr
