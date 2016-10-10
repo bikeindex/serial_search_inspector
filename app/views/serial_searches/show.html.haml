@@ -1,9 +1,10 @@
 .container-fluid
-  %h4
-    Log Lines for
-    %em
-      = @serial_search.serial
-  %table.table.table-striped.table-bordered
+  %header.info-header
+    %h4
+      Log Lines for
+      %em
+        = @serial_search.serial
+  %table.table.table-striped.table-bordered.header-sortable
     %thead
       %tr
         %th Request at

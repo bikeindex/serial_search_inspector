@@ -1,2 +1,43 @@
 $enable-flex: true;
 @import "bootstrap";
+
+.info-header {
+  padding:  20px 0px 20px 0px;
+}
+
+.header-sortable {
+  .sorting-arrow-base {
+    display: block;
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 0;
+    right: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+  }
+  th a {
+    display: block;
+    position: relative;
+    padding-right: 10px;
+    &:before {
+      @extend .sorting-arrow-base;
+      bottom: 0;
+      border-top: 10px solid $gray-lighter;
+    }
+    &:after {
+      @extend .sorting-arrow-base;
+      top: 0;
+      border-bottom: 10px solid $gray-lighter;
+    }
+    &.asc:before {
+      border-top: 10px solid $link-color;
+    }
+    &.desc:after {
+      border-bottom: 10px solid $link-color;
+    }
+    &.current {
+      text-decoration: underline;
+    }
+  }
+}
