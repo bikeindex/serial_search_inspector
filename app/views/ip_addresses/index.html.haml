@@ -15,7 +15,7 @@
         %th
           = sortable 'log_lines_count', 'Number of Searches'
         %th
-          = sortable 'Most Recent'
+          = sortable 'Most Recent Search'
     %tbody
       - @ip_addresses.each do |ip_address|
         %tr
@@ -24,8 +24,8 @@
           %td
             = ip_address.location
           %td
-            = ip_address.serial_searches.count
+            = ip_address.log_lines_count
           %td
-            / = ip_address.serial_searches.last.searched_bike_index_at
+            = l ip_address.last_request_at, format: :log_request_time
 
   = paginate @ip_addresses

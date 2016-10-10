@@ -10,11 +10,11 @@
     %thead
       %tr
         %th Serial
-        %th Last searched on
+        %th Most Recent Search
     %tbody
     - @ip_address.serial_searches.each do |serial_search|
       %tr
         %td
           = link_to serial_search.serial, serial_search_path(serial_search.id)
         %td
-          = serial_search.searched_bike_index_at
+          = serial_search.last_request_at
