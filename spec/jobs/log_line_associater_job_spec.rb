@@ -5,7 +5,7 @@ RSpec.describe LogLineAssociaterJob, type: :job do
     it 'should create an activejob to associate the logline to the IP address and Serial Search' do
       ActiveJob::Base.queue_adapter = :inline
       log_line = FactoryGirl.create(:log_line)
-      expect(UpdateSerialSearchLastRequestAtJob).to receive(:perform_later)
+      expect(UpdateLastRequestAtJob).to receive(:perform_later)
       LogLineAssociaterJob.perform_later
       log_line.reload
       expect(log_line.ip_address).to be_present

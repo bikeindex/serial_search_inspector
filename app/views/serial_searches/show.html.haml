@@ -1,31 +1,32 @@
 .container-fluid
   %header.info-header
     %h4
-      Log Lines for
+      = pluralize(@serial_search.log_lines.count, 'Log Line')
+      for
       %em
         = @serial_search.serial
+
   %table.table.table-striped.table-bordered.header-sortable
     %thead
       %tr
-        %th Request at
         %th IP Address
         %th Entry Data
+        %th Request At
     %tbody
       - @serial_search.log_lines.each do |log|
         %tr
           %td
-            = l log.request_at, format: :log_request_time
-          %td
             = link_to log.ip_address.address, ip_address_path(log.ip_address.id)
+            %small.ip-address-location
+              = log.ip_address.location
           %td
             %pre
-              = JSON.pretty_generate(log.entry['params'])
+              = JSON.pretty_generate(log.present_entry_data)
             %small
               %a{ href: "#expanded_log_params_#{log.id}",  data: { toggle: 'collapse' }, 'aria-expanded' => 'false', 'aria-controls' => 'collapseExample' }
                 All Parameters
             .collapse{ id: "expanded_log_params_#{log.id}" }
               %pre
                 = JSON.pretty_generate(log.entry)
-
-
-
+          %td
+            = l log.request_at, format: :log_request_time
