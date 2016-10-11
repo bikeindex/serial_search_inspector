@@ -4,18 +4,18 @@
   .graph
     = column_chart source_type_graphs_path, xtitle: 'Search Source', ytitle: 'Number of Searches'
   %h5
-    Per Hour / 24 Hours
+    The Last 24 hours
   .graph
-    = line_chart unique_created_day_graphs_path, xtitle: 'Hour', ytitle: 'Number of Searches'
+    = line_chart uniquely_created_entries_graphs_path(grouping: 'day'), xtitle: 'Hour', ytitle: 'Number of Searches'
   %h5
     In the last week
   .graph
-    = line_chart unique_created_week_graphs_path(sorting: 'week'), xtitle: 'Month', ytitle: 'Number of Searches'
+    = line_chart uniquely_created_entries_graphs_path(grouping: 'week'), xtitle: 'Day', ytitle: 'Number of Searches'
   %h5
     In the Last 30 days
   .graph
-    = line_chart unique_created_month_graphs_path, xtitle: 'Month', ytitle: 'Number of Searches'
+    = line_chart uniquely_created_entries_graphs_path(grouping: 'month'), xtitle: 'Day', ytitle: 'Number of Searches'
   %h5
-    Yearly
+    All Time
   .graph
-    = line_chart unique_created_year_graphs_path, xtitle: 'Month', ytitle: 'Number of Searches'
+    = line_chart uniquely_created_entries_graphs_path(grouping: 'year'), xtitle: 'Month', ytitle: 'Number of Searches'

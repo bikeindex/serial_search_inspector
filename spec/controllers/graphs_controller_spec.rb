@@ -9,21 +9,12 @@ RSpec.describe GraphsController, type: :controller do
     end
   end
 
-  describe 'unique_created_day' do
+  describe 'uniquely_created_entries' do
     it 'returns an array' do
-      get :unique_created_day
+      get :uniquely_created_entries, grouping: 'day'
       result = JSON.parse(response.body)
       expect(result.is_a?(Array)).to be true
       expect(response.status).to eq 200
-    end
-  end
-
-  describe 'unique_created' do
-    it 'returns an array' do
-      get :unique_created, grouping: 'group_by_hour_of_day'
-      result = JSON.parse(response.body)
-      expect(result.is_a?(Array)).to be true
-      expect(response.status).to eq '200'
     end
   end
 end
