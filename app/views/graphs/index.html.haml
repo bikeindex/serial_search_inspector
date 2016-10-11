@@ -1,0 +1,21 @@
+.container-fluid
+  %h5
+    Source Type
+  .graph
+    = column_chart source_type_graphs_path, xtitle: 'Search Source', ytitle: 'Number of Searches'
+  %h5
+    Per Hour / 24 Hours
+  .graph
+    = line_chart unique_created_day_graphs_path, xtitle: 'Hour', ytitle: 'Number of Searches'
+  %h5
+    In the last week
+  .graph
+    = line_chart unique_created_week_graphs_path(sorting: 'week'), xtitle: 'Month', ytitle: 'Number of Searches'
+  %h5
+    In the Last 30 days
+  .graph
+    = line_chart unique_created_month_graphs_path, xtitle: 'Month', ytitle: 'Number of Searches'
+  %h5
+    Yearly
+  .graph
+    = line_chart unique_created_year_graphs_path, xtitle: 'Month', ytitle: 'Number of Searches'

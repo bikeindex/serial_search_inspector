@@ -39,6 +39,8 @@ gem 'hamlit'
 gem 'bootstrap'
 gem 'kaminari'
 gem 'secure_headers'
+gem 'chartkick'
+gem 'groupdate'
 
 group :production do
   gem 'honeybadger'
