@@ -44,6 +44,13 @@ class LogLine < ApplicationRecord
     IpAddress.inspector_address?(address: entry_ip_address, request_at: find_request_at)
   end
 
+  def present_entry_data
+    entry['params'].select do |key, value|
+      value = '' if key == 'utf8'
+      !value.empty?
+    end
+  end
+
   def attributes_from_entry
     {
       request_at: find_request_at,

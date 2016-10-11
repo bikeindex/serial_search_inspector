@@ -185,6 +185,25 @@ RSpec.describe LogLine, type: :model do
     end
   end
 
+  describe 'present_entry_data' do
+    let(:log_fixture) { log_line_fixture }
+    context 'entry data has empty attributes' do
+      let(:target) do
+        {
+          'serial' => 'Wsbc602203254k',
+          'distance' => '100'
+        }
+      end
+      it 'displays only the present data' do
+        expect(log.present_entry_data).to eq target
+      end
+      it "doesn't delete other params" do
+        log.present_entry_data
+        expect(log.entry['params']).to eq parsed_log_fixture['params']
+      end
+    end
+  end
+
   describe 'create_log_line' do
     context 'with valid serial' do
       let(:log_fixture) { log_line_fixture }
