@@ -1,6 +1,8 @@
 class IpAddressesController < ApplicationController
   helper_method :sort_column, :sort_direction
 
+  before_filter :find_ip_address, except: [:index]
+
   def index
     @title = 'IP Addresses'
     per_page = params[:per_page] || 50
@@ -11,16 +13,30 @@ class IpAddressesController < ApplicationController
   end
 
   def show
-    @ip_address = IpAddress.find(params[:id])
     @title = "Searches from #{@ip_address.address}"
   end
 
   def edit
-    @ip_address = IpAddress.find(params[:id])
     @title = "Edit #{@ip_address.address}"
   end
 
+  def update
+    if @ip_address.update_attributes(ip_params)
+      redirect_to ip_address_path(@ip_address)
+    else
+      render :edit
+    end
+  end
+
   private
+
+  def ip_params
+    params.require(:ip_address).permit(:name, :notes)
+  end
+
+  def find_ip_address
+    @ip_address = IpAddress.find(params[:id])
+  end
 
   def sort_column
     IpAddress.column_names.include?(params[:sort]) ? params[:sort] : 'address'

@@ -18,7 +18,7 @@ RSpec.describe IpAddressesController, type: :controller do
         FactoryGirl.create(:log_line, ip_address: ip_address_3)
       end
       it 'sorts correctly by number of searches' do
-        get :index, sort: 'log_lines_count', direction: 'desc', per_page: '1'
+        get :index, params: { sort: 'log_lines_count', direction: 'desc', per_page: '1' }
         expect(response.status).to eq 200
         expect(assigns(:ip_addresses)).to eq([ip_address_3])
       end
@@ -44,11 +44,26 @@ RSpec.describe IpAddressesController, type: :controller do
   end
 
   describe 'PUT update/:id' do
-    let(:update_attr) { name: 'Heroku inspector', notes: 'tortoise'}
-    it 'updates the model' do
-      put :update, params: { id: ip_address.id, update_attr }
-      expect(response).to redirect_to(:)
-
+    context 'with times' do
+      let(:submitted_parameters) do
+        {
+          ip_address: {
+            name:  'BIKES',
+            notes: 'DJKLAASDLKJ'
+          },
+          id: ip_address.id
+        }
+      end
+      it 'updates the model' do
+        put :update, params: submitted_parameters
+        ip_address.reload
+        expect(response).to redirect_to(ip_address_path(ip_address))
+        expect(ip_address.name).to eq submitted_parameters[:ip_address][:name]
+        expect(ip_address.notes).to eq submitted_parameters[:ip_address][:notes]
+      end
+    end
+    context 'with ip_address that has times' do
+      it 'removes started_being_inspector_at and stopped_being_inspector_at'
     end
   end
 end

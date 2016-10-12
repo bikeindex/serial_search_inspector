@@ -10,10 +10,14 @@
     Associated with
     = pluralize(@ip_address.log_lines.count, 'Log Line')
 
-  = form_for @ip_address, html: { class: '' } do |f|
+  = form_for @ip_address do |f|
     .form-group.row
-      = f.label :inspector, class: 'col-xs-2 col-form-label'
-      = f.check_box :started_being_inspector_at, class: 'form-check col-xs-10'
+      = f.label :started_being_inspector_at, class: 'col-xs-2 col-form-label'
+      = f.datetime_local_field :started_being_inspector_at
+
+    .form-group.row
+      = f.label :stopped_being_inspector_at, class: 'col-xs-2 col-form-label'
+      = f.datetime_local_field :stopped_being_inspector_at
 
     .form-group.row
       = f.label :name, class: 'col-xs-2 col-form-label'
