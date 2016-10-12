@@ -3,7 +3,7 @@ class IpAddressesController < ApplicationController
 
   def index
     @title = 'IP Addresses'
-    ll. = params[:per_page] || 50
+    per_page = params[:per_page] || 50
     page = params[:page] || 1
     @serial_searches_count = SerialSearch.count
     @ip_addresses_count = IpAddress.count
