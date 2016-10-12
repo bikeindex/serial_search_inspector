@@ -19,6 +19,7 @@ Bundler.require(*Rails.groups)
 module SerialSearchInspector
   class Application < Rails::Application
     config.active_job.queue_adapter = :sidekiq
+    config.time_zone = 'Central Time (US & Canada)'
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

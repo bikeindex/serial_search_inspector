@@ -1,16 +1,18 @@
 .container-fluid
   %h5
-    Source Type
-  .graph
-    = column_chart source_type_graphs_path, xtitle: 'Search Source', ytitle: 'Number of Searches'
-  %h5
     The Last 24 hours
+    %small
+      = Time.zone
   .graph
     = line_chart uniquely_created_entries_graphs_path(grouping: 'day'), xtitle: 'Hour', ytitle: 'Number of created items'
   %h5
     In the last week
   .graph
     = line_chart uniquely_created_entries_graphs_path(grouping: 'week'), xtitle: 'Day', ytitle: 'Number of created items'
+  %h5
+    Source Type in the last week
+  .graph
+    = line_chart source_type_graphs_path, xtitle: 'Search Source', ytitle: 'Number of Searches'
   %h5
     In the Last 30 days
   .graph
