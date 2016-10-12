@@ -14,7 +14,7 @@ RSpec.describe UpdateLastRequestAtJob, type: :job do
         serial_search.reload
         expect(serial_search.last_request_at).to be_within(1.second).of old_time
         expect(ip_address.last_request_at).to be_within(1.second).of old_time
-        UpdateLastRequestAtJob.perform_later(serial_search, ip_address)
+        UpdateLastRequestAtJob.perform_later(log_line)
         serial_search.reload
         ip_address.reload
         expect(serial_search.last_request_at).to be_within(1.second).of target_time
