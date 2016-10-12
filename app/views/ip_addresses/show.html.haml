@@ -7,6 +7,8 @@
         = @ip_address.address
         from
         = @ip_address.location
+      %small
+        = link_to 'edit', edit_ip_address_path
   %table.table.table-striped.table-bordered
     %thead
       %tr

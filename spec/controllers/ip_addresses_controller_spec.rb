@@ -27,10 +27,28 @@ RSpec.describe IpAddressesController, type: :controller do
 
   describe 'GET show' do
     it 'renders the show' do
-      get :show, id: ip_address.id
+      get :show, params: { id: ip_address.id }
       expect(response.status).to eq 200
       expect(response).to render_template('show')
       expect(assigns(:ip_address)).to eq ip_address
+    end
+  end
+
+  describe 'GET edit' do
+    it 'renders the edit page' do
+      get :edit, params: { id: ip_address.id }
+      expect(response.status).to eq 200
+      expect(response).to render_template('edit')
+      expect(assigns(:ip_address)).to eq ip_address
+    end
+  end
+
+  describe 'PUT update/:id' do
+    let(:update_attr) { name: 'Heroku inspector', notes: 'tortoise'}
+    it 'updates the model' do
+      put :update, params: { id: ip_address.id, update_attr }
+      expect(response).to redirect_to(:)
+
     end
   end
 end

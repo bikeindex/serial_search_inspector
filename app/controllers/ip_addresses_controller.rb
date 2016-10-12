@@ -15,6 +15,11 @@ class IpAddressesController < ApplicationController
     @title = "Searches from #{@ip_address.address}"
   end
 
+  def edit
+    @ip_address = IpAddress.find(params[:id])
+    @title = "Edit #{@ip_address.address}"
+  end
+
   private
 
   def sort_column

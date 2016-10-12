@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161010195235) do
+ActiveRecord::Schema.define(version: 20161012205420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 20161010195235) do
     t.string   "country"
     t.integer  "log_lines_count",            default: 0
     t.datetime "last_request_at"
+    t.string   "name"
+    t.text     "notes"
   end
 
   create_table "log_lines", force: :cascade do |t|

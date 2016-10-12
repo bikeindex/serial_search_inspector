@@ -1,0 +1,27 @@
+.container-fluid
+  %header.info-header
+    .h4
+      Edit
+      %em
+        = @ip_address.address
+    %small
+      = @ip_address.location
+  %p
+    Associated with
+    = pluralize(@ip_address.log_lines.count, 'Log Line')
+
+  = form_for @ip_address, html: { class: '' } do |f|
+    .form-group.row
+      = f.label :inspector, class: 'col-xs-2 col-form-label'
+      = f.check_box :started_being_inspector_at, class: 'form-check col-xs-10'
+
+    .form-group.row
+      = f.label :name, class: 'col-xs-2 col-form-label'
+      = f.text_field :name, class: 'form-control col-xs-2'
+
+    .form-group.row
+      = f.label :notes, class: 'col-xs-2 col-form-label'
+      = f.text_area :notes, class: 'form-control col-xs-3'
+
+    .form-group
+      = f.submit class: 'btn btn-success'
