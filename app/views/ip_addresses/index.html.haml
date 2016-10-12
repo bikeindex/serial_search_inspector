@@ -25,6 +25,7 @@
           %td
             = ip_address.log_lines_count
           %td
-            = l ip_address.last_request_at, format: :log_request_time
+            - if ip_address.last_request_at.present?
+              = l ip_address.last_request_at, format: :log_request_time
 
   = paginate @ip_addresses
