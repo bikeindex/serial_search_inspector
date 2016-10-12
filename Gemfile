@@ -39,6 +39,13 @@ gem 'hamlit'
 gem 'bootstrap'
 gem 'kaminari'
 gem 'secure_headers'
+gem 'chartkick'
+gem 'groupdate'
+
+gem 'bundler', '>= 1.8.4' # required for rails-assets.org - JS and CSS assets
+source 'https://rails-assets.org' do # JS land is crazy, so lock everything
+  gem 'rails-assets-tether', '~> 1.1.1'
+end
 
 group :production do
   gem 'honeybadger'

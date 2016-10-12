@@ -6,7 +6,7 @@
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-    = favicon_link_tag 'favicon.ico'
+    = favicon_link_tag '/favicon.ico'
   %body
     %nav.navbar.navbar-full.navbar-dark.bg-inverse
       .navbar-brand Bike Index Serial Search Inspector
@@ -15,5 +15,7 @@
           = link_to 'Serial Searches', serial_searches_path, class: 'nav-link'
         %li.nav-item
           = link_to 'IP Addresses', ip_addresses_path, class: 'nav-link'
+        %li.nav-item
+          = link_to 'Graphs', graphs_path, class: 'nav-link'
 
     = yield

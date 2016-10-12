@@ -7,6 +7,17 @@ class LogLine < ApplicationRecord
   scope :processed, -> { where.not(ip_address_id: nil) }
   scope :unprocessed, -> { where(ip_address_id: nil) }
 
+  scope :with_search_type, -> { where.not(search_type: nil) }
+  scope :with_search_source, -> { where(search_type: nil) }
+
+  def self.search_types
+    @search_types ||= with_search_type.pluck('DISTINCT search_type')
+  end
+
+  def self.search_sources
+    @search_sources ||= with_search_source.pluck('DISTINCT search_source')
+  end
+
   def serial
     entry && entry['params'] && entry['params']['serial'] && entry['params']['serial'].strip.upcase
   end
