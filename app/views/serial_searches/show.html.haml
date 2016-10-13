@@ -16,9 +16,17 @@
       - @serial_search.log_lines.each do |log|
         %tr
           %td
-            = link_to log.ip_address.address, ip_address_path(log.ip_address.id)
+            - if log.ip_address.name.present?
+              =link_to log.ip_address.name, ip_address_path(log.ip_address.id)
+            - else
+              = link_to log.ip_address.address, ip_address_path(log.ip_address.id)
             %small.ip-address-location
               = log.ip_address.location
+              - if log.ip_address.notes.present?
+                %a{ href: "#show_notes#{log.id}", class: 'float-right', data: { toggle: 'collapse' } }
+                  Notes
+                .collapse{ id: "show_notes#{log.id}" }
+                  = log.ip_address.notes
           %td
             %pre
               = JSON.pretty_generate(log.present_entry_data)

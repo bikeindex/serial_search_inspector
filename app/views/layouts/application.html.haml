@@ -9,7 +9,7 @@
     = favicon_link_tag '/favicon.ico'
   %body
     %nav.navbar.navbar-full.navbar-dark.bg-inverse
-      .navbar-brand Bike Index Serial Search Inspector
+      = link_to 'Bike Index Serial Search Inspector', root_path, class: 'navbar-brand'
       %ul.nav.navbar-nav
         %li.nav-item
           = link_to 'Serial Searches', serial_searches_path, class: 'nav-link'
@@ -19,3 +19,10 @@
           = link_to 'Graphs', graphs_path, class: 'nav-link'
 
     = yield
+
+    %footer.footer
+      .container
+        %span.text-muted.float-right
+          The Serial Search Inspector is an Open Source Project.
+          View on
+          = link_to 'Github', 'https://github.com/bikeindex/serial_search_inspector'

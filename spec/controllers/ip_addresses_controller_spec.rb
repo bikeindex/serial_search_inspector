@@ -49,7 +49,9 @@ RSpec.describe IpAddressesController, type: :controller do
         {
           ip_address: {
             name:  'BIKES',
-            notes: 'DJKLAASDLKJ'
+            notes: 'DJKLAASDLKJ',
+            started_being_inspector_at: '2016-10-11T16:01',
+            stopped_being_inspector_at: ''
           },
           id: ip_address.id
         }
@@ -60,10 +62,35 @@ RSpec.describe IpAddressesController, type: :controller do
         expect(response).to redirect_to(ip_address_path(ip_address))
         expect(ip_address.name).to eq submitted_parameters[:ip_address][:name]
         expect(ip_address.notes).to eq submitted_parameters[:ip_address][:notes]
+        expect(ip_address.started_being_inspector_at).to eq Time.parse(submitted_parameters[:ip_address][:started_being_inspector_at])
       end
     end
     context 'with ip_address that has times' do
-      it 'removes started_being_inspector_at and stopped_being_inspector_at'
+      let(:submitted_parameters) do
+        {
+          ip_address: {
+            name:  'turtle',
+            notes: 'seth smells',
+            started_being_inspector_at: '',
+            stopped_being_inspector_at: ''
+          },
+          id: ip_address.id
+        }
+      end
+      it 'removes started_being_inspector_at and stopped_being_inspector_at' do
+        ip_address.update_attributes(
+          started_being_inspector_at: '2016-10-11T16:01',
+          stopped_being_inspector_at: '2016-10-13T16:01'
+        )
+        expect(ip_address.started_being_inspector_at).to eq Time.parse('2016-10-11T16:01')
+        put :update, params: submitted_parameters
+        ip_address.reload
+        expect(response).to redirect_to(ip_address_path(ip_address))
+        expect(ip_address.name).to eq submitted_parameters[:ip_address][:name]
+        expect(ip_address.notes).to eq submitted_parameters[:ip_address][:notes]
+        expect(ip_address.started_being_inspector_at).to be_nil
+        expect(ip_address.stopped_being_inspector_at).to be_nil
+      end
     end
   end
 end

@@ -5,10 +5,17 @@
       for
       %em
         = @ip_address.address
+        - if @ip_address.name.present?
+          (
+          = @ip_address.name
+          )
         from
         = @ip_address.location
-      %small
-        = link_to 'edit', edit_ip_address_path
+        = link_to 'edit', edit_ip_address_path, class: 'btn btn-secondary float-right form-group'
+    - if @ip_address.notes.present?
+      %p
+        = @ip_address.notes
+
   %table.table.table-striped.table-bordered
     %thead
       %tr

@@ -1,7 +1,7 @@
 class IpAddressesController < ApplicationController
   helper_method :sort_column, :sort_direction
 
-  before_filter :find_ip_address, except: [:index]
+  before_action :find_ip_address, except: [:index]
 
   def index
     @title = 'IP Addresses'
@@ -31,7 +31,7 @@ class IpAddressesController < ApplicationController
   private
 
   def ip_params
-    params.require(:ip_address).permit(:name, :notes)
+    params.require(:ip_address).permit(:name, :notes, :started_being_inspector_at, :stopped_being_inspector_at)
   end
 
   def find_ip_address
