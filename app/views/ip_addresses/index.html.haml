@@ -19,7 +19,16 @@
       - @ip_addresses.each do |ip_address|
         %tr
           %td
-            = link_to ip_address.address, ip_address_path(ip_address)
+            - if ip_address.name.present?
+              = link_to ip_address.name, ip_address_path(ip_address)
+            - else
+              = link_to ip_address.address, ip_address_path(ip_address)
+            - if ip_address.notes.present?
+              %small.float-right
+                %a{ href: "#show_notes#{ip_address.id}", data: { toggle: 'collapse' } }
+                  Notes
+                .collapse{ id: "show_notes#{ip_address.id}" }
+                  = ip_address.notes
           %td
             = ip_address.location
           %td

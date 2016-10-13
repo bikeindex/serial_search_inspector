@@ -21,6 +21,10 @@ class IpAddress < ApplicationRecord
     [city, state, country].compact.join(', ')
   end
 
+  def been_inspector?
+    started_being_inspector_at.present?
+  end
+
   def self.inspector_address?(address:, request_at:)
     where(address: address).each do |ip_address|
       if ip_address.started_being_inspector_at.present? && ip_address.started_being_inspector_at < request_at

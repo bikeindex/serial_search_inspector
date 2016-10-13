@@ -1,0 +1,49 @@
+.container-fluid
+  %header.info-header
+    .h4
+      Edit
+      %em
+        = @ip_address.address
+    %small
+      = @ip_address.location
+  %p
+    Associated with
+    = pluralize(@ip_address.log_lines.count, 'Log Line')
+
+  = form_for @ip_address do |f|
+    .form-check
+      %label.form-check-label
+        %input.form-check-input#has-been-inspector-checkbox{ type: 'checkbox', checked: @ip_address.been_inspector? }
+        Has Been Inspector
+
+    .collapse#expand-edit-inspector-time{ class: ('in' if @ip_address.been_inspector?) }
+      .form-group.row
+        = f.label :started_being_inspector_at, class: 'col-xs-2 col-form-label inspector-form'
+        = f.datetime_local_field :started_being_inspector_at
+
+      .form-group.row.inspector-form
+        = f.label :stopped_being_inspector_at, class: 'col-xs-2 col-form-label inspector-form'
+        = f.datetime_local_field :stopped_being_inspector_at
+
+    .form-group.row
+      = f.label :name, class: 'col-xs-2 col-form-label'
+      = f.text_field :name, class: 'form-control col-xs-2'
+
+    .form-group.row
+      = f.label :notes, class: 'col-xs-2 col-form-label'
+      = f.text_area :notes, class: 'form-control col-xs-3'
+
+    .form-group
+      = f.submit class: 'btn btn-success'
+
+:javascript
+  $(document).ready(function() {
+    $('#has-been-inspector-checkbox').change(function(){
+      if ($('#has-been-inspector-checkbox').prop('checked')){
+        $('#expand-edit-inspector-time').collapse('show')
+      } else {
+        $('#expand-edit-inspector-time').collapse('hide')
+        $('#expand-edit-inspector-time input').val('')
+      }
+    });
+  });
