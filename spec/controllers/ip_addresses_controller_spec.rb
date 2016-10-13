@@ -62,7 +62,7 @@ RSpec.describe IpAddressesController, type: :controller do
         expect(response).to redirect_to(ip_address_path(ip_address))
         expect(ip_address.name).to eq submitted_parameters[:ip_address][:name]
         expect(ip_address.notes).to eq submitted_parameters[:ip_address][:notes]
-        expect(ip_address.started_being_inspector_at).to eq Time.parse(submitted_parameters[:ip_address][:started_being_inspector_at])
+        expect(ip_address.started_being_inspector_at).to eq Time.zone.parse(submitted_parameters[:ip_address][:started_being_inspector_at])
       end
     end
     context 'with ip_address that has times' do
@@ -82,7 +82,7 @@ RSpec.describe IpAddressesController, type: :controller do
           started_being_inspector_at: '2016-10-11T16:01',
           stopped_being_inspector_at: '2016-10-13T16:01'
         )
-        expect(ip_address.started_being_inspector_at).to eq Time.parse('2016-10-11T16:01')
+        expect(ip_address.started_being_inspector_at).to eq Time.zone.parse('2016-10-11T16:01')
         put :update, params: submitted_parameters
         ip_address.reload
         expect(response).to redirect_to(ip_address_path(ip_address))
