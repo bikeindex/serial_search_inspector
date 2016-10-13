@@ -20,7 +20,7 @@
         %tr
           %td
             - if ip_address.name.present?
-              =link_to ip_address.name, ip_address_path(ip_address)
+              = link_to ip_address.name, ip_address_path(ip_address)
             - else
               = link_to ip_address.address, ip_address_path(ip_address)
             - if ip_address.notes.present?

@@ -17,7 +17,7 @@
         %tr
           %td
             - if log.ip_address.name.present?
-              =link_to log.ip_address.name, ip_address_path(log.ip_address.id)
+              = link_to log.ip_address.name, ip_address_path(log.ip_address.id)
             - else
               = link_to log.ip_address.address, ip_address_path(log.ip_address.id)
             %small.ip-address-location
