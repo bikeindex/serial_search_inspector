@@ -18,6 +18,7 @@ VCR.configure do |c|
   # end
   c.cassette_library_dir = 'spec/cassettes'
   c.hook_into :webmock
+  c.ignore_hosts 'codeclimate.com'
 end
 
 # Requires supporting ruby files with custom matchers and macros, etc, in

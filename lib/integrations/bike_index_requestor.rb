@@ -15,7 +15,7 @@ class BikeIndexRequestor
   end
 
   def create_bike_hashes_for_serial(serial_search)
-    find_bikes_with_serial(serial_search)['bikes'].map do |bike|
+    find_bikes_with_serial(serial_search.serial)['bikes'].map do |bike|
       {
         serial_search_id: serial_search.id,
         bike_index_id: bike['id'],

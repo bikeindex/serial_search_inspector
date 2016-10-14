@@ -10,7 +10,7 @@ class Bike < ApplicationRecord
 
   def self.find_or_create_bikes_from_bike_array(bike_array)
     bike_array.each do |bike_attributes|
-      bike = Bike.first_or_create(bike_attributes.except(:serial_search_id))
+      bike = Bike.find_or_create_by(bike_attributes.except(:serial_search_id))
       bike.update_was_stolen
       serial_search = SerialSearch.find(bike_attributes[:serial_search_id])
       bike.serial_searches << serial_search

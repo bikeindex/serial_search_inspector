@@ -70,7 +70,7 @@ describe BikeIndexRequestor do
     context 'not stolen' do
       let(:target) { [{ serial_search_id: serial_search.id, bike_index_id: 30080, stolen: false, date_stolen: nil }] }
       it 'returns hash' do
-        expect(instance).to receive(:find_bikes_with_serial) { target_find_bikes_with_serial_response }
+        expect(instance).to receive(:find_bikes_with_serial).with(serial_search.serial) { target_find_bikes_with_serial_response }
         expect(instance.create_bike_hashes_for_serial(serial_search)).to eq target
       end
     end
