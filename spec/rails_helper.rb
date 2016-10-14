@@ -9,6 +9,17 @@ require 'spec_helper'
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
+require 'vcr'
+require 'sidekiq/testing'
+
+VCR.configure do |c|
+  # c.ignore_request do |request|
+    # request.uri[/(\$zoom\$)/]
+  # end
+  c.cassette_library_dir = 'spec/cassettes'
+  c.hook_into :webmock
+end
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
