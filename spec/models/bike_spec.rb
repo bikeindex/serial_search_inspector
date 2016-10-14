@@ -57,6 +57,7 @@ RSpec.describe Bike, type: :model do
         bike = Bike.new(bike_index_id: 30080, stolen: true, date_stolen: 1400565600)
         bike.update_was_stolen
         bike.stolen = false
+        expect(bike.stolen).to be_falsey
         expect(bike.was_stolen).to be_truthy
       end
     end
