@@ -5,9 +5,7 @@ class Bike < ApplicationRecord
   has_and_belongs_to_many :serial_searches, -> { distinct }
 
   def update_was_stolen
-    if stolen == true
-      self.was_stolen = true
-    end
+    self.was_stolen = true if stolen == true
   end
 
   def self.find_or_create_bikes_from_bike_array(bike_array)
