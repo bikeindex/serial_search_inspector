@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe BikeIndexRequestor do
   let(:instance) { BikeIndexRequestor.new }
-  let(:serial) { 'some number' }
-  let(:stolen_serial) { 'stolen_serial_number' }
+  let(:serial_search) { FactoryGirl.create(:serial_search, serial: 'some number') }
+  let(:stolen_serial_search) { FactoryGirl.create(:serial_search, serial: 'stolen_serial_number') }
   let(:target_find_bikes_with_serial_response) do
     {
       bikes: [
@@ -54,31 +54,31 @@ describe BikeIndexRequestor do
     context 'not stolen bike' do
       it 'searches by serial' do
         VCR.use_cassette('bike_index_requestor_find_bikes_with_serial') do
-          expect(instance.find_bikes_with_serial(serial)).to eq target_find_bikes_with_serial_response
+          expect(instance.find_bikes_with_serial(serial_search.serial)).to eq target_find_bikes_with_serial_response
         end
       end
     end
     context 'stolen bike' do
       it 'searches by serial' do
         VCR.use_cassette('bike_index_requestor_find_bikes_with_serial_stolen') do
-          expect(instance.find_bikes_with_serial(stolen_serial)).to eq target_stolen_find_bikes_with_serial_response
+          expect(instance.find_bikes_with_serial(stolen_serial_search.serial)).to eq target_stolen_find_bikes_with_serial_response
         end
       end
     end
   end
   describe 'create_bike_hashes_for_serial' do
     context 'not stolen' do
-      let(:target) { [{ bike_index_id: 30080, stolen: false, date_stolen: nil }] }
+      let(:target) { [{ serial_search_id: serial.id, bike_index_id: 30080, stolen: false, date_stolen: nil }] }
       it 'returns hash' do
         expect(instance).to receive(:find_bikes_with_serial) { target_find_bikes_with_serial_response }
-        expect(instance.create_bike_hashes_for_serial(serial)).to eq target
+        expect(instance.create_bike_hashes_for_serial(serial_search)).to eq target
       end
     end
     context 'stolen' do
-      let(:target) { [{ bike_index_id: 3414, stolen: true, date_stolen: Time.parse('2014-05-20 01:00:00 -0500') }] }
+      let(:target) { [{ serial_search_id: stolen_serial.id, bike_index_id: 3414, stolen: true, date_stolen: Time.parse('2014-05-20 01:00:00 -0500') }] }
       it 'returns a hash' do
         expect(instance).to receive(:find_bikes_with_serial) { target_stolen_find_bikes_with_serial_response }
-        expect(instance.create_bike_hashes_for_serial(stolen_serial)).to eq target
+        expect(instance.create_bike_hashes_for_serial(stolen_serial_search)).to eq target
       end
     end
   end
