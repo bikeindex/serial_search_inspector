@@ -13,4 +13,14 @@ class BikeIndexRequestor
     response = self.class.get('/search', options)
     JSON.parse(response.body)
   end
+
+  def create_bike_hashes_for_serial(serial)
+    find_bikes_with_serial(serial)['bikes'].map do |bike|
+      {
+        bike_index_id: bike['id'],
+        stolen: bike['stolen'],
+        date_stolen: bike['date_stolen']
+      }
+    end
+  end
 end

@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe BikeIndexRequestor do
   let(:instance) { BikeIndexRequestor.new }
+  let(:serial) { 'some number' }
   let(:target_find_bikes_with_serial_response) do
     {
       bikes: [
@@ -23,18 +24,20 @@ describe BikeIndexRequestor do
           date_stolen: nil
         }
       ]
-    }
+    }.as_json
   end
   describe 'find_bikes_with_serial' do
-    let(:serial) { 'some number' }
     it 'searches by serial' do
       VCR.use_cassette('bike_index_requestor_find_bikes_with_serial') do
-        expect(instance.find_bikes_with_serial(serial)).to eq target_find_bikes_with_serial_response.as_json
+        expect(instance.find_bikes_with_serial(serial)).to eq target_find_bikes_with_serial_response
       end
     end
   end
-  describe 'find_bike_hashes_for_serial' do
-    # let(:target) { [ {id: 30080, etc}]}
-    # expect to receive(find_bikes_with_serial) { target_find_bikes_with_serial_response }
+  describe 'create_bike_hashes_for_serial' do
+    let(:target) { [{ bike_index_id: 30080, stolen: false, date_stolen: nil }] }
+    it 'returns hash' do
+      expect(instance).to receive(:find_bikes_with_serial) { target_find_bikes_with_serial_response }
+      expect(instance.create_bike_hashes_for_serial(serial)).to eq target
+    end
   end
 end
