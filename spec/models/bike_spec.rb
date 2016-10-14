@@ -30,7 +30,34 @@ RSpec.describe Bike, type: :model do
         Bike.find_or_create_bikes_from_bike_array(bike_array_2)
         Bike.find_or_create_bikes_from_bike_array(bike_array_1)
         expect(Bike.count).to eq 1
-        expect(Bike.first.serial_searches).to eq [serial_search_1, serial_search_2]
+        expect(Bike.first.serial_searches.count).to eq 2
+        expect(Bike.first.serial_searches).to include(serial_search_1)
+        expect(Bike.first.serial_searches).to include(serial_search_2)
+      end
+    end
+  end
+
+  describe 'update_was_stolen' do
+    context 'not stolen' do
+      it 'does not change was_stolen' do
+        bike = Bike.new(bike_index_id: 30080, stolen: false, date_stolen: nil)
+        bike.update_was_stolen
+        expect(bike.was_stolen).to be_falsey
+      end
+    end
+    context 'stolen' do
+      it 'changes was_stolen to true' do
+        bike = Bike.new(bike_index_id: 30080, stolen: true, date_stolen: 1400565600)
+        bike.update_was_stolen
+        expect(bike.was_stolen).to be_truthy
+      end
+    end
+    context 'stolen and later recovered' do
+      it 'does not reset was_stolen' do
+        bike = Bike.new(bike_index_id: 30080, stolen: true, date_stolen: 1400565600)
+        bike.update_was_stolen
+        bike.stolen = false
+        expect(bike.was_stolen).to be_truthy
       end
     end
   end
