@@ -1,0 +1,3 @@
+class BikeIndexRequestorJob < ApplicationJob
+
+end
