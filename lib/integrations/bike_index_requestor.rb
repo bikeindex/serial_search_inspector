@@ -19,7 +19,7 @@ class BikeIndexRequestor
       {
         bike_index_id: bike['id'],
         stolen: bike['stolen'],
-        date_stolen: bike['date_stolen']
+        date_stolen: bike['date_stolen'] && Time.at(bike['date_stolen'])
       }
     end
   end
