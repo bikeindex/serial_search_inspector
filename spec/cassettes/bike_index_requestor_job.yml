@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 14 Oct 2016 23:18:21 GMT
+      - Mon, 17 Oct 2016 16:01:56 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -27,8 +27,8 @@ http_interactions:
       Connection:
       - keep-alive
       Set-Cookie:
-      - __cfduid=d978e6a669be40e931761a65d8e158f951476487100; expires=Sat, 14-Oct-17
-        23:18:20 GMT; path=/; domain=.bikeindex.org; HttpOnly
+      - __cfduid=d9e14bcb64a297aa550942237754768801476720115; expires=Tue, 17-Oct-17
+        16:01:55 GMT; path=/; domain=.bikeindex.org; HttpOnly
       Total:
       - '1'
       Per-Page:
@@ -38,9 +38,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 12b72881-9d68-4cdf-bdee-3c557fa6c3dc
+      - 4628182d-2b53-4e46-a237-179e600448e2
       X-Runtime:
-      - '1.742378'
+      - '1.833745'
       Strict-Transport-Security:
       - max-age=31536000
       X-Powered-By:
@@ -48,10 +48,10 @@ http_interactions:
       Server:
       - cloudflare-nginx
       Cf-Ray:
-      - 2f1ebff76a3609d0-ORD
+      - 2f34f8cf1a985582-ORD
     body:
       encoding: ASCII-8BIT
       string: '{"bikes":[{"id":30569,"title":"Schwinn Traveler","serial":"Y524347","manufacturer_name":"Schwinn","frame_model":"Traveler","year":null,"frame_colors":["Red","Black"],"thumb":"https://files.bikeindex.org/uploads/Pu/15678/small_IMG_20141028_140215450.jpg","large_img":"https://files.bikeindex.org/uploads/Pu/15678/large_IMG_20141028_140215450.jpg","is_stock_img":false,"stolen":false,"stolen_location":null,"date_stolen":null}]}'
     http_version: 
-  recorded_at: Fri, 14 Oct 2016 23:18:22 GMT
+  recorded_at: Mon, 17 Oct 2016 16:01:59 GMT
 recorded_with: VCR 3.0.3

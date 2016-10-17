@@ -8,12 +8,16 @@ class SerialSearch < ApplicationRecord
 
   before_save :sanitize_serial
 
+  def within_min_request_time
+    (searched_bike_index_at <= Time.now) && (searched_bike_index_at >= 8.hours.ago)
+  end
+
   def self.sufficient_length
     4
   end
 
   def self.min_request_time
-    8
+    8.hours.ago
   end
 
   def sanitize_serial

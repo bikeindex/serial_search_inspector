@@ -7,6 +7,7 @@ class LogLineAssociaterJob < ApplicationJob
       log_line.find_or_create_serial_search_association
       log_line.save
       UpdateLastRequestAtJob.perform_later(log_line)
+      BikeIndexRequestorJob.perform_later(log_line.serial_search) if log_line.serial_search
     end
   end
 end

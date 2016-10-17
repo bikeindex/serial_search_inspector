@@ -29,10 +29,11 @@ RSpec.describe Bike, type: :model do
         Bike.find_or_create_bikes_from_bike_array(bike_array_1)
         Bike.find_or_create_bikes_from_bike_array(bike_array_2)
         Bike.find_or_create_bikes_from_bike_array(bike_array_1)
+        bike = Bike.first
         expect(Bike.count).to eq 1
-        expect(Bike.first.serial_searches.count).to eq 2
-        expect(Bike.first.serial_searches).to include(serial_search_1)
-        expect(Bike.first.serial_searches).to include(serial_search_2)
+        expect(bike.serial_searches.count).to eq 2
+        expect(bike.serial_searches).to include(serial_search_1)
+        expect(bike.serial_searches).to include(serial_search_2)
       end
     end
   end
