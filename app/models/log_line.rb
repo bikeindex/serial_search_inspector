@@ -44,7 +44,7 @@ class LogLine < ApplicationRecord
   end
 
   def serial_length_insufficient?
-    serial.length < 4 if serial
+    serial.length < SerialSearch.sufficient_length if serial
   end
 
   def entry_ip_address

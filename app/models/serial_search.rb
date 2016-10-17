@@ -8,6 +8,14 @@ class SerialSearch < ApplicationRecord
 
   before_save :sanitize_serial
 
+  def self.sufficient_length
+    4
+  end
+
+  def self.min_request_time
+    8
+  end
+
   def sanitize_serial
     self.serial = serial.strip.upcase
   end
