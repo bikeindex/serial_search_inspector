@@ -1,0 +1,58 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://bikeindex.org/api/v3/search?per_page=100&serial=STOLEN_SERIAL_NUMBER&stolenness=all
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 14 Oct 2016 21:16:20 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=db90cde48352b04fc2de6e5cef6d819721476479777; expires=Sat, 14-Oct-17
+        21:16:17 GMT; path=/; domain=.bikeindex.org; HttpOnly
+      Total:
+      - '1'
+      Per-Page:
+      - '100'
+      Etag:
+      - W/"07203546a55b44103600257bf50223cf"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - f2af319f-bcf8-48c3-8336-fdef8bcf4ffd
+      X-Runtime:
+      - '2.881766'
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Powered-By:
+      - cloud66
+      Server:
+      - cloudflare-nginx
+      Cf-Ray:
+      - 2f1e0d3288c455e8-ORD
+    body:
+      encoding: ASCII-8BIT
+      string: '{"bikes":[{"id":3414,"title":"2014 Jamis Allegro Comp Disc","serial":"stolen_serial_number","manufacturer_name":"Jamis","frame_model":"Allegro
+        Comp Disc","year":2014,"frame_colors":["Blue"],"thumb":"https://bikebook.s3.amazonaws.com/uploads/Fr/9979/small_14_allegrocompdisc_bk.jpg","large_img":"https://bikebook.s3.amazonaws.com/uploads/Fr/9979/14_allegrocompdisc_bk.jpg","is_stock_img":true,"stolen":true,"stolen_location":"Chicago,IL,60647","date_stolen":1400565600}]}'
+    http_version: 
+  recorded_at: Fri, 14 Oct 2016 21:16:20 GMT
+recorded_with: VCR 3.0.3

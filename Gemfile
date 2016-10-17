@@ -41,6 +41,7 @@ gem 'kaminari'
 gem 'secure_headers'
 gem 'chartkick'
 gem 'groupdate'
+gem 'httparty'
 
 gem 'bundler', '>= 1.8.4' # required for rails-assets.org - JS and CSS assets
 source 'https://rails-assets.org' do # JS land is crazy, so lock everything
@@ -76,6 +77,8 @@ end
 
 group :test do
   gem 'codeclimate-test-reporter'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

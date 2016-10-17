@@ -10,19 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161012205420) do
+ActiveRecord::Schema.define(version: 20161014170501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "bike_index_bikes", force: :cascade do |t|
+  create_table "bikes", force: :cascade do |t|
     t.integer  "bike_index_id"
     t.boolean  "stolen"
     t.datetime "date_stolen"
-    t.integer  "serial_search_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.index ["serial_search_id"], name: "index_bike_index_bikes_on_serial_search_id", using: :btree
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.boolean  "was_stolen"
+  end
+
+  create_table "bikes_serial_searches", force: :cascade do |t|
+    t.integer "bike_id"
+    t.integer "serial_search_id"
+    t.index ["bike_id"], name: "index_bikes_serial_searches_on_bike_id", using: :btree
+    t.index ["serial_search_id"], name: "index_bikes_serial_searches_on_serial_search_id", using: :btree
   end
 
   create_table "ip_addresses", force: :cascade do |t|
