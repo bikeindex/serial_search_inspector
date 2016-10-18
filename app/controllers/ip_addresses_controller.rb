@@ -22,6 +22,9 @@ class IpAddressesController < ApplicationController
 
   def update
     if @ip_address.update_attributes(ip_params)
+      @ip_address.log_lines.each do |log_line|
+        log_line.update_attribute(:inspector_request, log_line.inspector_request?)
+      end
       redirect_to ip_address_path(@ip_address)
     else
       render :edit
