@@ -10,6 +10,8 @@ class LogLine < ApplicationRecord
   scope :with_search_type, -> { where.not(search_type: nil) }
   scope :with_search_source, -> { where(search_type: nil) }
 
+  scope :without_inspector_requests, -> { where('inspector_request = false') }
+
   def self.search_types
     @search_types ||= with_search_type.pluck('DISTINCT search_type')
   end

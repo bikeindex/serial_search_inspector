@@ -45,6 +45,7 @@ RSpec.describe IpAddressesController, type: :controller do
 
   describe 'PUT update/:id' do
     context 'with times' do
+      let(:log_line) { FactoryGirl.create(:log_line, ip_address: ip_address, request_at: 1.hour.ago) }
       let(:submitted_parameters) do
         {
           ip_address: {
@@ -57,12 +58,16 @@ RSpec.describe IpAddressesController, type: :controller do
         }
       end
       it 'updates the model' do
+        ip_address.update_attribute(:address, log_line.entry_ip_address)
+        ip_address.log_lines << log_line
         put :update, params: submitted_parameters
         ip_address.reload
+        log_line.reload
         expect(response).to redirect_to(ip_address_path(ip_address))
         expect(ip_address.name).to eq submitted_parameters[:ip_address][:name]
         expect(ip_address.notes).to eq submitted_parameters[:ip_address][:notes]
         expect(ip_address.started_being_inspector_at).to eq Time.zone.parse(submitted_parameters[:ip_address][:started_being_inspector_at])
+        expect(log_line.inspector_request).to be_truthy
       end
     end
     context 'with ip_address that has times' do
