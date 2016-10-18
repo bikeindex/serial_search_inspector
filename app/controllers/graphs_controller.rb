@@ -31,7 +31,7 @@ class GraphsController < ApplicationController
         [
           { name: 'Valid Serial Searches', data: SerialSearch.where('created_at >= ?', 30.day.ago).group_by_day(:created_at).count },
           { name: 'Unique IP Addresses', data: IpAddress.where('created_at >= ?', 30.day.ago).group_by_day(:created_at).count },
-          { name: 'Total Serial Searches', data: LogLine.without_inspector_requests.where('created_at >= ?', 30.day.ago)].group_by_day(:created_at).count }
+          { name: 'Total Serial Searches', data: LogLine.without_inspector_requests.where('created_at >= ?', 30.day.ago).group_by_day(:created_at).count }
         ].chart_json
     else
       render json:
