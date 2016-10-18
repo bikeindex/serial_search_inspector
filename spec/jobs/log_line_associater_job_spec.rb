@@ -6,6 +6,7 @@ RSpec.describe LogLineAssociaterJob, type: :job do
       ActiveJob::Base.queue_adapter = :inline
       log_line = FactoryGirl.create(:log_line)
       expect(UpdateLastRequestAtJob).to receive(:perform_later).with(log_line)
+      expect(BikeIndexRequestorJob).to receive(:perform_later)
       LogLineAssociaterJob.perform_later
       log_line.reload
       expect(log_line.ip_address).to be_present

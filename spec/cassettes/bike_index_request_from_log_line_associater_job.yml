@@ -1,0 +1,58 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://bikeindex.org/api/v3/search?per_page=100&serial=WSBC602203254K&stolenness=all
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 17 Oct 2016 16:33:02 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=d3d25fd62949a97b1b7a715219afb70681476721980; expires=Tue, 17-Oct-17
+        16:33:00 GMT; path=/; domain=.bikeindex.org; HttpOnly
+      Total:
+      - '1'
+      Per-Page:
+      - '100'
+      Etag:
+      - W/"901030d8d24a7a9492f1df45ff1ca088"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 69255ddf-1d96-450a-a28a-15bcc1f415ac
+      X-Runtime:
+      - '1.950331'
+      Strict-Transport-Security:
+      - max-age=31536000
+      X-Powered-By:
+      - cloud66
+      Server:
+      - cloudflare-nginx
+      Cf-Ray:
+      - 2f35265c6bb72597-ORD
+    body:
+      encoding: ASCII-8BIT
+      string: '{"bikes":[{"id":97515,"title":"2015 Specialized Jett 29","serial":"Wsbc602203254k","manufacturer_name":"Specialized","frame_model":"Jett
+        29","year":2015,"frame_colors":["Black","Silver or Gray"],"thumb":null,"large_img":null,"is_stock_img":false,"stolen":false,"stolen_location":null,"date_stolen":null}]}'
+    http_version: 
+  recorded_at: Mon, 17 Oct 2016 16:33:03 GMT
+recorded_with: VCR 3.0.3
