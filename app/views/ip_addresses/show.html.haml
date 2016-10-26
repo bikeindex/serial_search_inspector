@@ -27,7 +27,8 @@
       - @ip_address.log_lines.each do |log|
         %tr
           %td
-            = link_to log.entry['params']['serial'], serial_search_path(log.serial_search.id)
+            - if log.serial_search.present?
+              = link_to log.entry['params']['serial'], serial_search_path(log.serial_search.id)
           %td
             %pre
               = JSON.pretty_generate(log.present_entry_data)
