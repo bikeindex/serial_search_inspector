@@ -1,6 +1,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  devise_for :users, :countrollers => { :omniauth_callbacks => 'callbacks'}
   mount Sidekiq::Web => '/sidekiq'
   root to: 'serial_searches#index'
 
