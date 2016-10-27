@@ -43,6 +43,8 @@ gem 'chartkick'
 gem 'groupdate'
 gem 'httparty'
 gem 'thor', '~> 0.19.1'
+gem 'devise'
+gem 'omniauth-bike-index'
 
 gem 'bundler', '>= 1.8.4' # required for rails-assets.org - JS and CSS assets
 source 'https://rails-assets.org' do # JS land is crazy, so lock everything

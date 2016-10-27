@@ -18,6 +18,11 @@
         %li.nav-item
           = link_to 'Graphs', graphs_path, class: 'nav-link'
 
+    %p.notice
+      = notice
+    %p.alert
+      = alert
+
     = yield
 
     %footer.footer
