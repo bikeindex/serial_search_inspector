@@ -26,8 +26,6 @@ Devise.setup do |config|
   # available as additional gems.
   require 'devise/orm/active_record'
 
-  config.omniauth :bike_index, ENV['BIKEINDEX_APP_ID'], ENV['BIKEINDEX_APP_SECRET'], scope: 'read_user'
-
   # ==> Configuration for any authentication mechanism
   # Configure which keys are used when authenticating a user. The default is
   # just :email. You can configure it to use [:username, :subdomain], so for
@@ -273,4 +271,6 @@ Devise.setup do |config|
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
+
+  config.omniauth :bike_index, ENV['BIKEINDEX_APP_ID'], ENV['BIKEINDEX_APP_SECRET'], scope: 'read_user'
 end
