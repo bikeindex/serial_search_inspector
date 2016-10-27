@@ -17,11 +17,12 @@
           = link_to 'IP Addresses', ip_addresses_path, class: 'nav-link'
         %li.nav-item
           = link_to 'Graphs', graphs_path, class: 'nav-link'
-
-    %p.notice
-      = notice
-    %p.alert
-      = alert
+    - if notice.present?
+      %p.notice.alert-info
+        = notice
+    - if alert.present?
+      %p.alert.alert-danger
+        = alert
 
     = yield
 
