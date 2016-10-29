@@ -9,19 +9,13 @@ class User < ApplicationRecord
       user.binx_info = auth.to_h
       user.email = user.binx_info['info']['email']
       user.username = "binx_id#{uid}"
-      user.password = Devise.friendly_token[0,20]
+      user.password = Devise.friendly_token[0, 20]
       user.binx_credentials = user.binx_info.delete 'credentials'
     end
-    # where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-    #   user.provider = auth.provider
-    #   user.uid = auth.uid
-    #   user.email = auth.info.email
-    #   user.password = Devise.friendly_token[0, 20]
-    # end
   end
 
   def update_binx_credentials(auth)
     new_cred = auth.to_h['credentials']
-    self.update_attribute :binx_credentials, new_cred unless binx_credentials == new_cred
+    update_attribute :binx_credentials, new_cred unless binx_credentials == new_cred
   end
 end

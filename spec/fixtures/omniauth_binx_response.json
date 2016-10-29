@@ -1,0 +1,51 @@
+{
+  "provider": "bike_index",
+  "uid": "1",
+  "info": {
+    "username": "seth",
+    "bike_ids": [
+      51,
+      56,
+      58
+    ],
+    "email": "admin@example.com",
+    "name": "New name",
+    "image": "/uploads/Us/1/bike.png"
+  },
+  "credentials": {
+    "token": "9f157d7bb3cf73846b0def9700f2e16800b0ae228cf52ead778f3f4ee44358ea",
+    "refresh_token": "57b0077de9b0db5b4b5761d7e177436a3c26df6a5e5374f1dde5b290f49f7e93",
+    "expires_at": 1429800712,
+    "expires": true
+  },
+  "extra": {
+    "raw_info": {
+      "id": "1",
+      "user": {
+        "username": "seth",
+        "name": "New name",
+        "email": "admin@example.com",
+        "image": "/uploads/Us/1/bike.png"
+      },
+      "bike_ids": [
+        51,
+        56,
+        58
+      ],
+      "memberships": [
+        {
+          "organization_name": "Stop messing about",
+          "organization_slug": "stop-messing-about",
+          "organization_access_token": "42f3cade52612b4bb5ba82f2a180aed1",
+          "user_is_organization_admin": true
+        },
+        {
+          "organization_name": "Accessor org",
+          "organization_slug": "accessor-org",
+          "organization_access_token": "68861ec105a2e3b062cd62a221c8efd1",
+          "user_is_organization_admin": true
+        }
+      ]
+    }
+  }
+}

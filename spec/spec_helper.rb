@@ -99,3 +99,14 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
+
+def omniauth_binx_fixture
+  JSON.parse(File.read(Rails.root.join("spec/fixtures/omniauth_binx_response.json")))
+end
+
+def set_omniauth_bike_index(auth_hash=omniauth_binx_fixture)
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.add_mock(:bike_index, omniauth_binx_fixture)
+  @request.env["devise.mapping"] = Devise.mappings[:user]
+  @request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:bike_index]
+end
