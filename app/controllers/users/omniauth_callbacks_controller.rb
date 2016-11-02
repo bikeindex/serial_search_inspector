@@ -1,8 +1,11 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  skip_before_action :ensure_authorized_user
+  # skip_before_action :ensure_authorized_user
   # skip_before_action :secrets
 
   def bike_index
+    puts '&&&&&&&&&&&&&&&&&&&&&&'
+    puts '*****************************'
+    puts request.env['omniauth.auth']
     @user = User.from_omniauth(request.env['omniauth.auth'].uid, request.env['omniauth.auth'])
     @user.update_binx_credentials(request.env['omniauth.auth'])
     if @user.persisted?
