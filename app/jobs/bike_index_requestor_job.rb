@@ -1,6 +1,6 @@
 class BikeIndexRequestorJob < ApplicationJob
   queue_as :default
-  require 'BikeIndexRequestor'
+  require 'bike_index_requestor'
 
   def perform(serial_search)
     if serial_search.valid_serial_search_for_bike_creation?
