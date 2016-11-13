@@ -1,0 +1,5 @@
+production:
+    after_rails:
+      - command: sudo mkdir $STACK_PATH/tmp/shared && sudo chmod 0775 -R $STACK_PATH/tmp/shared
+        target: rails
+        execute: true
