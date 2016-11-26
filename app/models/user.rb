@@ -20,27 +20,6 @@ class User < ApplicationRecord
   end
 
   def superuser?
-    has_role?(:superuser)
-  end
-
-  def appraiser?
-    has_role?(:appraiser)
-  end
-
-  def programmer?
-    has_role?(:programmer)
-  end
-
-  def is_authorized?(action='write', obj)
-    # return true if superuser?
-    # return true if appraiser?
-    if obj.kind_of?(String)
-      return true if ['messages', 'sessions',
-        'registrations', 'account', 'bikes', 'graphs', 'ip_addresses', 'log_lines', 'serial_searches'].include?(obj.downcase.strip)
-    else
-      return true if obj && defined?(obj.user) && obj.user.present? && obj.user == self
-      return true if self == obj
-    end
-    false
+    superuser
   end
 end

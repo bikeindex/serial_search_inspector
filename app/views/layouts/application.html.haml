@@ -8,15 +8,19 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = favicon_link_tag '/favicon.ico'
   %body
-    %nav.navbar.navbar-full.navbar-dark.bg-inverse
-      = link_to 'Bike Index Serial Search Inspector', root_path, class: 'navbar-brand'
-      %ul.nav.navbar-nav
-        %li.nav-item
-          = link_to 'Serial Searches', serial_searches_path, class: 'nav-link'
-        %li.nav-item
-          = link_to 'IP Addresses', ip_addresses_path, class: 'nav-link'
-        %li.nav-item
-          = link_to 'Graphs', graphs_path, class: 'nav-link'
+    - if current_user.superuser?
+      %nav.navbar.navbar-full.navbar-dark.bg-inverse
+        = link_to 'Admin', root_path, class: 'navbar-brand'
+        %ul.nav.navbar-nav
+          %li.nav-item
+            = link_to 'Users', accounts_path, class: 'nav-link'
+          %li.nav-item
+            = link_to 'Serial Searches', serial_searches_path, class: 'nav-link'
+          %li.nav-item
+            = link_to 'IP Addresses', ip_addresses_path, class: 'nav-link'
+          %li.nav-item
+            = link_to 'Graphs', graphs_path, class: 'nav-link'
+
     - if notice.present?
       %p.notice.alert-info
         = notice
@@ -28,6 +32,7 @@
 
     %footer.footer
       .container
+        = link_to 'Refresh Bike Index bikes', refresh_bike_index_path
         %span.text-muted.float-right
           The Serial Search Inspector is an Open Source Project.
           View on

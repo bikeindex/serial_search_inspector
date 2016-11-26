@@ -101,10 +101,6 @@ RSpec.configure do |config|
 =end
 end
 
-def set_current_user(user)
-  cookies.signed[:auth] = { secure: true, httponly: true, value: [user.id, user.auth_token] }
-end
-
 def omniauth_binx_fixture
   JSON.parse(File.read(Rails.root.join("spec/fixtures/omniauth_binx_response.json")))
 end
