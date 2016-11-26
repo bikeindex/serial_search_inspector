@@ -6,7 +6,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = 'b9ff5bb21a850b3f52e9e2b6794f1bb55d39006331edce54d0e46004988e18cd7108372875cf85fd8755975b06d5f22c47d38b8f4c303beccc501b82248210a7'
+  config.secret_key = ENV['DEVISE_SECRET']
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -272,5 +272,5 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 
-  config.omniauth :bike_index, ENV['BIKEINDEX_APP_ID'], ENV['BIKEINDEX_APP_SECRET'], callback_url: 'localhost:5000/users/auth/bike_index/callback', scope: 'read_bikes read_user write_user write_bikes read_organization_membership'
+  config.omniauth :bike_index, ENV['BIKEINDEX_APP_ID'], ENV['BIKEINDEX_APP_SECRET'], scope: 'read_bikes read_user write_user write_bikes read_organization_membership'
 end
