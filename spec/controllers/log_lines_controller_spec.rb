@@ -36,7 +36,7 @@ RSpec.describe LogLinesController, type: :controller do
     context 'valid payload' do
       it 'receives payload of logs' do
         expect do
-          post :create, payload: payload.to_json, api_authorization_key: ENV['API_AUTH_KEY'], headers: { 'Content-Type' => 'application/json' }
+          post :create, params: { payload: payload.to_json, api_authorization_key: ENV['API_AUTH_KEY'], headers: { 'Content-Type' => 'application/json' } }
         end.to change(LogLine, :count).by 2
         log_line = LogLine.first # with @timestamp
         log_line_2 = LogLine.last # without @timestamp
@@ -48,7 +48,7 @@ RSpec.describe LogLinesController, type: :controller do
     end
     context 'incorrect api_authorization_key' do
       it 'returns correct error code' do
-        post :create, payload: payload.to_json, api_authorization_key: 'hampsters', headers: { 'Content-Type' => 'application/json' }
+        post :create, params: { payload: payload.to_json, api_authorization_key: 'hampsters', headers: { 'Content-Type' => 'application/json' } }
         expect(response.status).to eq 401
       end
     end
