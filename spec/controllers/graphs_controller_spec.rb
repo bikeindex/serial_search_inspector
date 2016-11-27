@@ -45,7 +45,6 @@ RSpec.describe GraphsController, type: :controller do
       it 'returns an array' do
         get :source_type
         result = JSON.parse(response.body)
-        pp result
         expect(result.is_a?(Array)).to be true
         expect(response.status).to eq 200
       end
