@@ -14,7 +14,7 @@ RSpec.describe SerialSearchesController, type: :controller do
     end
     describe 'GET show' do
       it 'redirects to root_url' do
-        get :show, id: serial_search.id
+        get :show, params: { id: serial_search.id }
         expect(response).to redirect_to root_url
       end
     end
@@ -40,14 +40,14 @@ RSpec.describe SerialSearchesController, type: :controller do
         FactoryGirl.create(:log_line, serial_search: serial_search_3)
       end
       it 'sorts by times_searched' do
-        get :index, sort: 'log_lines_count', direction: 'desc', per_page: '1'
+        get :index, params: { sort: 'log_lines_count', direction: 'desc', per_page: '1' }
         expect(response.status).to eq 200
         expect(assigns(:serial_searches)). to eq([serial_search_3])
       end
     end
     describe 'GET show' do
       it 'renders the show' do
-        get :show, id: serial_search.id
+        get :show, params: { id: serial_search.id }
         expect(response.status).to eq 200
         expect(response).to render_template('show')
         expect(assigns(:serial_search)).to eq serial_search
