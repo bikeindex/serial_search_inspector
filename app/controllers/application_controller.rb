@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   def ensure_user
     unless current_user.present?
       session[:sandr] ||= request.url unless controller_name.match('session')
-      redirect_to user_omniauth_authorize_path(:bike_index) and return
+      redirect_to user_bike_index_omniauth_authorize_path(:bike_index) and return
     end
   end
 
