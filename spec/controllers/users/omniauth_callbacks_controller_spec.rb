@@ -7,7 +7,7 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
       expect {
         post :bike_index
       }.to change(User, :count).by(1)
-      response.code.should eq('302')
+      expect(response.code).to eq('302')
       user = User.last
       expect(user.binx_id).to eq(omniauth_binx_fixture['uid'].to_i)
       expect(user.binx_credentials).to be_present
