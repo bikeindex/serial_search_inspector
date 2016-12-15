@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :bikes
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -17,9 +19,5 @@ class User < ApplicationRecord
   def update_binx_credentials(auth)
     new_cred = auth.to_h['credentials']
     update_attribute :binx_credentials, new_cred unless binx_credentials == new_cred
-  end
-
-  def superuser?
-    superuser
   end
 end

@@ -14,7 +14,8 @@ RSpec.describe SerialSearch, type: :model do
   describe 'associations' do
     it { should have_many(:log_lines) }
     it { should have_many(:ip_addresses) }
-    it { should have_and_belong_to_many(:bikes) }
+    it { should have_many(:bikes) }
+    it { should have_many(:bike_serial_searches) }
   end
 
   describe 'valid_serial_search_for_bike_creation?' do

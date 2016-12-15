@@ -2,3 +2,30 @@
   %header.info-header
     %h4
       = @user.email
+    - @user.bikes.each do |bike|
+      %h5
+        = bike.title
+      %a{ href: "https://bikeindex.org/bikes/#{bike.bike_index_id}" }
+        View Bike on BikeIndex
+
+      - if bike.serial_searches.empty?
+        %p
+          These aren't the bikes people are searching for!
+          There have been no serial searches matching your bikes!
+      - else
+        %table.table.table-striped.table-bordered
+          %thead
+            %tr
+              %th serial searched for
+              %th time
+              %th location
+            %tbody
+              - bike.serial_searches.each do |serial_search|
+                %tr
+                  %td
+                    = serial_search.serial
+                  %td
+                    = serial_search.searched_bike_index_at
+                  %td
+                    - serial_search.log_lines.each do |log|
+                      = log.ip_address.city
