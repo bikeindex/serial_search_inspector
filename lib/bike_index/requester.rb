@@ -1,4 +1,4 @@
-require './lib/bike_index' # why doesn't this get linked up automatically?
+require './lib/bike_index' # why doesn't this get linked up automagically?
 
 class BikeIndex::Requester
   include HTTParty

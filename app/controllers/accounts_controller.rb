@@ -11,8 +11,12 @@ class AccountsController < ApplicationController
   end
 
   def show
+    serials = []
     @user = User.find(params[:id])
     @user_bikes = BikeIndex::Requester.new(@user).get_bikes
+    @user_bikes['bikes'].each { |bike| serials << bike['serial'] }
+    @user_serial_searches = []
+    serials.each { |serial| @user_serial_searches << SerialSearch.find_by(serial: serial) }
   end
 
   def refresh_bike_index_credentials
