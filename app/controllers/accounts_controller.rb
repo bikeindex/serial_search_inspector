@@ -1,5 +1,3 @@
-require './lib/bike_index/requester' # why doesn't this get linked up automatically?
-
 class AccountsController < ApplicationController
   helper_method :sort_column, :sort_direction
   skip_before_action :ensure_superuser, only: [:refresh_bike_index_credentials]
@@ -11,17 +9,7 @@ class AccountsController < ApplicationController
   end
 
   def show
-    serials = []
-    @user_serial_searches = []
-
     @user = User.find(params[:id])
-    user_bikes = BikeIndex::Requester.new(@user).get_bikes
-
-    user_bikes['bikes'].each { |bike| serials << bike['serial'] }
-
-    serials.each do |serial|
-      @user_serial_searches << SerialSearch.find_by(serial: serial)
-    end
   end
 
   def refresh_bike_index_credentials

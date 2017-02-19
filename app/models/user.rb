@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  has_many :user_bikes
+  has_many :bikes, through: :user_bikes
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

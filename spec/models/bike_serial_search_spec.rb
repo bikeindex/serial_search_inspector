@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe UserBike, type: :model do
+RSpec.describe BikeSerialSearch, type: :model do
   describe 'associations' do
-    it { should belong_to(:user) }
     it { should belong_to(:bike) }
+    it { should belong_to(:serial_search) }
   end
 end

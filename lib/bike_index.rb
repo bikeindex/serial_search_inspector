@@ -2,7 +2,6 @@ class Error < StandardError
 end
 
 module BikeIndex
-
   class Client < OAuth2::Client
     def initialize
       super(

@@ -13,6 +13,8 @@ class BikeIndex::Requester
   end
 
   def get_request
+    # There were two ways of doing this, in regards to the access_token.
+    # This is the only one that worked but didn't see ideal? I can't remember why.
     response = self.class.get("/me/bikes?access_token=#{access_token}")
     JSON.parse(response.body)
   end

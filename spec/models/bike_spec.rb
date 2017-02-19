@@ -7,29 +7,36 @@ RSpec.describe Bike, type: :model do
   end
 
   describe 'associations' do
-    it { should have_and_belong_to_many(:serial_searches) }
+    it { should have_many(:users) }
+    it { should have_many(:user_bikes) }
+    it { should have_many(:serial_searches) }
+    it { should have_many(:bike_serial_searches) }
   end
 
   describe 'find_or_create_bikes_from_bike_array' do
     context 'new bike' do
       let(:serial_search) { FactoryGirl.create(:serial_search) }
       let(:bike_array) { [{ serial_search_id: serial_search.id, bike_index_id: 30080, stolen: false, date_stolen: nil }] }
+
       it 'creates a new bike entry and associates' do
         Bike.find_or_create_bikes_from_bike_array(bike_array)
         expect(Bike.first.serial_searches.first).to eq serial_search
         expect(serial_search.bikes.first).to eq Bike.first
       end
     end
+
     context 'bike already exists' do
       let(:serial_search_1) { FactoryGirl.create(:serial_search) }
       let(:serial_search_2) { FactoryGirl.create(:serial_search) }
       let(:bike_array_1) { [{ serial_search_id: serial_search_1.id, bike_index_id: 30080, stolen: false, date_stolen: nil }] }
       let(:bike_array_2) { [{ serial_search_id: serial_search_2.id, bike_index_id: 30080, stolen: false, date_stolen: nil }] }
+
       it 'associates with serial_search' do
         Bike.find_or_create_bikes_from_bike_array(bike_array_1)
         Bike.find_or_create_bikes_from_bike_array(bike_array_2)
         Bike.find_or_create_bikes_from_bike_array(bike_array_1)
         bike = Bike.first
+
         expect(Bike.count).to eq 1
         expect(bike.serial_searches.count).to eq 2
         expect(bike.serial_searches).to include(serial_search_1)
@@ -46,6 +53,7 @@ RSpec.describe Bike, type: :model do
         expect(bike.was_stolen).to be_falsey
       end
     end
+
     context 'stolen' do
       it 'changes was_stolen to true' do
         bike = Bike.new(bike_index_id: 30080, stolen: true, date_stolen: 1400565600)
@@ -53,6 +61,7 @@ RSpec.describe Bike, type: :model do
         expect(bike.was_stolen).to be_truthy
       end
     end
+
     context 'stolen and later recovered' do
       it 'does not reset was_stolen' do
         bike = Bike.new(bike_index_id: 30080, stolen: true, date_stolen: 1400565600)
