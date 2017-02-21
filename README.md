@@ -1,4 +1,4 @@
-# Bike Index Serial Search Inspector
+# [Bike Index Serial Search Inspector](https://inspector.bikeindex.org/)
 [![Build Status](https://travis-ci.org/bikeindex/serial_search_inspector.svg?branch=tables)](https://travis-ci.org/bikeindex/serial_search_inspector)
 [![Code Climate](https://codeclimate.com/github/bikeindex/serial_search_inspector/badges/gpa.svg)](https://codeclimate.com/github/bikeindex/serial_search_inspector)
 [![Test Coverage](https://codeclimate.com/github/bikeindex/serial_search_inspector/badges/coverage.svg)](https://codeclimate.com/github/bikeindex/serial_search_inspector/coverage)
