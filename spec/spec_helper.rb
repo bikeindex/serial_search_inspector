@@ -18,6 +18,7 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'factory_girl_rails'
 require 'support/factory_girl'
+
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
@@ -98,4 +99,15 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+end
+
+def omniauth_binx_fixture
+  JSON.parse(File.read(Rails.root.join("spec/fixtures/omniauth_binx_response.json")))
+end
+
+def set_omniauth_bike_index(auth_hash=omniauth_binx_fixture)
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.add_mock(:bike_index, omniauth_binx_fixture)
+  @request.env["devise.mapping"] = Devise.mappings[:user]
+  @request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:bike_index]
 end

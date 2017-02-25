@@ -2,3 +2,4 @@ en:
   time:
     formats:
       log_request_time: "%a %-m.%d.%y - %l:%M%P"
+      date: "%a %-m.%d.%y"

@@ -2,7 +2,9 @@ class Bike < ApplicationRecord
   validates_presence_of :bike_index_id
   validates_uniqueness_of :bike_index_id
 
-  has_and_belongs_to_many :serial_searches, -> { distinct }
+  belongs_to :user, optional: true
+  has_many :bike_serial_searches
+  has_many :serial_searches, -> { distinct }, through: :bike_serial_searches
 
   def update_was_stolen
     self.was_stolen = true if stolen == true

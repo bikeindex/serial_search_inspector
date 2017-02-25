@@ -1,0 +1,23 @@
+.container-fluid
+  %header.info-header
+    %h4
+      = @users_count
+      users
+  %table.table.table-striped.table-bordered.header-sortable
+    %thead
+      %tr
+        %th
+          = sortable 'email', 'email'
+        %th
+          = sortable 'created_at', 'Created (on inspector)'
+        %th
+          Bikes
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td
+            = link_to user.email, account_path(id: user.id)
+          %td
+            = l user.created_at, format: :date
+          %td
+            = user.binx_info['info']['bike_ids'].count

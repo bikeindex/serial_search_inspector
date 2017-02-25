@@ -4,7 +4,8 @@ class SerialSearch < ApplicationRecord
 
   has_many :log_lines
   has_many :ip_addresses, through: :log_lines
-  has_and_belongs_to_many :bikes, -> { distinct }
+  has_many :bike_serial_searches
+  has_many :bikes, -> { distinct }, through: :bike_serial_searches
 
   before_save :sanitize_serial
 
