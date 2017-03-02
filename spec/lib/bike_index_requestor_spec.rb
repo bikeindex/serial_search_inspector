@@ -68,14 +68,15 @@ describe BikeIndexRequestor do
   end
   describe 'create_bike_hashes_for_serial' do
     context 'not stolen' do
-      let(:target) { [{ serial_search_id: serial_search.id, bike_index_id: 30080, stolen: false, date_stolen: nil }] }
+
+      let(:target) { [{ bike_index_id: 30080, title: '2014 Jamis Allegro Sport Femme', serial: 'some serial number', stolen: false, date_stolen: nil }] }
       it 'returns hash' do
         expect(instance).to receive(:find_bikes_with_serial).with(serial_search.serial) { target_find_bikes_with_serial_response }
         expect(instance.create_bike_hashes_for_serial(serial_search)).to eq target
       end
     end
     context 'stolen' do
-      let(:target) { [{ serial_search_id: stolen_serial_search.id, bike_index_id: 3414, stolen: true, date_stolen: Time.parse('2014-05-20 01:00:00 -0500') }] }
+      let(:target) { [{ bike_index_id: 3414, title: '2014 Jamis Allegro Comp Disc', serial: 'stolen_serial_number', stolen: true, date_stolen: Time.parse('2014-05-20 01:00:00.000000000 -0500') }] }
       it 'returns a hash' do
         expect(instance).to receive(:find_bikes_with_serial) { target_stolen_find_bikes_with_serial_response }
         expect(instance.create_bike_hashes_for_serial(stolen_serial_search)).to eq target

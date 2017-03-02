@@ -7,15 +7,20 @@ class FetchBikeIndexBikesJob < ApplicationJob
     user.update_attribute(:binx_bikes, BikeIndex::Requester.new(user).request_bikes)
 
     user.binx_bikes['bikes'].each do |bike|
+      bike = Bike.find_or_create_by(bike_index_id: bike['id'])
+
       bike_attributes = {
         user_id: user.id,
-        bike_index_id: bike['id'],
         title: bike['title'],
-        serial: bike['serial']
+        serial: bike['serial'],
+        stolen: bike['stolen'],
+        date_stolen: bike['date_stolen'] && Time.at(bike['date_stolen'])
       }
-      Bike.find_or_create_by(bike_attributes)
 
-      CheckBikeSerialSearchesJob.perform_later(bike['serial'])
+      bike.update_attributes(bike_attributes)
+      bike.update_was_stolen
+
+      CheckBikeSerialSearchesJob.perform_later(bike, bike['serial'])
     end
   end
 end

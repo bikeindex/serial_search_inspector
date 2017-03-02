@@ -7,7 +7,7 @@ RSpec.describe CheckBikeSerialSearchesJob, type: :job do
 
     it 'creates a bike_serial_search record and its associations' do
       ActiveJob::Base.queue_adapter = :inline
-      CheckBikeSerialSearchesJob.perform_later(serial_search.serial)
+      CheckBikeSerialSearchesJob.perform_later(bike, serial_search.serial)
 
       expect(BikeSerialSearch.count).to eq(1)
       expect(serial_search.bikes.first).to eq(bike)
