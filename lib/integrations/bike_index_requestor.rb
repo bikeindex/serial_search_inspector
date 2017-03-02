@@ -17,8 +17,9 @@ class BikeIndexRequestor
   def create_bike_hashes_for_serial(serial_search)
     find_bikes_with_serial(serial_search.serial)['bikes'].map do |bike|
       {
-        serial_search_id: serial_search.id,
         bike_index_id: bike['id'],
+        title: bike['title'],
+        serial: bike['serial'],
         stolen: bike['stolen'],
         date_stolen: bike['date_stolen'] && Time.at(bike['date_stolen'])
       }

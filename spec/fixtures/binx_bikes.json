@@ -1,0 +1,19 @@
+{
+  "bikes": [
+    {
+      "id": 30569,
+      "title": "Schwinn Traveler",
+      "serial": "Y524347",
+      "manufacturer_name": "Schwinn",
+      "frame_model": "Traveler",
+      "year": false,
+      "frame_colors": ["Red", "Black"],
+      "thumb": "https://files.bikeindex.org/uploads/Pu/15678/small_IMG_20141028_140215450.jpg",
+      "large_img": "https://files.bikeindex.org/uploads/Pu/15678/large_IMG_20141028_140215450.jpg",
+      "is_stock_img": false,
+      "stolen": false,
+      "stolen_location": false,
+      "date_stolen": false
+    }
+  ]
+}

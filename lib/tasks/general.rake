@@ -13,3 +13,9 @@ task search_bike_index: :environment do
     BikeIndexRequestorJob.perform_later(serial_search)
   end
 end
+
+task fetch_all_user_bikes: :environment do
+  User.all.each do |user|
+    FetchBikeIndexBikesJob.perform_later(user)
+  end
+end
