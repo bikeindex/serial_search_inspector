@@ -19,3 +19,16 @@ task fetch_all_user_bikes: :environment do
     FetchBikeIndexBikesJob.perform_later(user)
   end
 end
+
+task fetch_bikes_by_binx_id: :environment do
+  puts 'Batching all bicycles..'
+
+  Bike.find_in_batches(batch_size: 100) do |batch|
+    wait_time = 1
+
+    batch.each do |bike|
+      FetchBikeByBikeIndexIdJob.set(wait: wait_time.minutes).perform_later(bike)
+      wait_time += 2
+    end
+  end
+end
