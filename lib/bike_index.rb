@@ -40,6 +40,11 @@ module BikeIndex
       JSON.parse(response.body)
     end
 
+    def request_bike_by_bike_index_id(bike_index_id)
+      response = self.class.get("/bikes/#{bike_index_id}")
+      JSON.parse(response.body)
+    end
+
     def refreshed_token(token)
       token = token.refresh!
       cred = {
