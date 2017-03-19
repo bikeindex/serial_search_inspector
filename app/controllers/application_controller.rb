@@ -4,17 +4,17 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def ensure_user
-    unless current_user.present?
-      session[:sandr] ||= request.url unless controller_name.match('session')
-      redirect_to user_bike_index_omniauth_authorize_path and return
-    end
+    return true if current_user.present?
+
+    session[:sandr] ||= request.url unless controller_name.match('session')
+    redirect_to user_bike_index_omniauth_authorize_path and return
   end
 
   def ensure_superuser
-    ensure_user
-    unless current_user && current_user.superuser?
-      redirect_to root_url and return
-    end
+    return unless ensure_user
+    return true if current_user.superuser?
+
+    redirect_to root_url and return
   end
 
   def ssl_configured?
