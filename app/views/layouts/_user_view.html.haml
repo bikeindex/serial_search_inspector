@@ -5,27 +5,29 @@
     - @user.bikes.each do |bike|
       %h5
         = bike.title
+        = bike.serial
       %a{ href: "https://bikeindex.org/bikes/#{bike.bike_index_id}" }
         View Bike on BikeIndex
 
       - if bike.serial_searches.empty?
         %p
-          These aren't the bikes people are searching for!
-          There have been no serial searches matching your bikes!
+          There are no recorded searches for this serial number
       - else
-        %table.table.table-striped.table-bordered
-          %thead
-            %tr
-              %th serial searched for
-              %th time
-              %th location
-            %tbody
-              - bike.serial_searches.each do |serial_search|
-                %tr
-                  %td
-                    = serial_search.serial
-                  %td
-                    = serial_search.searched_bike_index_at
-                  %td
-                    - serial_search.log_lines.each do |log|
-                      = log.ip_address.city
+        - bike.serial_searches.each do |serial_search|
+          %p
+            = "There are #{serial_search.log_lines.count} logs for this serial"
+          %table.table.table-striped.table-bordered
+            %thead
+              %tr
+                %th Serial Searched for
+                %th Time
+                %th Location
+              %tbody
+                - serial_search.log_lines.each do |log_line|
+                  %tr
+                    %td
+                      = log_line.entry['params']['serial']
+                    %td
+                      = log_line.request_at
+                    %td
+                      = log_line.ip_address.city
