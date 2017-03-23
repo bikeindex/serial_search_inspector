@@ -16,8 +16,6 @@
               There are no recorded searches for this serial number
           - else
             - bike.serial_searches.each do |serial_search|
-              %p.card-text
-                = "There are #{serial_search.log_lines.count} logs for this serial"
               %table.table.table-striped.table-bordered
                 %thead
                   %tr
