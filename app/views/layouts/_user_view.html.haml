@@ -30,6 +30,6 @@
                         %td
                           = log_line.entry['params']['serial']
                         %td
-                          = log_line.request_at
+                          = l log_line.request_at, format: :log_request_time
                         %td
                           = log_line.ip_address.city

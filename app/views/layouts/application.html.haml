@@ -20,6 +20,11 @@
             = link_to 'IP Addresses', ip_addresses_path, class: 'nav-link'
           %li.nav-item
             = link_to 'Graphs', graphs_path, class: 'nav-link'
+        = image_tag 'logo.svg', class: 'logo'
+
+    - else
+      %nav.navbar.navbar-full.navbar-dark.bg-inverse
+        = image_tag 'logo.svg', class: 'logo'
 
     - if notice.present?
       %p.notice.alert-info
