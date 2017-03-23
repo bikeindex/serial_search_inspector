@@ -24,7 +24,7 @@
 - `./start` use the included [bash script](https://github.com/bikeindex/serial_search_inspector/blob/master/start) to start the development server
 - Go to [localhost:5000](http://localhost:5000)
 
-While this is enough for local development, to completely setup the Serial Search Inspector a running instance of [Bike Index](https://bikeindex.org) and log output from [Papertrail](https://papertrailapp.com/) is required.
+While this is enough for local development, to completely setup the Serial Search Inspector a running instance of [Bike Index](https://github.com/bikeindex/bike_index) and log output from [Papertrail](https://papertrailapp.com/) is required.
 
 Create a Papertrail webhook and POST logs to `your_inspector_address.com/log_lines?api_authorization_key=xxxx`
 
