@@ -1,0 +1,26 @@
+.modal.fade#aboutModal{ 'tabindex': '-1', 'role': 'dialog', 'aria-labelledby': 'exampleModalLAbel?', 'aria-hidden': 'true' }
+  .modal-dialog{ 'role': 'document'}
+    .modal-content
+      .modal-header
+        %h5.modal-title.inline
+          Bike Index: Serial Search Inspector
+        %button.close{ 'type': 'close', 'data-dismiss': 'modal', 'aria-label': 'Close' }
+          %span{ 'aria-hidden': true }
+            &times;
+      .modal-body
+        %p
+          The Serial Search Inspector is a new tool for Bike Index. It monitors
+          serial number searches from the Bike Index and records the search
+          if it matches a registered bike. This allows us to see more about how
+          people are using the Bike Index and helps you to see if anyone has searched
+          for your serial number.
+        %p
+          There are a few things to note with this tool:
+        %p
+          1. It is possible that another bike from a different manufacturer may share
+          the same serial number as your bike. Because it's impossible for us to know
+          which serial belongs to which bike, you may see search logs that weren't
+          intended for your bike.
+        %p
+          2. The location tracking is very general and done through your IP Address.
+          Just know that it is a rough estimate.

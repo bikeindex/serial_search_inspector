@@ -4,27 +4,12 @@
     %title
       = @title
     = csrf_meta_tags
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = favicon_link_tag '/favicon.ico'
   %body
-    - if current_user.superuser?
-      %nav.navbar.navbar-full.navbar-dark.bg-inverse
-        = link_to 'Admin', root_path, class: 'navbar-brand'
-        %ul.nav.navbar-nav
-          %li.nav-item
-            = link_to 'Users', accounts_path, class: 'nav-link'
-          %li.nav-item
-            = link_to 'Serial Searches', serial_searches_path, class: 'nav-link'
-          %li.nav-item
-            = link_to 'IP Addresses', ip_addresses_path, class: 'nav-link'
-          %li.nav-item
-            = link_to 'Graphs', graphs_path, class: 'nav-link'
-        = image_tag 'logo.svg', class: 'logo'
-
-    - else
-      %nav.navbar.navbar-full.navbar-dark.bg-inverse
-        = image_tag 'logo.svg', class: 'logo'
+    = render '/layouts/navbar'
+    = render '/layouts/about_modal'
 
     - if notice.present?
       %p.notice.alert-info
