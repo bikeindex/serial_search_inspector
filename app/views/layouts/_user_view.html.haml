@@ -26,6 +26,7 @@
                     %th Location
                   %tbody
                     - serial_search.log_lines.each do |log_line|
+                      - next if log_line.inspector_request
                       %tr
                         %td
                           = log_line.entry['params']['serial']
