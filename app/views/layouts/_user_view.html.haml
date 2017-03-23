@@ -1,33 +1,35 @@
 .container-fluid
   %header.info-header
     %h4
-      = @user.email
+      = "Welcome, #{@user.email}"
     - @user.bikes.each do |bike|
-      %h5
-        = bike.title
-        = bike.serial
-      %a{ href: "https://bikeindex.org/bikes/#{bike.bike_index_id}" }
-        View Bike on BikeIndex
+      .card
+        .card-block
+          %h5.card-title
+            = "#{bike.title} - #{bike.serial}"
 
-      - if bike.serial_searches.empty?
-        %p
-          There are no recorded searches for this serial number
-      - else
-        - bike.serial_searches.each do |serial_search|
-          %p
-            = "There are #{serial_search.log_lines.count} logs for this serial"
-          %table.table.table-striped.table-bordered
-            %thead
-              %tr
-                %th Serial Searched for
-                %th Time
-                %th Location
-              %tbody
-                - serial_search.log_lines.each do |log_line|
+          %a.card-link{ href: "https://bikeindex.org/bikes/#{bike.bike_index_id}" }
+            View on BikeIndex
+
+          - if bike.serial_searches.empty?
+            %p.card-text
+              There are no recorded searches for this serial number
+          - else
+            - bike.serial_searches.each do |serial_search|
+              %p.card-text
+                = "There are #{serial_search.log_lines.count} logs for this serial"
+              %table.table.table-striped.table-bordered
+                %thead
                   %tr
-                    %td
-                      = log_line.entry['params']['serial']
-                    %td
-                      = log_line.request_at
-                    %td
-                      = log_line.ip_address.city
+                    %th Serial Searched for
+                    %th Time
+                    %th Location
+                  %tbody
+                    - serial_search.log_lines.each do |log_line|
+                      %tr
+                        %td
+                          = log_line.entry['params']['serial']
+                        %td
+                          = log_line.request_at
+                        %td
+                          = log_line.ip_address.city
