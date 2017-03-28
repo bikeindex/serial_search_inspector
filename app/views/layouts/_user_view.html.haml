@@ -1,31 +1,34 @@
 .container-fluid
   %header.info-header
     %h4
-      = @user.email
+      Welcome, #{@user.email}
     - @user.bikes.each do |bike|
-      %h5
-        = bike.title
-      %a{ href: "https://bikeindex.org/bikes/#{bike.bike_index_id}" }
-        View Bike on BikeIndex
+      .card
+        .card-block
+          %h5.card-title
+            #{bike.title} - #{bike.serial}
 
-      - if bike.serial_searches.empty?
-        %p
-          These aren't the bikes people are searching for!
-          There have been no serial searches matching your bikes!
-      - else
-        %table.table.table-striped.table-bordered
-          %thead
-            %tr
-              %th serial searched for
-              %th time
-              %th location
-            %tbody
-              - bike.serial_searches.each do |serial_search|
-                %tr
-                  %td
-                    = serial_search.serial
-                  %td
-                    = serial_search.searched_bike_index_at
-                  %td
-                    - serial_search.log_lines.each do |log|
-                      = log.ip_address.city
+          %a.card-link{ href: "https://bikeindex.org/bikes/#{bike.bike_index_id}" }
+            View on BikeIndex
+
+          - if bike.serial_searches.empty?
+            %p.card-text
+              There are no recorded searches for this serial number
+          - else
+            - bike.serial_searches.each do |serial_search|
+              %table.table.table-striped.table-bordered
+                %thead
+                  %tr
+                    %th Serial Searched for
+                    %th Time
+                    %th Location
+                  %tbody
+                    - serial_search.log_lines.each do |log_line|
+                      - next if log_line.inspector_request
+                      %tr
+                        %td
+                          = log_line.entry['params']['serial']
+                        %td
+                          = l log_line.request_at, format: :log_request_time
+                        %td
+                          = log_line.ip_address.city

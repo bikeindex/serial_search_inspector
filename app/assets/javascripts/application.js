@@ -14,8 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require tether
-//= require bootstrap
-//= require bootstrap-sprockets
+//= require bootstrap.min
 //= require Chart.bundle
 //= require chartkick
 //= require_tree .

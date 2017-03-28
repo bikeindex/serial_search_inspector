@@ -1,0 +1,35 @@
+.modal.fade#aboutModal{ 'tabindex': '-1', 'role': 'dialog', 'aria-labelledby': 'exampleModalLAbel?', 'aria-hidden': 'true' }
+  .modal-dialog{ 'role': 'document'}
+    .modal-content
+      .modal-header
+        %h5.modal-title.inline
+          Serial Search Inspector
+        %button.close{ 'type': 'close', 'data-dismiss': 'modal', 'aria-label': 'Close' }
+          %span{ 'aria-hidden': true }
+            &times;
+      .modal-body
+        %p
+          The Serial Search Inspector is a new tool that allows Bike Index to monitor
+          serial number searches on the registry. This allows us to see a little more
+          into how people use the Bike Index and provides additional information to you.
+        %p
+          How it works: The Inspector functions in conjunction with Bike Index. When a
+          serial number is searched for on the Bike Index, we create a log of that
+          search and share it with the Inspector. The Inspector then, determined by the
+          validity of the search, checks if that serial matches to a registered bike on
+          the registry. If there is a match, we link that search and bike together.
+          This lets you see when a bike registered to you is searched for.
+        %p
+          There are a few things to keep in mind regarding this information.
+        %p
+          First, it is possible, though unlikely, that two or more bikes could share a
+          serial number or your bike could be matched with a partial serial number search.
+          This would happen if two or more manufacturers happen to use the same serial number.
+          What does this mean for you? Well, if this were the case, there may be serial
+          number searches that were intended for a different bike and vice versa.
+        %p
+          Second, the location provided with the logged searches are rough and are based
+          closest by city. This is hopefully intended to see if someone across the country
+          is searching for you bike.
+        %p
+          We hope you enjoy this new tool and find it useful.
