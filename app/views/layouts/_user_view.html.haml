@@ -1,12 +1,12 @@
 .container-fluid
   %header.info-header
     %h4
-      = "Welcome, #{@user.email}"
+      Welcome, #{@user.email}
     - @user.bikes.each do |bike|
       .card
         .card-block
           %h5.card-title
-            = "#{bike.title} - #{bike.serial}"
+            #{bike.title} - #{bike.serial}
 
           %a.card-link{ href: "https://bikeindex.org/bikes/#{bike.bike_index_id}" }
             View on BikeIndex
