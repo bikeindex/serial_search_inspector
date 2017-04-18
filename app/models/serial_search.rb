@@ -25,6 +25,14 @@ class SerialSearch < ApplicationRecord
     8.hours.ago
   end
 
+  def self.text_search(query)
+    if query.present?
+      where('serial @@ :q', q: query)
+    else
+      scoped
+    end
+  end
+
   def sanitize_serial
     self.serial = serial.strip.upcase
   end
