@@ -5,6 +5,14 @@
       Serial Searches from
       = @ip_addresses_count
       unique IP Addresses
+
+    .form-inline
+      = form_tag serial_searches_path, method: :get
+      %p
+        = text_field_tag :query, params[:query], class: 'form-control',
+          placeholder: 'Serial Number'
+        = submit_tag 'Search', name: nil, class: 'btn btn-primary'
+
   %table.table.table-striped.table-bordered.header-sortable
     %thead
       %tr
