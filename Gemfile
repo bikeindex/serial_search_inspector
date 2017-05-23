@@ -47,6 +47,7 @@ gem 'devise'
 gem 'omniauth-oauth2', '~> 1.3.1'
 gem 'omniauth-bike-index'
 gem 'rack-cors', :require => 'rack/cors'
+gem 'textacular'
 
 gem 'bundler', '>= 1.8.4' # required for rails-assets.org - JS and CSS assets
 source 'https://rails-assets.org' do # JS land is crazy, so lock everything

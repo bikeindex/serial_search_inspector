@@ -27,7 +27,7 @@ class SerialSearch < ApplicationRecord
 
   def self.text_search(query)
     if query.present?
-      where('serial @@ ?', query)
+      fuzzy_search(query)
     else
       all
     end
