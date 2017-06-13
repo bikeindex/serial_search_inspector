@@ -2,11 +2,6 @@ class SerialSearch < ApplicationRecord
   validates_presence_of :serial
   validates_uniqueness_of :serial
 
-  include PgSearch
-  pg_search_scope :search_by_serial_number,
-                  against: :serial,
-                  using: :trigram
-
   has_many :log_lines
   has_many :ip_addresses, through: :log_lines
   has_many :bike_serial_searches
@@ -32,7 +27,7 @@ class SerialSearch < ApplicationRecord
 
   def self.text_search(query)
     if query.present?
-      search_by_serial_number(query)
+      where('serial % ?', query)
     else
       all
     end
