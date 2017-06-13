@@ -3,7 +3,9 @@ class SerialSearch < ApplicationRecord
   validates_uniqueness_of :serial
 
   include PgSearch
-  pg_search_scope :search_by_serial_number, against: :serial
+  pg_search_scope :search_by_serial_number,
+                  against: :serial,
+                  using: :trigram
 
   has_many :log_lines
   has_many :ip_addresses, through: :log_lines
