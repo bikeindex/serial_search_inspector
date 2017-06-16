@@ -48,7 +48,22 @@ RSpec.describe SerialSearchesController, type: :controller do
       it 'sorts by times_searched' do
         get :index, params: { sort: 'log_lines_count', direction: 'desc', per_page: '1' }
         expect(response.status).to eq 200
-        expect(assigns(:serial_searches)). to eq([serial_search_3])
+        expect(assigns(:serial_searches)).to eq([serial_search_3])
+      end
+    end
+
+    context 'sort by last request at' do
+      let!(:serial_search_1) { FactoryGirl.create(:serial_search, serial: 'WTU 326', log_lines_count: '2') }
+      let!(:serial_search_2) { FactoryGirl.create(:serial_search, serial: 'WTU 316', log_lines_count: '3') }
+
+      it 'sorts correctly when switching direction' do
+        get :index, params: { sort: 'log_lines_count', direction: 'asc', query: 'WTU' }
+
+        expect(response.status).to eq 200
+        expect(assigns(:serial_searches)).to eq([ serial_search_1, serial_search_2])
+
+        get :index, params: { sort: 'log_lines_count', direction: 'desc', query: 'WTU' }
+        expect(assigns(:serial_searches)).to eq([serial_search_2, serial_search_1])
       end
     end
 

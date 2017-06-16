@@ -67,4 +67,20 @@ RSpec.describe SerialSearch, type: :model do
       end
     end
   end
+
+  describe '.text_search' do
+    let(:serial_search) { FactoryGirl.create(:serial_search, serial: 'Y524347') }
+
+    context 'with a complete matched serial' do
+      it 'returns the valid serial_search record' do
+        expect(SerialSearch.text_search('Y524347')).to include(serial_search)
+      end
+    end
+
+    context 'with a partial matched serial' do
+      it 'returns the valid serial_search record' do
+        expect(SerialSearch.text_search('Y524')).to include(serial_search)
+      end
+    end
+  end
 end
