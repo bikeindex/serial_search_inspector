@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   # ensure_security_headers
   before_action :ensure_superuser
+  before_action :enable_mini_profiler
   protect_from_forgery with: :exception
 
   def ensure_user
@@ -15,6 +16,12 @@ class ApplicationController < ActionController::Base
     return true if current_user.superuser?
 
     redirect_to root_url and return
+  end
+
+  def enable_mini_profiler
+    if current_user && current_user.superuser?
+      Rack::MiniProfiler.authorize_request unless Rails.env.test?
+    end
   end
 
   def ssl_configured?
