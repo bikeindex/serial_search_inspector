@@ -1,6 +1,9 @@
 $enable-flex: true;
 @import "bootstrap";
 
+.alert { padding: 10px }
+.notice { padding: 10px }
+
 .info-header { padding:  20px 0px 20px 0px; }
 
 .ip-address-location { display: block; }
