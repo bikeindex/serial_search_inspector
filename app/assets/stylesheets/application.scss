@@ -1,6 +1,14 @@
 $enable-flex: true;
 @import "bootstrap";
 
+html { height: 100%; }
+
+body {
+  position: relative;
+  padding-bottom: 60px;
+  min-height: 100%;
+}
+
 .alert { padding: 10px; }
 .notice { padding: 10px; }
 
@@ -50,6 +58,8 @@ $enable-flex: true;
 .footer {
   position: absolute;
   bottom: 0;
+  right: 0;
+  left: 0;
   width: 100%;
   height: 60px;
   line-height: 60px;
