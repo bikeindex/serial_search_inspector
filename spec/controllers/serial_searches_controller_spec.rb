@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe SerialSearchesController, type: :controller do
-  let!(:serial_search) { FactoryGirl.create(:serial_search) }
+  let!(:serial_search) { FactoryBot.create(:serial_search) }
 
   context 'user' do
     include_context :logged_in_as_user
@@ -36,13 +36,13 @@ RSpec.describe SerialSearchesController, type: :controller do
     end
 
     context 'sort by times_searched' do
-      let!(:serial_search_3) { FactoryGirl.create(:serial_search) }
-      let!(:serial_search_2) { FactoryGirl.create(:serial_search) }
+      let!(:serial_search_3) { FactoryBot.create(:serial_search) }
+      let!(:serial_search_2) { FactoryBot.create(:serial_search) }
 
       before do
-        FactoryGirl.create(:log_line, serial_search: serial_search_2)
-        FactoryGirl.create(:log_line, serial_search: serial_search_3)
-        FactoryGirl.create(:log_line, serial_search: serial_search_3)
+        FactoryBot.create(:log_line, serial_search: serial_search_2)
+        FactoryBot.create(:log_line, serial_search: serial_search_3)
+        FactoryBot.create(:log_line, serial_search: serial_search_3)
       end
 
       it 'sorts by times_searched' do
@@ -53,8 +53,8 @@ RSpec.describe SerialSearchesController, type: :controller do
     end
 
     context 'sort by last request at' do
-      let!(:serial_search_1) { FactoryGirl.create(:serial_search, serial: 'WTU 326', log_lines_count: '2') }
-      let!(:serial_search_2) { FactoryGirl.create(:serial_search, serial: 'WTU 316', log_lines_count: '3') }
+      let!(:serial_search_1) { FactoryBot.create(:serial_search, serial: 'WTU 326', log_lines_count: '2') }
+      let!(:serial_search_2) { FactoryBot.create(:serial_search, serial: 'WTU 316', log_lines_count: '3') }
 
       it 'sorts correctly when switching direction' do
         get :index, params: { sort: 'log_lines_count', direction: 'asc', query: 'WTU' }

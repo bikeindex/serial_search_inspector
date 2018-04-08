@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe BikeIndexRequestor do
   let(:instance) { BikeIndexRequestor.new }
-  let(:serial_search) { FactoryGirl.create(:serial_search, serial: 'some number') }
-  let(:stolen_serial_search) { FactoryGirl.create(:serial_search, serial: 'stolen_serial_number') }
+  let(:serial_search) { FactoryBot.create(:serial_search, serial: 'some number') }
+  let(:stolen_serial_search) { FactoryBot.create(:serial_search, serial: 'stolen_serial_number') }
   let(:target_find_bikes_with_serial_response) do
     {
       bikes: [

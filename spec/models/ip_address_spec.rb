@@ -19,7 +19,7 @@ RSpec.describe IpAddress, type: :model do
 
   describe 'inspector_address?' do
     context 'started_being_inspector_at present' do
-      let(:ip_address) { FactoryGirl.create(:ip_address, address: 'sample_address', started_being_inspector_at: Date.parse('03-03-2013').to_time) }
+      let(:ip_address) { FactoryBot.create(:ip_address, address: 'sample_address', started_being_inspector_at: Date.parse('03-03-2013').to_time) }
       before do
         expect(ip_address).to be_present
       end
@@ -28,7 +28,7 @@ RSpec.describe IpAddress, type: :model do
       end
     end
     context 'ip_address has both start and stop,' do
-      let(:ip_address) { FactoryGirl.create(:ip_address, address: 'sample_address', started_being_inspector_at: Date.parse('01-07-2016').to_time, stopped_being_inspector_at: Date.parse('01-08-2016').to_time) }
+      let(:ip_address) { FactoryBot.create(:ip_address, address: 'sample_address', started_being_inspector_at: Date.parse('01-07-2016').to_time, stopped_being_inspector_at: Date.parse('01-08-2016').to_time) }
       before do
         expect(ip_address).to be_present
       end
@@ -54,7 +54,7 @@ RSpec.describe IpAddress, type: :model do
       end
     end
     context 'started_being_inspector_at is nil' do
-      let(:ip) { FactoryGirl.create(:ip_address) }
+      let(:ip) { FactoryBot.create(:ip_address) }
       it 'does not error' do
         expect(IpAddress.inspector_address?(address: ip.address, request_at: Time.now)).to be_falsey
       end

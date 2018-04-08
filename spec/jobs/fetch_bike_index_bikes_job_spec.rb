@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe FetchBikeIndexBikesJob, type: :feature do
   describe 'perform' do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryBot.create(:user) }
     let(:binx_bikes) { JSON.parse(File.read(Rails.root.join('spec/fixtures/binx_bikes.json'))) }
 
     before do

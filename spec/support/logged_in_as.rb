@@ -1,5 +1,5 @@
 shared_context :logged_in_as_user do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryBot.create(:user) }
   before do
     @request.env['devise.mapping'] = Devise.mappings[:user]
     sign_in user
@@ -7,7 +7,7 @@ shared_context :logged_in_as_user do
 end
 
 shared_context :logged_in_as_superuser do
-  let(:user) { FactoryGirl.create(:superuser) }
+  let(:user) { FactoryBot.create(:superuser) }
   before do
     @request.env['devise.mapping'] = Devise.mappings[:user]
     sign_in user

@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe SerialSearch, type: :model do
   include_context :log_line_fixtures
 
-  let(:serial_search_1) { FactoryGirl.create(:serial_search, searched_bike_index_at: 1.day.ago) }
-  let(:serial_search_2) { FactoryGirl.create(:serial_search, searched_bike_index_at: 2.hours.ago) }
+  let(:serial_search_1) { FactoryBot.create(:serial_search, searched_bike_index_at: 1.day.ago) }
+  let(:serial_search_2) { FactoryBot.create(:serial_search, searched_bike_index_at: 2.hours.ago) }
 
   describe 'validations' do
     it { should validate_presence_of(:serial) }
@@ -69,7 +69,7 @@ RSpec.describe SerialSearch, type: :model do
   end
 
   describe '.text_search' do
-    let(:serial_search) { FactoryGirl.create(:serial_search, serial: 'Y524347') }
+    let(:serial_search) { FactoryBot.create(:serial_search, serial: 'Y524347') }
 
     context 'with a complete matched serial' do
       it 'returns the valid serial_search record' do

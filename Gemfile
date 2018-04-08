@@ -69,7 +69,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'guard-rspec'
   gem 'guard-rubocop'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'rails-controller-testing'
   gem 'dotenv-rails'
 end

@@ -26,9 +26,9 @@ RSpec.describe GraphsController, type: :controller do
   end
 
   context 'superuser' do
-    let!(:serial_search) { FactoryGirl.create(:serial_search) }
-    let!(:ip_address) { FactoryGirl.create(:ip_address) }
-    let!(:log_line) { FactoryGirl.create(:log_line) }
+    let!(:serial_search) { FactoryBot.create(:serial_search) }
+    let!(:ip_address) { FactoryBot.create(:ip_address) }
+    let!(:log_line) { FactoryBot.create(:log_line) }
     include_context :logged_in_as_superuser
     describe 'GET index' do
       it 'renders the index' do
