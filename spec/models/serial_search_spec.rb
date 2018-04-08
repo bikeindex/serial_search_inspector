@@ -7,6 +7,7 @@ RSpec.describe SerialSearch, type: :model do
   let(:serial_search_2) { FactoryBot.create(:serial_search, searched_bike_index_at: 2.hours.ago) }
 
   describe 'validations' do
+    subject { FactoryBot.create(:serial_search) }
     it { should validate_presence_of(:serial) }
     it { should validate_uniqueness_of(:serial) }
   end
