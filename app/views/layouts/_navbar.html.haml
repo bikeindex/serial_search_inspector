@@ -1,6 +1,8 @@
 - if current_user.superuser?
   %nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
-    = link_to 'Admin', root_path, class: 'navbar-brand'
+    %a.navbar-brand{ href: '#' }
+      = image_tag 'logo.svg', class: 'logo d-inline-block align-top'
+      = link_to 'Admin', root_path, class: 'navbar-brand'
     %button.navbar-toggler{ type: 'button',  'data-toggle': 'collapse', 'data-target': '#navbarSupportedContent' }
       %span.navbar-toggler-icon
     .collapse.navbar-collapse#navbarSupportedContent
@@ -13,12 +15,11 @@
           = link_to 'IP Addresses', ip_addresses_path, class: 'nav-link'
         %li.nav-item
           = link_to 'Graphs', graphs_path, class: 'nav-link'
-    = image_tag 'logo.svg', class: 'logo'
-
 - else
   %nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
-    .navbar-brand
-      Bike Index: Serial Search Inspector
+    %a.navbar-brand{ href: '#' }
+      = image_tag 'logo.svg', class: 'logo d-inline-block align-t op'
+      = link_to 'Bike Index: Serial Search Inspector', root_path, class: 'navbar-brand'
     %button.navbar-toggler{ type: 'button',  'data-toggle': 'collapse', 'data-target': '#navbarSupportedContent' }
       %span.navbar-toggler-icon
     .collapse.navbar-collapse#navbarSupportedContent
@@ -26,6 +27,3 @@
         %li.nav-item
           %a.nav-link{ href: '', 'data-toggle': 'modal', 'data-target': '#aboutModal' }
             About
-    = image_tag 'logo.svg', class: 'logo'
-
-
