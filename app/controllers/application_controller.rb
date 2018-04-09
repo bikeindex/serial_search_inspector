@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  # ensure_security_headers
   before_action :ensure_superuser
   before_action :enable_mini_profiler
   protect_from_forgery with: :exception
