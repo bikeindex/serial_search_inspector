@@ -10,7 +10,9 @@ require 'rspec/rails'
 require 'vcr'
 require 'sidekiq/testing'
 require 'simplecov'
+require 'simplecov-console'
 
+SimpleCov.formatter = SimpleCov.formatter = SimpleCov::Formatter::Console
 SimpleCov.start
 
 Shoulda::Matchers.configure do |config|

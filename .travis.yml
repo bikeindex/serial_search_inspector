@@ -2,11 +2,11 @@ language: ruby
 rvm:
   - 2.2.5
 env:
-  - DB=postgresql
+  global:
+    - DB=postgresql
+    - CC_TEST_REPORTER_ID=$CODECLIMATE_REPO_TOKEN
 addons:
   postgresql: '9.4'
-  code_climate:
-    repo_token: $CODECLIMATE_REPO_TOKEN
 script:
   - bundle exec rake spec
 before_script:
