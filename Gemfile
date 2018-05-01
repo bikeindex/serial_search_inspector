@@ -38,7 +38,6 @@ gem 'sinatra', github: 'sinatra'
 gem 'hamlit'
 gem 'bootstrap'
 gem 'kaminari'
-gem 'secure_headers'
 gem 'chartkick'
 gem 'groupdate'
 gem 'httparty'
@@ -69,9 +68,10 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'guard-rspec'
   gem 'guard-rubocop'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'rails-controller-testing'
   gem 'dotenv-rails'
+  gem 'pry-rails'
 end
 
 group :development do
@@ -83,7 +83,8 @@ group :development do
 end
 
 group :test do
-  gem 'codeclimate-test-reporter'
+  gem 'simplecov'
+  gem 'simplecov-console'
   gem 'vcr'
   gem 'webmock'
 end

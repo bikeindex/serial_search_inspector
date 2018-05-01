@@ -2,14 +2,19 @@ language: ruby
 rvm:
   - 2.2.5
 env:
-  - DB=postgresql
+  global:
+    - DB=postgresql
+    - CC_TEST_REPORTER_ID=$CODECLIMATE_REPO_TOKEN
 addons:
   postgresql: '9.4'
-  code_climate:
-    repo_token: $CODECLIMATE_REPO_TOKEN
 script:
   - bundle exec rake spec
 before_script:
   - bundle exec rake db:create
   - bundle exec rake db:schema:load
   - bundle exec rake db:test:prepare
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT

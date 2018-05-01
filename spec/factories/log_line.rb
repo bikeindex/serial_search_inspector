@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :log_line do
     entry { JSON.parse(File.read('./spec/fixtures/log_line.json')) }
     before(:create) do |log|

@@ -34,12 +34,12 @@ body {
     &:before {
       @extend .sorting-arrow-base;
       bottom: 0;
-      border-top: 10px solid $gray-lighter;
+      border-top: 10px solid $gray-400;
     }
     &:after {
       @extend .sorting-arrow-base;
       top: 0;
-      border-bottom: 10px solid $gray-lighter;
+      border-bottom: 10px solid $gray-400;
     }
     &.asc:before {
       border-top: 10px solid $link-color;

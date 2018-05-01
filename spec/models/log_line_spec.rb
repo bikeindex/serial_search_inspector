@@ -18,7 +18,7 @@ RSpec.describe LogLine, type: :model do
 
   describe 'factory' do
     context 'default factory' do
-      let(:log_line) { FactoryGirl.create(:log_line) }
+      let(:log_line) { FactoryBot.create(:log_line) }
       it 'works correctly' do
         log_line.reload
         expect(log_line.request_at).to be_within(1.second).of Time.now
@@ -26,7 +26,7 @@ RSpec.describe LogLine, type: :model do
     end
     context 'factory passing in request_at' do
       let(:target_time) { Time.now + 1.minute }
-      let(:log_line) { FactoryGirl.create(:log_line, request_at: target_time) }
+      let(:log_line) { FactoryBot.create(:log_line, request_at: target_time) }
       it 'works correctly' do
         log_line.reload
         expect(log_line.request_at).to be_within(1.second).of target_time
@@ -268,8 +268,8 @@ RSpec.describe LogLine, type: :model do
       end
     end
     context 'ip address already exists' do
-      let(:ip_address) { FactoryGirl.create(:ip_address, address: '111.222.333.444') }
-      let(:created_log) { FactoryGirl.create(:log_line, entry: parsed_log_fixture) }
+      let(:ip_address) { FactoryBot.create(:ip_address, address: '111.222.333.444') }
+      let(:created_log) { FactoryBot.create(:log_line, entry: parsed_log_fixture) }
       it 'associates with that ip' do
         expect(ip_address).to be_present
         log.find_or_create_ip_address_association
@@ -280,7 +280,7 @@ RSpec.describe LogLine, type: :model do
 
   describe 'find_or_create_serial_search_association' do
     context 'valid serial' do
-      let!(:serial_search) { FactoryGirl.create(:serial_search) }
+      let!(:serial_search) { FactoryBot.create(:serial_search) }
       let(:log_fixture) { log_line_fixture }
       it 'creates a new serial in the database' do
         expect do
@@ -299,7 +299,7 @@ RSpec.describe LogLine, type: :model do
     end
     context 'SerialSearch already exists' do
       let(:log_fixture) { log_line_fixture }
-      let(:serial_search) { FactoryGirl.create(:serial_search, serial: "#{parsed_log_fixture['params']['serial'].strip.upcase}  ") }
+      let(:serial_search) { FactoryBot.create(:serial_search, serial: "#{parsed_log_fixture['params']['serial'].strip.upcase}  ") }
       it 'does not create a new serial and associates' do
         expect(serial_search).to be_present
         expect do

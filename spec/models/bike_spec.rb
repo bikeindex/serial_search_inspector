@@ -14,7 +14,7 @@ RSpec.describe Bike, type: :model do
 
   describe 'find_or_create_bikes_from_bike_array' do
     context 'new bike' do
-      let(:serial_search) { FactoryGirl.create(:serial_search) }
+      let(:serial_search) { FactoryBot.create(:serial_search) }
       let(:bike_array) { [{ serial: serial_search.serial, bike_index_id: 30080, stolen: false, date_stolen: nil }] }
 
       it 'creates a new bike entry and associates' do
@@ -25,8 +25,8 @@ RSpec.describe Bike, type: :model do
     end
 
     context 'bike already exists' do
-      let(:serial_search_1) { FactoryGirl.create(:serial_search) }
-      let(:serial_search_2) { FactoryGirl.create(:serial_search) }
+      let(:serial_search_1) { FactoryBot.create(:serial_search) }
+      let(:serial_search_2) { FactoryBot.create(:serial_search) }
       let(:bike_array_1) { [{ serial: serial_search_1.serial, bike_index_id: 30080, stolen: false, date_stolen: nil }] }
       let(:bike_array_2) { [{ serial: serial_search_2.serial, bike_index_id: 30080, stolen: false, date_stolen: nil }] }
 

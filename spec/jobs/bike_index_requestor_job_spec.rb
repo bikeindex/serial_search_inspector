@@ -18,7 +18,7 @@ RSpec.describe BikeIndexRequestorJob, type: :job do
       end
       context 'within 8 hours' do
         it 'does not search bike index' do
-          serial_search = FactoryGirl.create(:serial_search, searched_bike_index_at: DateTime.now)
+          serial_search = FactoryBot.create(:serial_search, searched_bike_index_at: DateTime.now)
           ActiveJob::Base.queue_adapter = :inline
           expect(Bike).to receive(:find_or_create_bikes_from_bike_array).exactly(0).times
           BikeIndexRequestorJob.perform_later(serial_search)

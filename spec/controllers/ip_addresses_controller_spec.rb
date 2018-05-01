@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe IpAddressesController, type: :controller do
-  let!(:ip_address) { FactoryGirl.create(:ip_address) }
+  let!(:ip_address) { FactoryBot.create(:ip_address) }
 
   context 'user' do
     include_context :logged_in_as_user
@@ -55,12 +55,12 @@ RSpec.describe IpAddressesController, type: :controller do
         expect(assigns(:ip_addresses)).to eq([ip_address])
       end
       context 'sort by number of searches' do
-        let!(:ip_address_3) { FactoryGirl.create(:ip_address) }
-        let!(:ip_address_2) { FactoryGirl.create(:ip_address) }
+        let!(:ip_address_3) { FactoryBot.create(:ip_address) }
+        let!(:ip_address_2) { FactoryBot.create(:ip_address) }
         before do
-          FactoryGirl.create(:log_line, ip_address: ip_address_2)
-          FactoryGirl.create(:log_line, ip_address: ip_address_3)
-          FactoryGirl.create(:log_line, ip_address: ip_address_3)
+          FactoryBot.create(:log_line, ip_address: ip_address_2)
+          FactoryBot.create(:log_line, ip_address: ip_address_3)
+          FactoryBot.create(:log_line, ip_address: ip_address_3)
         end
         it 'sorts correctly by number of searches' do
           get :index, params: { sort: 'log_lines_count', direction: 'desc', per_page: '1' }
@@ -90,7 +90,7 @@ RSpec.describe IpAddressesController, type: :controller do
 
     describe 'PUT update/:id' do
       context 'with times' do
-        let(:log_line) { FactoryGirl.create(:log_line, ip_address: ip_address, request_at: 1.hour.ago) }
+        let(:log_line) { FactoryBot.create(:log_line, ip_address: ip_address, request_at: 1.hour.ago) }
         let(:submitted_parameters) do
           {
             ip_address: {

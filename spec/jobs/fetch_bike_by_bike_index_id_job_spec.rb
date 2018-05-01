@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe FetchBikeByBikeIndexIdJob, type: :job do
   describe 'perform' do
-    let(:bike) { FactoryGirl.create(:bike, bike_index_id: 30569, serial: nil) }
+    let(:bike) { FactoryBot.create(:bike, bike_index_id: 30569, serial: nil) }
     let(:binx_response) { JSON.parse(File.read(Rails.root.join('spec/fixtures/binx_bike_by_id.json'))) }
 
     it 'updates the bikes attributes' do

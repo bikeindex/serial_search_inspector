@@ -4,7 +4,7 @@ RSpec.describe LogLineAssociaterJob, type: :job do
   describe 'perform' do
     it 'should create an activejob to associate the logline to the IP address and Serial Search' do
       ActiveJob::Base.queue_adapter = :inline
-      log_line = FactoryGirl.create(:log_line)
+      log_line = FactoryBot.create(:log_line)
       expect(UpdateLastRequestAtJob).to receive(:perform_later).with(log_line)
       expect(BikeIndexRequestorJob).to receive(:perform_later)
       LogLineAssociaterJob.perform_later
