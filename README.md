@@ -10,7 +10,7 @@
 | What            | Install             | Notes |
 | --------------- | -------------------------- | ----- |
 | Rails 5.0.0.1   | [Ruby on Rails](http://rubyonrails.org/)
-| Ruby 2.2.5      | [rvm](https://github.com/wayneeseguin/rvm), [rbenv](https://github.com/sstephenson/rbenv) with [ruby-build](https://github.com/sstephenson/ruby-build) or [from source.](http://www.ruby-lang.org/en/) | |
+| Ruby 2.5.1      | [rvm](https://github.com/wayneeseguin/rvm), [rbenv](https://github.com/sstephenson/rbenv) with [ruby-build](https://github.com/sstephenson/ruby-build) or [from source.](http://www.ruby-lang.org/en/) | |
 | PostgreSQL 9.5.3| [Postgres.app](http://postgresapp.com/), `brew install postgresql` on OSX, [on Linux](http://www.postgresql.org/download/linux/ubuntu/) | |
 | Sidekiq         | [Sidekiq](https://github.com/mperham/sidekiq), which requires [Redis](https://redis.io/) | |
 
