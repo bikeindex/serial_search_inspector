@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-  - 2.2.5
+  - 2.5.1
 env:
   global:
     - DB=postgresql
@@ -10,6 +10,7 @@ addons:
 script:
   - bundle exec rake spec
 before_script:
+  - gem install bundler
   - bundle exec rake db:create
   - bundle exec rake db:schema:load
   - bundle exec rake db:test:prepare
